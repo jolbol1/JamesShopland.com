@@ -2,7 +2,9 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base",
-     ":semanticCommitTypeAll(:package:)"
+     ":semanticCommitTypeAll(:package:)",
+    "group:all"
   ],
   "prHourlyLimit": 0
+  
 }
