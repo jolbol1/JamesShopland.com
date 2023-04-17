@@ -6,6 +6,7 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+[![Vercel][vercel-badge]](https://jamesshopland.com)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -41,7 +42,7 @@ The site is deployed via Vercel.
 
 ### Built With
 
-- [![Svelte][svelte-badge]][svelte-url]
+- [![Next][next.js]][next-url]
 - [![Vite][vite-badge]][vite-url]
 - [![Typescript][typescript-badge]][typescript-url]
 - [![Tailwind][tailwind-badge]][tailwind-url]
@@ -131,3 +132,4 @@ Project Link: [https://github.com/jolbol1/jolbol1.github.io](https://github.com/
 [svelte-url]: https://svelte.dev/
 [vite-badge]: https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white
 [vite-url]: https://vitejs.dev/
+[vercel-badge]: https://img.shields.io/github/deployments/jolbol1/JamesShopland.com/production?label=Vercel&logo=vercel&style=for-the-badge
