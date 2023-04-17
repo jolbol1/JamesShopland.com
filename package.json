@@ -14,8 +14,8 @@
     "prettier:fix": "npx prettier --write ."
   },
   "dependencies": {
-    "@next/bundle-analyzer": "13.1.6",
-    "@next/font": "13.1.6",
+    "@next/bundle-analyzer": "13.3.0",
+    "@next/font": "13.3.0",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
     "@types/mdx": "^2.0.4",
@@ -29,7 +29,7 @@
     "image-size": "1.0.0",
     "kbar": "^0.1.0-beta.40",
     "mdx-bundler": "^9.0.1",
-    "next": "13.1.6",
+    "next": "13.3.0",
     "next-contentlayer": "0.3.0",
     "next-sitemap": "^4.0.7",
     "next-themes": "^0.2.0",
@@ -57,7 +57,7 @@
     "@typescript-eslint/parser": "^5.36.2",
     "cross-env": "^7.0.3",
     "eslint": "^8.38.0",
-    "eslint-config-next": "13.1.6",
+    "eslint-config-next": "13.3.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.0",
