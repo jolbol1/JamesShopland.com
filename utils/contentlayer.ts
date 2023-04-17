@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import GithubSlugger from 'github-slugger'
+import { slug } from 'github-slugger'
 import type { Document, MDX } from 'contentlayer/core'
 
 export type MDXDocument = Document & { body: MDX }
@@ -86,7 +86,7 @@ export async function getAllTags(allBlogs: MDXBlog[]) {
   allBlogs.forEach((file) => {
     if (file.tags && file.draft !== true) {
       file.tags.forEach((tag) => {
-        const formattedTag = GithubSlugger.slug(tag)
+        const formattedTag = slug(tag)
         if (formattedTag in tagCount) {
           tagCount[formattedTag] += 1
         } else {

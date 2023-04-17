@@ -1,6 +1,6 @@
 import { writeFileSync, mkdirSync } from 'fs'
 import path from 'path'
-import GithubSlugger from 'github-slugger'
+import { slug } from 'github-slugger'
 import { escape } from './htmlEscaper'
 import type { CoreConfig } from './config'
 import type { MDXBlog } from './contentlayer'
@@ -47,9 +47,7 @@ export async function generateRSS(config: CoreConfig, allBlogs: MDXBlog[]) {
   if (publishPosts.length > 0) {
     const tags = await getAllTags(publishPosts)
     for (const tag of Object.keys(tags)) {
-      const filteredPosts = allBlogs.filter((post) =>
-        post.tags.map((t) => GithubSlugger.slug(t)).includes(tag)
-      )
+      const filteredPosts = allBlogs.filter((post) => post.tags.map((t) => slug(t)).includes(tag))
       const rss = generateRss(config, filteredPosts, `tags/${tag}/feed.xml`)
       const rssPath = path.join('public', 'tags', tag)
       mkdirSync(rssPath, { recursive: true })
