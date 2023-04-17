@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://jamesshopland.com
+Host: https://jshopland.vercel.app
 
 # Sitemaps
-Sitemap: https://jamesshopland.com/sitemap.xml
+Sitemap: https://jshopland.vercel.app/sitemap.xml

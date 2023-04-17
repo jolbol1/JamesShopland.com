@@ -6,6 +6,8 @@ import type { CoreConfig } from './config'
 import type { MDXBlog } from './contentlayer'
 import { getAllTags } from './contentlayer'
 
+const slugger = new GithubSlugger()
+
 const generateRssItem = (config: CoreConfig, post) => `
   <item>
     <guid>${config.siteUrl}/blog/${post.slug}</guid>
@@ -27,7 +29,7 @@ const generateRss = (config: CoreConfig, posts, page = 'feed.xml') => `
       <language>${config.language}</language>
       <managingEditor>${config.email} (${config.author})</managingEditor>
       <webMaster>${config.email} (${config.author})</webMaster>
-      <lastBuildDate>${new Date(posts[0].date).toUTCString()}</lastBuildDate>
+      <lastBuildDate>${new Date(posts[0]?.date).toUTCString()}</lastBuildDate>
       <atom:link href="${config.siteUrl}/${page}" rel="self" type="application/rss+xml"/>
       ${posts.map((post) => generateRssItem(config, post)).join('')}
     </channel>
@@ -48,7 +50,7 @@ export async function generateRSS(config: CoreConfig, allBlogs: MDXBlog[]) {
     const tags = await getAllTags(publishPosts)
     for (const tag of Object.keys(tags)) {
       const filteredPosts = allBlogs.filter((post) =>
-        post.tags.map((t) => GithubSlugger.slug(t)).includes(tag)
+        post.tags.map((t) => slugger.slug(t)).includes(tag)
       )
       const rss = generateRss(config, filteredPosts, `tags/${tag}/feed.xml`)
       const rssPath = path.join('public', 'tags', tag)
