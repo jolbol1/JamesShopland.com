@@ -2,11 +2,29 @@
 title: 'Markdown Guide'
 date: '2019-10-11'
 tags: ['github', 'guide']
-draft: true
+draft: false
 summary: 'Markdown cheatsheet for all your blogging needs - headers, lists, images, tables and more! An illustrated guide based on GitHub Flavored Markdown.'
 ---
 
-# Introduction
+# Introduction ok
+
+```ts showLineNumbers title="next.config.js" {3} /appDir: true/
+import { withContentlayer } from 'next-contentlayer'
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    domains: ['avatars.githubusercontent.com'],
+  },
+  experimental: {
+    appDir: true,
+    serverComponentsExternalPackages: ['@prisma/client'],
+  },
+}
+
+export default withContentlayer(nextConfig)
+```
 
 Markdown and Mdx parsing is supported via `unified`, and other remark and rehype packages. `next-mdx-remote` allows us to parse `.mdx` and `.md` files in a more flexible manner without touching webpack.
 
