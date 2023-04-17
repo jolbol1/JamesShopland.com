@@ -12,10 +12,10 @@ const projectsData: ProjectData[] = [
   {
     title: 'Opening Lines',
     description: `Generate Opening Message tool, which utilizes ChatGPTs API to help you craft the perfect opening message for any situation. Whether you're looking to make a professional introduction or start a conversation on a dating app, this tool can help you get started with the right words and vibe.`,
-    titleLink: 'https://opening-lines.vercel.app/',
+    titleLink: 'https://opening-lines.jamesshopland.cloud/',
     links: [
       { title: 'GitHub', href: 'https://github.com/jolbol1/opening-lines' },
-      { title: 'Demo', href: 'https://opening-lines.vercel.app/' },
+      { title: 'Demo', href: 'https://opening-lines.jamesshopland.cloud/' },
     ],
     icons: ['next', 'react', 'typescript'],
   },
@@ -45,12 +45,12 @@ const projectsData: ProjectData[] = [
   {
     title: 'F1-Calc',
     description: ` F1 Game 2022 AI Difficulty Calculator, a tool designed for Formula 1 racing game enthusiasts. This application allows you to input your best lap times and receive recommendations for the optimal AI level to play at, ensuring a challenging and exciting experience. The included chart provides additional context by showing you the times to beat if you want to push yourself even further. `,
-    titleLink: 'https://jamesshopland.com/f1-calc/',
+    titleLink: 'https://jolbol1.github.io/f1-calc/',
     links: [
       { title: 'GitHub', href: 'https://github.com/jolbol1/f1-calc' },
       {
         title: 'Demo',
-        href: 'https://jamesshopland.com/f1-calc/',
+        href: 'https://jolbol1.github.io/f1-calc/',
       },
     ],
     icons: ['typescript', 'svelte'],
