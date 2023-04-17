@@ -46,6 +46,7 @@ const components = {
     />
   ),
   a: ({ className, ...props }) => (
+    // eslint-disable-next-line jsx-a11y/anchor-has-content
     <a
       className={cn('font-medium text-slate-900 underline underline-offset-4', className)}
       {...props}
