@@ -4,6 +4,7 @@ import 'katex/dist/katex.css'
 
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
+import { Analytics } from '@vercel/analytics/react'
 import Head from 'next/head'
 
 import siteMetadata from '@/data/siteMetadata'
@@ -18,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <LayoutWrapper>
         <Component {...pageProps} />
       </LayoutWrapper>
+      <Analytics />
     </ThemeProvider>
   )
 }
