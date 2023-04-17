@@ -4,6 +4,6 @@
     "config:base",
   ],
   "prHourlyLimit": 0
-  "commitMessage": "{{:package:}} {{commitMessageAction}} {{commitMessageTopic}} {{commitMessageExtra}} {{commitMessageSuffix}}
+  "commitMessage": "{{:package:}} {{commitMessageAction}} {{commitMessageTopic}} {{commitMessageExtra}} {{commitMessageSuffix}}"
   
 }
