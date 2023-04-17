@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.task-list-item::before {
+  @apply hidden;
+}
+
+.task-list-item {
+  @apply list-none;
+}
+
+.footnotes {
+  @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+}
+
+.data-footnote-backref {
+  @apply no-underline;
+}
+
+.csl-entry {
+  @apply my-5;
+}
+
+/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+.underlined {
+  position: relative;
+  white-space: nowrap;
+}
+
+.underlined,
+.underlined:focus {
+  text-decoration: none !important;
+}
+
+.underlined:focus {
+  outline: none;
+}
+
+.underlined:after {
+  bottom: -4px;
+  content: '';
+  display: block;
+  height: 2px;
+  left: 0;
+  position: absolute;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+  width: 100%;
+}
+
+.active.underlined:after,
+.underlined:focus:after,
+.underlined:hover:after {
+  background-color: currentColor;
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion) {
+  .underlined:after {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .active.underlined:after,
+  .underlined:focus:after,
+  .underlined:hover:after {
+    opacity: 1;
+  }
+}
+
+.typing-demo {
+  width: 11ch;
+  animation: typing 2s steps(16), blink 0.5s step-end 5 alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 5px solid;
+  border-color: transparent;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: white;
+  }
+}
+
+.giscus-frame {
+  width: 100%;
+}

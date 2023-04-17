@@ -1,0 +1,8 @@
+# Ignore artifacts:
+package-lock.json
+build
+coverage
+.contentlayer
+.husky
+.next
+.vercel
