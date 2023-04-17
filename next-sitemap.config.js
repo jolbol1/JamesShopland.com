@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://jshopland.vercel.app',
+  siteUrl: 'https://jamesshopland.com',
   generateRobotsTxt: true,
   generateIndexSitemap: false,
 }
