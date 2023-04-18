@@ -66,10 +66,15 @@ export function LatestPosts({ posts }: LatestPostsProps) {
 
                           <Link
                             href={`/blog/${slug}`}
-                            className="text-blue-700 hover:text-primary-600 dark:text-primary-500 dark:hover:text-primary-400"
+                            className="h-fit text-blue-700 hover:text-primary-600 dark:text-primary-500 dark:hover:text-primary-400"
                             aria-label={`Read "${title}"`}
                           >
-                            Read more &rarr;
+                            {`Read ${
+                              post.readingTime.text
+                                ? '(' + post.readingTime.text.replace(' read', '') + ')'
+                                : 'more'
+                            }`}
+                            &rarr;{' '}
                           </Link>
                         </div>
                       </div>
