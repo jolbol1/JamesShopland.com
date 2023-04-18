@@ -90,7 +90,7 @@ export default async function PagePage({ params }: PageProps) {
                                   ))}
                                 </div>
                               </div>
-                              <div className="prose  max-w-none text-gray-600 dark:text-gray-400">
+                              <div className="  max-w-none text-gray-600 dark:text-gray-400">
                                 {summary}
                               </div>
                             </div>

@@ -1,7 +1,7 @@
 export function CodingTimeline() {
   return (
     <ol className="relative ml-3 !list-none border-l border-gray-200 dark:border-gray-700">
-      <li className="mb-10 ml-0">
+      <li className="mb-10 ml-8">
         <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 ring-8  ring-gray-100 dark:bg-blue-600 dark:ring-gray-900">
           <svg
             aria-hidden="true"
@@ -33,7 +33,7 @@ export function CodingTimeline() {
           technology.
         </p>
       </li>
-      <li className="mb-10 ml-0">
+      <li className="mb-10 ml-8">
         <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 ring-white dark:bg-blue-600 dark:ring-gray-900">
           <svg
             aria-hidden="true"
@@ -57,7 +57,7 @@ export function CodingTimeline() {
           world of software engineering and explore new technologies and approaches.
         </p>
       </li>
-      <li className="mb-10 ml-0">
+      <li className="mb-10 ml-8">
         <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 ring-white dark:bg-blue-600 dark:ring-gray-900">
           <svg
             aria-hidden="true"
@@ -80,7 +80,7 @@ export function CodingTimeline() {
           found myself becoming increasingly interested in coding.
         </p>
       </li>
-      <li className="mb-10 ml-0">
+      <li className="mb-10 ml-8">
         <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 ring-white dark:bg-blue-600 dark:ring-gray-900">
           <svg
             aria-hidden="true"
@@ -105,7 +105,7 @@ export function CodingTimeline() {
           to incorporate this knowledge into my work.
         </p>
       </li>
-      <li className="mb-10 ml-0">
+      <li className="mb-10 ml-8">
         <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 ring-white dark:bg-blue-600 dark:ring-gray-900">
           <svg
             aria-hidden="true"
@@ -130,7 +130,7 @@ export function CodingTimeline() {
           foundation in business and financial principles.
         </p>
       </li>
-      <li className="mb-10 ml-0">
+      <li className="mb-10 ml-8">
         <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 ring-white dark:bg-blue-600 dark:ring-gray-900">
           <svg
             aria-hidden="true"
@@ -156,7 +156,7 @@ export function CodingTimeline() {
           to improve their computer skills.
         </p>
       </li>
-      <li className="ml-0">
+      <li className="ml-8">
         <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 ring-white dark:bg-blue-600 dark:ring-gray-900">
           <svg
             aria-hidden="true"

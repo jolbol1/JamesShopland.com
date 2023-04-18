@@ -49,7 +49,7 @@ export default function About() {
             <SocialIcon kind="twitter" href={twitter} />
           </div>
         </div>
-        <div className="dark:prose-dark prose max-w-none pb-8 pt-8 xl:col-span-2">
+        <div className="max-w-none pb-8 pt-8 text-gray-700 dark:text-gray-300 xl:col-span-2">
           <Mdx code={author.body.code} />
 
           <div className="relative col-span-2 col-start-2 ">
