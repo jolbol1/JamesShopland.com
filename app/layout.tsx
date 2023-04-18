@@ -6,6 +6,7 @@ import { ServerThemeProvider } from 'next-themes'
 import siteMetadata from '@/config/site-metadata'
 import Footer from '@/components/footer'
 import Nav from '@/components/nav'
+import Analytics from '@/components/analytics'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <Nav />
           <main className="mx-auto mb-auto max-w-8xl grow">{children}</main>
           <Footer />
+          <Analytics />
         </body>
       </html>
     </ServerThemeProvider>
