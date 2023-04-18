@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Tag from '@/components/tag'
 import { slug } from 'github-slugger'
 import { formatDate } from '@/lib/utils'
+import { Metadata } from 'next'
 
 interface TagPageProps {
   params: {
@@ -24,6 +25,18 @@ async function getPageFromParams(params: TagPageProps['params']) {
   }
 
   return page
+}
+
+export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
+  const page = await getPageFromParams(params)
+
+  if (!page) {
+    return {}
+  }
+
+  return {
+    title: page,
+  }
 }
 
 export async function generateStaticParams(): Promise<TagPageProps['params'][]> {

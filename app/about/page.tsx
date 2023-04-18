@@ -11,6 +11,10 @@ import ProjectCard from '@/components/project-card'
 import { Mdx } from '@/components/mdx/mdx'
 import { notFound } from 'next/navigation'
 
+export const metadata = {
+  title: 'About',
+}
+
 export default function About() {
   const author = allAuthors.find((p) => p.slug === 'default')
   if (!author) notFound()

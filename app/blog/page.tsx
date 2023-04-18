@@ -6,6 +6,10 @@ import Link from 'next/link'
 import Tag from '@/components/tag'
 import { formatDate } from '@/lib/utils'
 
+export const metadata = {
+  title: 'Blog',
+}
+
 export default async function BlogPage() {
   const posts = allCoreContent(sortedBlogPost(allBlogs)) as Blog[]
   const initialDisplayPosts = allCoreContent(posts)

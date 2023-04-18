@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
   const post = details.post
 
-  const url = process.env.NEXT_PUBLIC_APP_URL
+  const url = siteMetadata.siteUrl
 
   const ogUrl = new URL(`${url}/api/og`)
   ogUrl.searchParams.set('heading', post.title)

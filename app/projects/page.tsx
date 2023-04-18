@@ -1,6 +1,10 @@
 import projectsData from '@/data/projectsData'
 import ProjectCard from '@/components/project-card'
 
+export const metadata = {
+  title: 'About',
+}
+
 export default async function Projects() {
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700">
