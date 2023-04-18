@@ -8,6 +8,24 @@ summary: 'Markdown cheatsheet for all your blogging needs - headers, lists, imag
 
 # Introduction
 
+```ts showLineNumbers title="next.config.js" {3} /appDir: true/
+import { withContentlayer } from 'next-contentlayer'
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    domains: ['avatars.githubusercontent.com'],
+  },
+  experimental: {
+    appDir: true,
+    serverComponentsExternalPackages: ['@prisma/client'],
+  },
+}
+
+export default withContentlayer(nextConfig)
+```
+
 Markdown and Mdx parsing is supported via `unified`, and other remark and rehype packages. `next-mdx-remote` allows us to parse `.mdx` and `.md` files in a more flexible manner without touching webpack.
 
 GitHub flavored markdown is used. `mdx-prism` provides syntax highlighting capabilities for code blocks. Here's a demo of how everything looks.
@@ -24,7 +42,7 @@ Here’s an overview of Markdown syntax that you can use anywhere on GitHub.com 
 
 ## Headers
 
-```
+```mdx
 # This is a h1 tag
 
 ## This is a h2 tag
@@ -40,7 +58,7 @@ Here’s an overview of Markdown syntax that you can use anywhere on GitHub.com 
 
 ## Emphasis
 
-```
+```mdx
 _This text will be italic_
 
 **This text will be bold**
@@ -58,7 +76,7 @@ _You **can** combine them_
 
 ### Unordered
 
-```
+```mdx
 - Item 1
 - Item 2
   - Item 2a
@@ -72,7 +90,7 @@ _You **can** combine them_
 
 ### Ordered
 
-```
+```mdx
 1. Item 1
 1. Item 2
 1. Item 3
@@ -88,7 +106,7 @@ _You **can** combine them_
 
 ## Images
 
-```
+```mdx
 ![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
 Format: ![Alt Text](url)
 ```
@@ -97,7 +115,7 @@ Format: ![Alt Text](url)
 
 ## Links
 
-```
+```mdx
 http://github.com - automatic!
 [GitHub](http://github.com)
 ```
@@ -107,7 +125,7 @@ http://github.com - automatic!
 
 ## Blockquotes
 
-```
+```mdx
 As Kanye West said:
 
 > We're living the future so
@@ -121,7 +139,7 @@ As Kanye West said:
 
 ## Inline code
 
-```
+```mdx
 I think you should use an
 `<addr>` element here instead.
 ```
@@ -133,7 +151,7 @@ I think you should use an
 
 Here’s an example of how you can use syntax highlighting with [GitHub Flavored Markdown](https://help.github.com/articles/basic-writing-and-formatting-syntax/):
 
-````
+````mdx
 ```js:fancyAlert.js
 function fancyAlert(arg) {
   if (arg) {
@@ -145,7 +163,7 @@ function fancyAlert(arg) {
 
 And here's how it looks - nicely colored with styled code titles!
 
-```js:fancyAlert.js
+```jsx
 function fancyAlert(arg) {
   if (arg) {
     $.facebox({ div: '#foo' })
@@ -155,7 +173,7 @@ function fancyAlert(arg) {
 
 ## Footnotes
 
-```
+```mdx
 Here is a simple footnote[^1]. With some additional text after it.
 
 [^1]: My reference.
@@ -167,7 +185,7 @@ Here is a simple footnote[^1]. With some additional text after it.
 
 ## Task Lists
 
-```
+```mdx
 - [x] list syntax required (any unordered or ordered list supported)
 - [x] this is a complete item
 - [ ] this is an incomplete item
@@ -181,7 +199,7 @@ Here is a simple footnote[^1]. With some additional text after it.
 
 You can create tables by assembling a list of words and dividing them with hyphens `-` (for the first row), and then separating each column with a pipe `|`:
 
-```
+```mdx
 | First Header                | Second Header                |
 | --------------------------- | ---------------------------- |
 | Content from cell 1         | Content from cell 2          |

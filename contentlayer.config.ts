@@ -1,30 +1,23 @@
 import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer/source-files'
 import readingTime from 'reading-time'
-import path from 'path'
 // Remark packages
 import remarkGfm from 'remark-gfm'
-import remarkMath from 'remark-math'
-import {
-  remarkExtractFrontmatter,
-  remarkCodeTitles,
-  remarkImgToJsx,
-  extractTocHeadings,
-} from './utils/mdx-plugins'
+
 // Rehype packages
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeKatex from 'rehype-katex'
-import rehypeCitation from 'rehype-citation'
-import rehypePrismPlus from 'rehype-prism-plus'
-import rehypePresetMinify from 'rehype-preset-minify'
 
-const root = process.cwd()
+import rehypePrettyCode from 'rehype-pretty-code'
 
 const computedFields: ComputedFields = {
   readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
   slug: {
     type: 'string',
     resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''),
+  },
+  slugAsParams: {
+    type: 'string',
+    resolve: (doc) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
   },
   path: {
     type: 'string',
@@ -34,7 +27,6 @@ const computedFields: ComputedFields = {
     type: 'string',
     resolve: (doc) => doc._raw.sourceFilePath,
   },
-  toc: { type: 'string', resolve: (doc) => extractTocHeadings(doc.body.raw) },
 }
 
 export const Blog = defineDocumentType(() => ({
@@ -79,21 +71,37 @@ export default makeSource({
   contentDirPath: 'data',
   documentTypes: [Blog, Authors],
   mdx: {
-    cwd: process.cwd(),
-    remarkPlugins: [
-      remarkExtractFrontmatter,
-      remarkGfm,
-      remarkCodeTitles,
-      remarkMath,
-      remarkImgToJsx,
-    ],
+    remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
-      rehypeAutolinkHeadings,
-      rehypeKatex,
-      [rehypeCitation, { path: path.join(root, 'data') }],
-      [rehypePrismPlus, { ignoreMissing: true }],
-      rehypePresetMinify,
+      [
+        rehypePrettyCode,
+        {
+          theme: 'github-dark',
+          onVisitLine(node: { children: string | any[] }) {
+            // Prevent lines from collapsing in `display: grid` mode, and allow empty
+            // lines to be copy/pasted
+            if (node.children.length === 0) {
+              node.children = [{ type: 'text', value: ' ' }]
+            }
+          },
+          onVisitHighlightedLine(node: { properties: { className: string[] } }) {
+            node.properties.className.push('line--highlighted')
+          },
+          onVisitHighlightedWord(node: { properties: { className: string[] } }) {
+            node.properties.className = ['word--highlighted']
+          },
+        },
+      ],
+      [
+        rehypeAutolinkHeadings,
+        {
+          properties: {
+            className: ['subheading-anchor'],
+            ariaLabel: 'Link to section',
+          },
+        },
+      ],
     ],
   },
 })

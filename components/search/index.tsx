@@ -1,13 +1,16 @@
+'use client'
 import dynamic from 'next/dynamic'
 
-import type { KBarSearchProps } from './KBar'
-import { SearchBarButton } from './SearchBarButton'
+import type { KBarSearchProps } from './kbar'
+import { SearchBarButton } from './search-bar-button'
 
 export type SearchConfig = KBarSearchProps
 
-export const KBarSearchProvider = dynamic(
+const KBarSearchProvider = dynamic(
   () => {
-    return import('./KBar').then((mod) => mod.KBarSearchProvider)
+    return import('./kbar').then((mod) => mod.KBarSearchProvider)
   },
   { ssr: false, loading: () => <SearchBarButton /> }
 )
+
+export default KBarSearchProvider
