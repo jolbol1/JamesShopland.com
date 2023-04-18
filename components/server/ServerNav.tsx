@@ -5,6 +5,7 @@ import Link from '../Link'
 import DarkModeSwitch from '../DarkModeSwitch'
 import Image from 'next/image'
 import { GlowDiv } from '../GlowDiv'
+import KBarSearchProvider from '../search'
 
 const Nav = () => {
   return (
@@ -39,6 +40,7 @@ const Nav = () => {
             </Link>
           ))}
         </div>
+        <KBarSearchProvider kbarConfig={siteMetadata.kbarConfig} />
 
         <div className="ml-0 hidden min-[700px]:block [@media(min-width:810px)]:mr-4">
           <DarkModeSwitch />
