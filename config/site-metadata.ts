@@ -10,7 +10,7 @@ const siteMetadata: SiteConfig = {
     'Discover my personal website, where I showcase my coding skills and expertise in software engineering. Explore a range of innovative software tools, blog posts, and project showcases that demonstrate my passion for problem-solving and creativity in the rapidly changing field of technology.',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://jamesshopland.com',
+  siteUrl: process.env.NEXT_PUBLIC_APP_URL ?? 'https://jamesshopland.com',
   siteRepo: 'https://github.com/jolbol1/jshopland',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',

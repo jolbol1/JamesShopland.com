@@ -13,6 +13,7 @@ import { notFound } from 'next/navigation'
 import Comments from '@/components/comments'
 import ScrollTopAndComment from '@/components/floating-buttons'
 import { formatDate } from '@/lib/utils'
+import { Metadata } from 'next'
 
 const editUrl = (path: string) => `${siteMetadata.siteRepo}/blob/master/data/${path}`
 const discussUrl = (path: string) =>
@@ -56,6 +57,51 @@ async function getPostFromParams(
     prev,
     next,
     authorDetails,
+  }
+}
+
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const details = await getPostFromParams(params)
+
+  if (!details || !details.post) {
+    return {}
+  }
+
+  const post = details.post
+
+  const url = process.env.NEXT_PUBLIC_APP_URL
+
+  const ogUrl = new URL(`${url}/api/og`)
+  ogUrl.searchParams.set('heading', post.title)
+  ogUrl.searchParams.set('type', 'Blog Post')
+  ogUrl.searchParams.set('mode', 'dark')
+
+  return {
+    title: post.title,
+    description: post.summary,
+    authors: post.authors?.map((author) => ({
+      name: author,
+    })),
+    openGraph: {
+      title: post.title,
+      description: post.summary,
+      type: 'article',
+      url: `${siteMetadata.siteUrl}/${post.slug}`,
+      images: [
+        {
+          url: ogUrl.toString(),
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.summary,
+      images: [ogUrl.toString()],
+    },
   }
 }
 

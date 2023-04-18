@@ -20,6 +20,62 @@ const jetbrains = localFont({
   display: 'swap',
 })
 
+export const metadata = {
+  title: {
+    default: siteMetadata.title,
+    template: `%s | ${siteMetadata.title}`,
+  },
+  description: siteMetadata.description,
+  keywords: [
+    'Next.js',
+    'React',
+    'Tailwind CSS',
+    'James Shopland',
+    'Web Developer',
+    'Software Engineer',
+  ],
+  authors: [
+    {
+      name: 'James Shopland',
+      url: 'https://jamesshopland.com.com',
+    },
+  ],
+  creator: 'James Shopland',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
+  ],
+  openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    url: siteMetadata.siteUrl,
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    siteName: siteMetadata.title,
+    images: [
+      {
+        url: `${siteMetadata.siteUrl}/og.jpg`,
+        width: 1200,
+        height: 630,
+        alt: siteMetadata.title,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    images: [`${siteMetadata.siteUrl}/images/general/og.png`],
+    creator: '@jollyshopland',
+  },
+  icons: {
+    icon: '/favicons/favicon.ico',
+    shortcut: '/favicons/favicon-16x16.png',
+    apple: '/favicons/apple-touch-icon.png',
+  },
+  manifest: `${siteMetadata.siteUrl}/favicons/site.webmanifest`,
+}
+
 interface RootLayoutProps {
   children: React.ReactNode
 }

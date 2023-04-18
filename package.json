@@ -17,6 +17,7 @@
     "@next/bundle-analyzer": "13.3.0",
     "@types/mdx": "^2.0.4",
     "@vercel/analytics": "^0.1.11",
+    "@vercel/og": "^0.5.3",
     "autoprefixer": "^10.4.13",
     "clsx": "^1.2.1",
     "contentlayer": "0.3.1",
@@ -43,7 +44,8 @@
     "rss": "^1.2.2",
     "shiki": "^0.14.1",
     "tailwind-merge": "^1.12.0",
-    "tailwindcss": "^3.2.2"
+    "tailwindcss": "^3.2.2",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@svgr/webpack": "^7.0.0",
