@@ -3,6 +3,7 @@ import ProjectCard from '@/components/project-card'
 
 export const metadata = {
   title: 'About',
+  description: `My projects page, where I showcase some of my software engineering projects. From building web apps with TypeScript and react to developing Java plugins for game, my projects demonstrate my diverse skill set and experience. Explore my work work and get a glimpse into my passion for problem-solving and creativity in the rapidly changing field of technology.`,
 }
 
 export default async function Projects() {

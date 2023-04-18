@@ -60,7 +60,6 @@ export default async function PagePage({ params }: TagPageProps) {
     allBlogs.filter((post) => post.draft !== true && post.tags?.map((t) => slug(t)).includes(page))
   )
 
-  // If initialDisplayPosts exist, display it if no searchValue is specified
   return (
     <>
       <div className=" divide-y divide-gray-400 dark:divide-gray-700">

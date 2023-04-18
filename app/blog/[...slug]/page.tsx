@@ -117,7 +117,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { post, prev, next, authorDetails } = pageDetails
   const { filePath, path, date, title, tags } = post
 
-  if (!post) {
+  if (!post || post.draft) {
     notFound()
   }
 
