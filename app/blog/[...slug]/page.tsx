@@ -9,6 +9,8 @@ import siteMetadata from '@/data/siteMetadata'
 import Link from 'next/link'
 import Tag from '@/components/Tag'
 import { notFound } from 'next/navigation'
+import Comments from '@/components/comments'
+import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/master/data/${path}`
 const discussUrl = (path) =>
@@ -109,6 +111,7 @@ export default function BlogPostPage({ params }) {
                 {` • `}
                 <Link href={editUrl(filePath)}>View on GitHub</Link>
               </div>
+              <Comments />
             </div>
             <footer className="col-span-2">
               <div className=" text-sm font-medium leading-5  xl:col-start-1 xl:row-start-2 ">
@@ -168,6 +171,7 @@ export default function BlogPostPage({ params }) {
           </div>
         </div>
       </article>
+      <ScrollTopAndComment />
     </>
   )
 }
