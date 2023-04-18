@@ -4,7 +4,6 @@
       "config:base"
    ],
    "prHourlyLimit":0,
-   "commitMessage":"{{:package:}} {{commitMessageAction}} {{commitMessageTopic}} {{commitMessageExtra}} {{commitMessageSuffix}}",
    "lockFileMaintenance":{
       "enabled":true,
       "automerge":true,
