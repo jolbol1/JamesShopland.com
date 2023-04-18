@@ -5,7 +5,7 @@ import { allBlogs } from 'contentlayer/generated'
 import Tags from '@/components/tags'
 import Link from 'next/link'
 import Tag from '@/components/tag'
-import { kebabCase } from 'utils/kebabCase'
+import { slug } from 'github-slugger'
 import { formatDate } from '@/lib/utils'
 
 interface TagPageProps {
@@ -44,9 +44,7 @@ export default async function PagePage({ params }: TagPageProps) {
 
   const tags = await getAllTags(allBlogs)
   const posts = allCoreContent(
-    allBlogs.filter(
-      (post) => post.draft !== true && post.tags?.map((t) => kebabCase(t)).includes(page)
-    )
+    allBlogs.filter((post) => post.draft !== true && post.tags?.map((t) => slug(t)).includes(page))
   )
 
   // If initialDisplayPosts exist, display it if no searchValue is specified

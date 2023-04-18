@@ -1,6 +1,6 @@
 import Link from '@/components/link'
 import Tag from '@/components/tag'
-import { kebabCase } from '../utils/kebabCase'
+import { slug } from 'github-slugger'
 
 interface TagsProps {
   tags: Record<string, number>
@@ -19,7 +19,7 @@ export default function Tags({ tags }: TagsProps) {
           >
             <Tag text={t} className="mr-3 text-sm font-medium lowercase  " />
             <Link
-              href={`/tags/${kebabCase(t)}`}
+              href={`/tags/${slug(t)}`}
               className="-ml-2 text-sm font-semibold uppercase text-white"
               aria-label={`View posts tagged ${t}`}
             >
