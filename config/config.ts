@@ -17,15 +17,15 @@ export interface CoreConfig {
   socialBanner: string
   email: string
   github: string
-  twitter?: string
+  twitter: string
   facebook?: string
   youtube?: string
-  linkedin?: string
+  linkedin: string
   locale: string
 }
 
 export type SiteConfig = Record<string, unknown> &
   CoreConfig & {
-    kbarConfig?: SearchConfig
+    kbarConfig: SearchConfig
     giscusConfig: GiscusConfig
   }

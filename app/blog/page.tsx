@@ -54,13 +54,14 @@ export default async function BlogPage() {
                                   </Link>
                                 </h2>
                                 <div className="flex flex-wrap gap-2 pt-2">
-                                  {tags.map((tag) => (
-                                    <Tag
-                                      key={tag}
-                                      text={tag}
-                                      className="2xl rounded-lg bg-blue-600  px-2 py-1 text-sm text-white hover:scale-110 hover:bg-blue-600 dark:bg-blue-950 "
-                                    />
-                                  ))}
+                                  {tags &&
+                                    tags.map((tag) => (
+                                      <Tag
+                                        key={tag}
+                                        text={tag}
+                                        className="2xl rounded-lg bg-blue-600  px-2 py-1 text-sm text-white hover:scale-110 hover:bg-blue-600 dark:bg-blue-950 "
+                                      />
+                                    ))}
                                 </div>
                               </div>
                               <div className="  max-w-none text-gray-600 dark:text-gray-400">

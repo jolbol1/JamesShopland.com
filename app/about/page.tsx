@@ -9,9 +9,11 @@ import SocialIcon from '@/components/social-icons'
 import Image from 'next/image'
 import ProjectCard from '@/components/project-card'
 import { Mdx } from '@/components/mdx/mdx'
+import { notFound } from 'next/navigation'
 
 export default function About() {
   const author = allAuthors.find((p) => p.slug === 'default')
+  if (!author) notFound()
   const { name, avatar, occupation, company, email, twitter, linkedin, github } = author
 
   return (
@@ -31,22 +33,23 @@ export default function About() {
             height={106}
             className="absolute top-[-6px]"
           />
-
-          <Image
-            src={avatar}
-            alt="avatar"
-            width={192}
-            height={192}
-            className="h-48 w-48 rounded-full"
-          />
+          {avatar && (
+            <Image
+              src={avatar}
+              alt="avatar"
+              width={192}
+              height={192}
+              className="h-48 w-48 rounded-full"
+            />
+          )}
           <h2 className="pb-2 pt-4 text-2xl font-bold leading-8 tracking-tight">{name}</h2>
           <div className="text-gray-700 dark:text-gray-400">{occupation}</div>
           <div className="text-gray-700 dark:text-gray-400">{company}</div>
           <div className="flex space-x-3 pt-6">
-            <SocialIcon kind="mail" href={`mailto:${email}`} />
-            <SocialIcon kind="github" href={github} />
-            <SocialIcon kind="linkedin" href={linkedin} />
-            <SocialIcon kind="twitter" href={twitter} />
+            {email && <SocialIcon kind="mail" href={`mailto:${email}`} />}
+            {github && <SocialIcon kind="github" href={github} />}
+            {linkedin && <SocialIcon kind="linkedin" href={linkedin} />}
+            {twitter && <SocialIcon kind="twitter" href={twitter} />}
           </div>
         </div>
         <div className="max-w-none pb-8 pt-8 text-gray-700 dark:text-gray-300 xl:col-span-2">

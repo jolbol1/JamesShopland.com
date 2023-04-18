@@ -14,7 +14,7 @@ import {
 import { formatDate } from '@/lib/utils'
 
 export const Portal = ({ searchDocumentsPath }: { searchDocumentsPath: string }) => {
-  const [searchActions, setSearchActions] = useState([])
+  const [searchActions, setSearchActions] = useState<Action[]>([])
 
   useEffect(() => {
     const mapPosts = (posts: CoreContent<MDXDocument>[]) => {

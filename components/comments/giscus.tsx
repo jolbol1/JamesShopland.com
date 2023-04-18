@@ -5,15 +5,15 @@ export interface GiscusConfig {
   themeURL?: string
   theme?: string
   darkTheme?: string
-  mapping?: string
-  repo?: string
-  repositoryId?: string
-  category?: string
-  categoryId?: string
-  reactions?: string
-  metadata?: string
+  mapping: string
+  repo: string
+  repositoryId: string
+  category: string
+  categoryId: string
+  reactions: string
+  metadata: string
   inputPosition?: string
-  lang?: string
+  lang: string
 }
 
 export type GiscusProps = GiscusConfig
@@ -52,9 +52,9 @@ export const Giscus = ({
     script.setAttribute('data-mapping', mapping)
     script.setAttribute('data-reactions-enabled', reactions)
     script.setAttribute('data-emit-metadata', metadata)
-    script.setAttribute('data-input-position', inputPosition)
+    script.setAttribute('data-input-position', inputPosition ?? 'bottom')
     script.setAttribute('data-lang', lang)
-    script.setAttribute('data-theme', commentsTheme)
+    script.setAttribute('data-theme', commentsTheme ?? 'dark')
     script.setAttribute('crossorigin', 'anonymous')
     script.async = true
 

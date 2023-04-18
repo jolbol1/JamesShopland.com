@@ -1,10 +1,17 @@
 import Link from '@/components/link'
 import Tag from '@/components/tag'
 import { formatDate } from '@/lib/utils'
+import type { Blog } from 'contentlayer/generated'
 
 const MAX_DISPLAY = 3
 
-export function LatestPosts({ posts }) {
+type Posts = Omit<Blog, 'body' | '_raw' | '_id'>[]
+
+interface LatestPostsProps {
+  posts: Posts
+}
+
+export function LatestPosts({ posts }: LatestPostsProps) {
   return (
     <>
       <div className="mx-auto max-w-3xl  px-4 sm:px-6 xl:max-w-5xl ">
@@ -40,13 +47,14 @@ export function LatestPosts({ posts }) {
                               </Link>
                             </h2>
                             <div className="flex flex-wrap gap-2 pt-2">
-                              {tags.map((tag) => (
-                                <Tag
-                                  key={tag}
-                                  text={tag}
-                                  className="2xl rounded-lg bg-blue-600  px-2 py-1 text-sm text-white hover:scale-110 hover:bg-blue-600 dark:bg-blue-950 "
-                                />
-                              ))}
+                              {tags &&
+                                tags.map((tag) => (
+                                  <Tag
+                                    key={tag}
+                                    text={tag}
+                                    className="2xl rounded-lg bg-blue-600  px-2 py-1 text-sm text-white hover:scale-110 hover:bg-blue-600 dark:bg-blue-950 "
+                                  />
+                                ))}
                             </div>
                           </div>
                           <div className="  max-w-none text-gray-600 dark:text-gray-400">

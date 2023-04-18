@@ -8,14 +8,14 @@ import Tag from '@/components/tag'
 import { kebabCase } from 'utils/kebabCase'
 import { formatDate } from '@/lib/utils'
 
-interface PageProps {
+interface TagPageProps {
   params: {
-    slug: string[]
+    slug: string
   }
 }
 
-async function getPageFromParams(params) {
-  const slug = params?.slug
+async function getPageFromParams(params: TagPageProps['params']) {
+  const slug = params.slug
   const tags = await getAllTags(allBlogs)
   const page = Object.keys(tags).find((tag) => tag === slug)
 
@@ -26,17 +26,26 @@ async function getPageFromParams(params) {
   return page
 }
 
-export default async function PagePage({ params }: PageProps) {
+export async function generateStaticParams(): Promise<TagPageProps['params'][]> {
+  const tags = await getAllTags(allBlogs)
+  return Object.keys(tags).map((doc) => ({
+    slug: doc,
+  }))
+}
+
+export default async function PagePage({ params }: TagPageProps) {
   const page = await getPageFromParams(params)
+
   if (!page) {
     notFound()
   }
+
   const title = page[0].toUpperCase() + page.split(' ').join('-').slice(1)
 
   const tags = await getAllTags(allBlogs)
   const posts = allCoreContent(
     allBlogs.filter(
-      (post) => post.draft !== true && post.tags.map((t) => kebabCase(t)).includes(page)
+      (post) => post.draft !== true && post.tags?.map((t) => kebabCase(t)).includes(page)
     )
   )
 
@@ -80,13 +89,14 @@ export default async function PagePage({ params }: PageProps) {
                                   </Link>
                                 </h2>
                                 <div className="flex flex-wrap gap-2 pt-2">
-                                  {tags.map((tag) => (
-                                    <Tag
-                                      key={tag}
-                                      text={tag}
-                                      className="2xl rounded-lg bg-blue-600  px-2 py-1 text-sm text-white hover:scale-110 hover:bg-blue-600 dark:bg-blue-950 "
-                                    />
-                                  ))}
+                                  {tags &&
+                                    tags.map((tag) => (
+                                      <Tag
+                                        key={tag}
+                                        text={tag}
+                                        className="2xl rounded-lg bg-blue-600  px-2 py-1 text-sm text-white hover:scale-110 hover:bg-blue-600 dark:bg-blue-950 "
+                                      />
+                                    ))}
                                 </div>
                               </div>
                               <div className="  max-w-none text-gray-600 dark:text-gray-400">

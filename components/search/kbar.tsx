@@ -35,7 +35,7 @@ export const KBarSearchProvider: FC<{
   }, [importDocSearchModalIfNeeded, setLoaded])
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       if (event.ctrlKey && event.key === 'k') {
         event.preventDefault()
         importDocSearchModalIfNeeded().then(() => {

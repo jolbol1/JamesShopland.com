@@ -5,8 +5,9 @@ import { escape } from './htmlEscaper'
 import type { CoreConfig } from '../config/config'
 import type { MDXBlog } from '../lib/contentlayer'
 import { getAllTags } from '../lib/contentlayer'
+import { Blog } from 'contentlayer/generated'
 
-const generateRssItem = (config: CoreConfig, post) => `
+const generateRssItem = (config: CoreConfig, post: Blog) => `
   <item>
     <guid>${config.siteUrl}/blog/${post.slug}</guid>
     <title>${escape(post.title)}</title>
@@ -18,7 +19,7 @@ const generateRssItem = (config: CoreConfig, post) => `
   </item>
 `
 
-const generateRss = (config: CoreConfig, posts, page = 'feed.xml') => `
+const generateRss = (config: CoreConfig, posts: Blog[], page = 'feed.xml') => `
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
       <title>${escape(config.title)}</title>
@@ -35,7 +36,7 @@ const generateRss = (config: CoreConfig, posts, page = 'feed.xml') => `
 `
 
 export async function generateRSS(config: CoreConfig, allBlogs: MDXBlog[]) {
-  const publishPosts = allBlogs.filter((post) => post.draft !== true)
+  const publishPosts = allBlogs.filter((post) => post.draft !== true) as Blog[]
   // RSS for blog post
   if (publishPosts.length > 0) {
     const rss = generateRss(config, publishPosts)
@@ -47,7 +48,9 @@ export async function generateRSS(config: CoreConfig, allBlogs: MDXBlog[]) {
   if (publishPosts.length > 0) {
     const tags = await getAllTags(publishPosts)
     for (const tag of Object.keys(tags)) {
-      const filteredPosts = allBlogs.filter((post) => post.tags.map((t) => slug(t)).includes(tag))
+      const filteredPosts = allBlogs.filter((post) =>
+        post.tags?.map((t) => slug(t)).includes(tag)
+      ) as Blog[]
       const rss = generateRss(config, filteredPosts, `tags/${tag}/feed.xml`)
       const rssPath = path.join('public', 'tags', tag)
       mkdirSync(rssPath, { recursive: true })

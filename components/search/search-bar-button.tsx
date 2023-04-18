@@ -1,6 +1,11 @@
 const ACTION_KEY_DEFAULT = 'CTRL'
 
-export const SearchBarButton = ({ onClick = null, kbd = ACTION_KEY_DEFAULT }) => {
+interface SearchBarButtonProps {
+  onClick?: () => void
+  kbd?: string
+}
+
+export const SearchBarButton = ({ onClick, kbd = ACTION_KEY_DEFAULT }: SearchBarButtonProps) => {
   return (
     <button
       onClick={onClick}

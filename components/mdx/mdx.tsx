@@ -2,10 +2,11 @@
 import * as React from 'react'
 import Image from 'next/image'
 import { useMDXComponent } from 'next-contentlayer/hooks'
+import type { MDXComponents } from 'mdx/types'
 
 import { cn } from '@/lib/utils'
 
-const components = {
+const components: MDXComponents = {
   h1: ({ className, ...props }) => (
     <h1
       className={cn(
@@ -90,8 +91,8 @@ const components = {
     // eslint-disable-next-line @next/next/no-img-element
     <img className={cn('rounded-md border border-slate-200', className)} alt={alt} {...props} />
   ),
-  hr: ({ ...props }) => (
-    <hr className="my-4 border-gray-400 dark:border-gray-700 md:my-8" {...props} />
+  hr: ({ className, ...props }) => (
+    <hr className={cn('my-4 border-gray-400 dark:border-gray-700 md:my-8', className)} {...props} />
   ),
   table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
     <div className="my-6 w-full overflow-y-auto">

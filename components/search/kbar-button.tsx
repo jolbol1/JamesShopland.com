@@ -10,7 +10,12 @@ function isAppleDevice() {
   return /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)
 }
 
-export const KBarButton = ({ loaded, onOpen }) => {
+interface KBarButtonProps {
+  loaded: boolean
+  onOpen: () => void
+}
+
+export const KBarButton = ({ loaded, onOpen }: KBarButtonProps) => {
   const context = useKBar()
   const key = useMemo(() => {
     if (typeof navigator !== 'undefined') {

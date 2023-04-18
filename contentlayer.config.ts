@@ -15,6 +15,10 @@ const computedFields: ComputedFields = {
     type: 'string',
     resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''),
   },
+  slugAsParams: {
+    type: 'string',
+    resolve: (doc) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
+  },
   path: {
     type: 'string',
     resolve: (doc) => doc._raw.flattenedPath,
@@ -74,17 +78,17 @@ export default makeSource({
         rehypePrettyCode,
         {
           theme: 'github-dark',
-          onVisitLine(node) {
+          onVisitLine(node: { children: string | any[] }) {
             // Prevent lines from collapsing in `display: grid` mode, and allow empty
             // lines to be copy/pasted
             if (node.children.length === 0) {
               node.children = [{ type: 'text', value: ' ' }]
             }
           },
-          onVisitHighlightedLine(node) {
+          onVisitHighlightedLine(node: { properties: { className: string[] } }) {
             node.properties.className.push('line--highlighted')
           },
-          onVisitHighlightedWord(node) {
+          onVisitHighlightedWord(node: { properties: { className: string[] } }) {
             node.properties.className = ['word--highlighted']
           },
         },

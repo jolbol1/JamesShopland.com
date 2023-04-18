@@ -1,6 +1,7 @@
+import '@/styles/mdx.css'
+
 import PageTitle from '@/components/page-title'
 import { sortedBlogPost, coreContent } from '../../../lib/contentlayer'
-import '@/styles/mdx.css'
 import { allBlogs, allAuthors } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
 import { Mdx } from '@/components/mdx/mdx'
@@ -11,32 +12,63 @@ import Tag from '@/components/tag'
 import { notFound } from 'next/navigation'
 import Comments from '@/components/comments'
 import ScrollTopAndComment from '@/components/floating-buttons'
+import { formatDate } from '@/lib/utils'
 
-const editUrl = (path) => `${siteMetadata.siteRepo}/blob/master/data/${path}`
-const discussUrl = (path) =>
+const editUrl = (path: string) => `${siteMetadata.siteRepo}/blob/master/data/${path}`
+const discussUrl = (path: string) =>
   `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${siteMetadata.siteUrl}/${path}`)}`
 
-const postDateTemplate: Intl.DateTimeFormatOptions = {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
+interface BlogPostPageProps {
+  params: {
+    slug: string[]
+  }
 }
 
-export default function BlogPostPage({ params }) {
-  const slug = (params.slug as string[]).join('/')
+interface PostPageDetails {
+  post: Blog
+  prev: ReturnType<typeof coreContent> | null
+  next: ReturnType<typeof coreContent> | null
+  authorDetails: (ReturnType<typeof coreContent> | null)[]
+}
+
+async function getPostFromParams(
+  params: BlogPostPageProps['params']
+): Promise<PostPageDetails | null> {
+  const slug = params.slug.join('/')
   const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
   const postIndex = sortedPosts.findIndex((p) => p.slug === slug)
+  if (postIndex === -1) return null
+  const post = sortedPosts[postIndex]
   const prevContent = sortedPosts[postIndex + 1] || null
   const prev = (prevContent && (prevContent?.draft ? null : coreContent(prevContent))) || null
   const nextContent = sortedPosts[postIndex - 1] || null
   const next = (nextContent && (nextContent?.draft ? null : coreContent(nextContent))) || null
-  const post = sortedPosts.find((p) => p.slug === slug)
+
   const authorList = post.authors || ['default']
   const authorDetails = authorList.map((author) => {
     const authorResults = allAuthors.find((p) => p.slug === author)
+    if (!authorResults) return null
     return coreContent(authorResults)
   })
+
+  return {
+    post,
+    prev,
+    next,
+    authorDetails,
+  }
+}
+
+export async function generateStaticParams(): Promise<BlogPostPageProps['params'][]> {
+  return allBlogs.map((post) => ({
+    slug: post.slugAsParams.split('/'),
+  }))
+}
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const pageDetails = await getPostFromParams(params)
+  if (!pageDetails) return notFound()
+  const { post, prev, next, authorDetails } = pageDetails
   const { filePath, path, date, title, tags } = post
 
   if (!post) {
@@ -53,9 +85,7 @@ export default function BlogPostPage({ params }) {
                 <div>
                   <dt className="sr-only">Published on</dt>
                   <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                    <time dateTime={date}>
-                      {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
-                    </time>
+                    <time dateTime={date}>{formatDate(date)}</time>
                   </dd>
                 </div>
               </dl>
@@ -69,34 +99,36 @@ export default function BlogPostPage({ params }) {
               <dt className="sr-only">Authors</dt>
               <dd>
                 <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
-                  {authorDetails.map((author) => (
-                    <li className="flex items-center space-x-2" key={author.name}>
-                      {author.avatar && (
-                        <Image
-                          src={author.avatar}
-                          width={38}
-                          height={38}
-                          alt="avatar"
-                          className="h-10 w-10 rounded-full"
-                        />
-                      )}
-                      <dl className="whitespace-nowrap text-sm font-medium leading-5">
-                        <dt className="sr-only">Name</dt>
-                        <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
-                        <dt className="sr-only">Twitter</dt>
-                        <dd>
-                          {author.twitter && (
-                            <Link
-                              href={author.twitter}
-                              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                            >
-                              {author.twitter.replace('https://twitter.com/', '@')}
-                            </Link>
-                          )}
-                        </dd>
-                      </dl>
-                    </li>
-                  ))}
+                  {authorDetails.map((author) =>
+                    !author ? null : (
+                      <li className="flex items-center space-x-2" key={author.name}>
+                        {author.avatar && (
+                          <Image
+                            src={author.avatar}
+                            width={38}
+                            height={38}
+                            alt="avatar"
+                            className="h-10 w-10 rounded-full"
+                          />
+                        )}
+                        <dl className="whitespace-nowrap text-sm font-medium leading-5">
+                          <dt className="sr-only">Name</dt>
+                          <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
+                          <dt className="sr-only">Twitter</dt>
+                          <dd>
+                            {author.twitter && (
+                              <Link
+                                href={author.twitter}
+                                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                              >
+                                {author.twitter.replace('https://twitter.com/', '@')}
+                              </Link>
+                            )}
+                          </dd>
+                        </dl>
+                      </li>
+                    )
+                  )}
                 </ul>
               </dd>
             </dl>

@@ -1,8 +1,9 @@
 import { writeFileSync } from 'fs'
 import { allCoreContent } from '../lib/contentlayer'
 import siteMetadata from '@/config/site-metadata'
+import type { Blog } from 'contentlayer/generated'
 
-const search = (allBlogs) => {
+const search = (allBlogs: Blog[]) => {
   writeFileSync(
     `public/${siteMetadata.kbarConfig.searchDocumentsPath}`,
     JSON.stringify(allCoreContent(allBlogs))

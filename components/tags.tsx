@@ -2,7 +2,11 @@ import Link from '@/components/link'
 import Tag from '@/components/tag'
 import { kebabCase } from '../utils/kebabCase'
 
-export default function Tags({ tags }) {
+interface TagsProps {
+  tags: Record<string, number>
+}
+
+export default function Tags({ tags }: TagsProps) {
   const sortedTags = Object.keys(tags).sort((a, b) => tags[b] - tags[a])
   return (
     <div className="flex  flex-wrap gap-2">

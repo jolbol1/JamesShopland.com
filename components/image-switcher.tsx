@@ -12,7 +12,7 @@ interface Props extends Omit<ImageProps, 'src'> {
 const ImageSwitcher = ({ light, dark, alt, ...rest }: Props) => {
   const { theme, resolvedTheme } = useTheme()
   const [clientLoaded, setClientLoaded] = useState(false)
-  const [aiImage, setAiImage] = useState(null)
+  const [aiImage, setAiImage] = useState<'light' | 'dark' | null>(null)
 
   useEffect(() => {
     setClientLoaded(true)
