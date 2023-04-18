@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback, FC, ReactNode } from 'react'
 import { KBarProvider, type Action, Priority } from 'kbar'
-import Router from 'next/router.js'
 import { KBarModal as KBarModalType } from './kbar-modal'
 import { KBarButton } from './kbar-button'
 import siteMetadata from '@/config/site-metadata'
+import { useRouter } from 'next/navigation'
 
 export interface KBarSearchProps {
   searchDocumentsPath: string
@@ -18,6 +18,7 @@ export const KBarSearchProvider: FC<{
 }> = ({ kbarConfig, children }) => {
   const { searchDocumentsPath, defaultActions } = kbarConfig
   const [loaded, setLoaded] = useState(false)
+  const router = useRouter()
 
   const importDocSearchModalIfNeeded = useCallback(() => {
     if (KBarModal) {
@@ -59,7 +60,7 @@ export const KBarSearchProvider: FC<{
           name: 'Homepage',
           keywords: '',
           section: 'Home',
-          perform: () => Router.push('/'),
+          perform: () => router.push('/'),
           priority: Priority.HIGH,
         },
         {
@@ -67,7 +68,7 @@ export const KBarSearchProvider: FC<{
           name: 'Blog',
           keywords: 'blog posts content',
           section: 'Home',
-          perform: () => Router.push('/blog'),
+          perform: () => router.push('/blog'),
           priority: Priority.HIGH,
         },
         {
@@ -75,7 +76,7 @@ export const KBarSearchProvider: FC<{
           name: 'Projects',
           keywords: 'projects portfolio examples demo showcase',
           section: 'Home',
-          perform: () => Router.push('/projects'),
+          perform: () => router.push('/projects'),
           priority: Priority.HIGH,
         },
         {
@@ -83,7 +84,7 @@ export const KBarSearchProvider: FC<{
           name: 'About',
           keywords: 'about who',
           section: 'Home',
-          perform: () => Router.push('/about'),
+          perform: () => router.push('/about'),
           priority: Priority.HIGH,
         },
         {

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Router from 'next/router'
 import { CoreContent, MDXDocument } from '../../lib/contentlayer'
 import {
   KBarPortal,
@@ -12,9 +11,11 @@ import {
   Action,
 } from 'kbar'
 import { formatDate } from '@/lib/utils'
+import { useRouter } from 'next/navigation'
 
 export const Portal = ({ searchDocumentsPath }: { searchDocumentsPath: string }) => {
   const [searchActions, setSearchActions] = useState<Action[]>([])
+  const router = useRouter()
 
   useEffect(() => {
     const mapPosts = (posts: CoreContent<MDXDocument>[]) => {
@@ -26,7 +27,7 @@ export const Portal = ({ searchDocumentsPath }: { searchDocumentsPath: string })
           keywords: post?.summary || '',
           section: 'Content',
           subtitle: formatDate(post.date),
-          perform: () => Router.push('/' + post.path),
+          perform: () => router.push('/' + post.path),
         })
       }
       return actions
