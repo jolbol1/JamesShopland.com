@@ -10,10 +10,6 @@ export const config = {
   runtime: 'edge',
 }
 
-const interRegular = fetch(new URL('../../assets/fonts/Inter-Regular.ttf', import.meta.url)).then(
-  (res) => res.arrayBuffer()
-)
-
 const interBold = fetch(new URL('../../assets/fonts/Inter-Bold.ttf', import.meta.url)).then((res) =>
   res.arrayBuffer()
 )
@@ -28,7 +24,6 @@ const image2 = fetch(new URL('../../assets/icons.png', import.meta.url)).then((r
 
 export default async function handler(req: NextRequest) {
   try {
-    const fontRegular = await interRegular
     const fontBold = await interBold
 
     const url = new URL(req.url)
@@ -102,12 +97,6 @@ export default async function handler(req: NextRequest) {
         width: 1200,
         height: 630,
         fonts: [
-          {
-            name: 'Inter',
-            data: fontRegular,
-            weight: 400,
-            style: 'normal',
-          },
           {
             name: 'Inter',
             data: fontBold,
