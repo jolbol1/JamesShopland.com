@@ -8,14 +8,17 @@ import { cn } from '@/lib/utils'
 const components = {
   h1: ({ className, ...props }) => (
     <h1
-      className={cn('mt-2 scroll-m-20 text-4xl font-bold tracking-tight', className)}
+      className={cn(
+        'mt-2 scroll-m-20 text-4xl font-bold tracking-tight text-black dark:text-white',
+        className
+      )}
       {...props}
     />
   ),
   h2: ({ className, ...props }) => (
     <h2
       className={cn(
-        'mt-10 scroll-m-20 border-b border-b-slate-200 pb-1 text-3xl font-semibold tracking-tight first:mt-0',
+        ' mt-10 scroll-m-20 border-b border-b-gray-400 pb-1 text-3xl font-semibold tracking-tight text-black first:mt-0 dark:border-b-gray-700 dark:text-white',
         className
       )}
       {...props}
@@ -23,32 +26,44 @@ const components = {
   ),
   h3: ({ className, ...props }) => (
     <h3
-      className={cn('mt-8 scroll-m-20 text-2xl font-semibold tracking-tight', className)}
+      className={cn(
+        'mt-8 scroll-m-20 text-2xl font-semibold tracking-tight text-black dark:text-white',
+        className
+      )}
       {...props}
     />
   ),
   h4: ({ className, ...props }) => (
     <h4
-      className={cn('mt-8 scroll-m-20 text-xl font-semibold tracking-tight', className)}
+      className={cn(
+        'mt-8 scroll-m-20 text-xl font-semibold tracking-tight text-black dark:text-white',
+        className
+      )}
       {...props}
     />
   ),
   h5: ({ className, ...props }) => (
     <h5
-      className={cn('mt-8 scroll-m-20 text-lg font-semibold tracking-tight', className)}
+      className={cn(
+        'mt-8 scroll-m-20 text-lg font-semibold tracking-tight text-black dark:text-white',
+        className
+      )}
       {...props}
     />
   ),
   h6: ({ className, ...props }) => (
     <h6
-      className={cn('mt-8 scroll-m-20 text-base font-semibold tracking-tight', className)}
+      className={cn(
+        'mt-8 scroll-m-20 text-base font-semibold tracking-tight text-black dark:text-white',
+        className
+      )}
       {...props}
     />
   ),
   a: ({ className, ...props }) => (
     // eslint-disable-next-line jsx-a11y/anchor-has-content
     <a
-      className={cn('font-medium text-slate-900 underline underline-offset-4', className)}
+      className={cn('font-medium text-primary-600 dark:text-primary-500 ', className)}
       {...props}
     />
   ),
@@ -75,7 +90,9 @@ const components = {
     // eslint-disable-next-line @next/next/no-img-element
     <img className={cn('rounded-md border border-slate-200', className)} alt={alt} {...props} />
   ),
-  hr: ({ ...props }) => <hr className="my-4 border-slate-200 md:my-8" {...props} />,
+  hr: ({ ...props }) => (
+    <hr className="my-4 border-gray-400 dark:border-gray-700 md:my-8" {...props} />
+  ),
   table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
     <div className="my-6 w-full overflow-y-auto">
       <table className={cn('w-full', className)} {...props} />
@@ -114,12 +131,13 @@ const components = {
   code: ({ className, ...props }) => (
     <code
       className={cn(
-        'relative rounded border bg-slate-300/25 px-[0.3rem] py-[0.2rem] font-mono text-sm text-slate-600',
+        'relative rounded border border-gray-400 bg-slate-300/25 px-[0.3rem] py-[0.2rem] font-mono text-sm text-slate-600  dark:text-gray-200',
         className
       )}
       {...props}
     />
   ),
+
   Image,
 }
 

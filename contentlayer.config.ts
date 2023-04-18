@@ -17,6 +17,7 @@ import rehypeKatex from 'rehype-katex'
 import rehypeCitation from 'rehype-citation'
 import rehypePrismPlus from 'rehype-prism-plus'
 import rehypePresetMinify from 'rehype-preset-minify'
+import rehypePrettyCode from 'rehype-pretty-code'
 
 const root = process.cwd()
 
@@ -79,21 +80,37 @@ export default makeSource({
   contentDirPath: 'data',
   documentTypes: [Blog, Authors],
   mdx: {
-    cwd: process.cwd(),
-    remarkPlugins: [
-      remarkExtractFrontmatter,
-      remarkGfm,
-      remarkCodeTitles,
-      remarkMath,
-      remarkImgToJsx,
-    ],
+    remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
-      rehypeAutolinkHeadings,
-      rehypeKatex,
-      [rehypeCitation, { path: path.join(root, 'data') }],
-      [rehypePrismPlus, { ignoreMissing: true }],
-      rehypePresetMinify,
+      [
+        rehypePrettyCode,
+        {
+          theme: 'github-dark',
+          onVisitLine(node) {
+            // Prevent lines from collapsing in `display: grid` mode, and allow empty
+            // lines to be copy/pasted
+            if (node.children.length === 0) {
+              node.children = [{ type: 'text', value: ' ' }]
+            }
+          },
+          onVisitHighlightedLine(node) {
+            node.properties.className.push('line--highlighted')
+          },
+          onVisitHighlightedWord(node) {
+            node.properties.className = ['word--highlighted']
+          },
+        },
+      ],
+      [
+        rehypeAutolinkHeadings,
+        {
+          properties: {
+            className: ['subheading-anchor'],
+            ariaLabel: 'Link to section',
+          },
+        },
+      ],
     ],
   },
 })
