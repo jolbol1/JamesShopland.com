@@ -65,15 +65,15 @@ export const metadata = {
     card: 'summary_large_image',
     title: siteMetadata.title,
     description: siteMetadata.description,
-    images: [`${siteMetadata.siteUrl}/images/general/og.png`],
+    images: [`${siteMetadata.siteUrl}/og.png`],
     creator: '@jollyshopland',
   },
   icons: {
-    icon: '/favicons/favicon.ico',
-    shortcut: '/favicons/favicon-16x16.png',
-    apple: '/favicons/apple-touch-icon.png',
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
   },
-  manifest: `${siteMetadata.siteUrl}/favicons/site.webmanifest`,
+  manifest: `${siteMetadata.siteUrl}/site.webmanifest`,
 }
 
 interface RootLayoutProps {
