@@ -14,9 +14,9 @@ const interBold = fetch(new URL('../../assets/fonts/Inter-Bold.ttf', import.meta
   res.arrayBuffer()
 )
 
-const image = fetch(
-  new URL('../../public/favicons/android-chrome-512x512.png', import.meta.url)
-).then((res) => res.arrayBuffer())
+const image = fetch(new URL('../../assets/logo-64x64.png', import.meta.url)).then((res) =>
+  res.arrayBuffer()
+)
 
 const image2 = fetch(new URL('../../assets/icons.png', import.meta.url)).then((res) =>
   res.arrayBuffer()
