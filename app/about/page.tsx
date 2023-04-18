@@ -1,13 +1,13 @@
 // import { MDXLayoutRenderer } from '@/components/MDXComponents'
 
-import ImageSwitcher from '@/components/ImageSwitcher'
+import ImageSwitcher from '@/components/image-switcher'
 import { allAuthors } from 'contentlayer/generated'
-import AILight from '@/data/images/aiLight.webp'
-import AIDark from '@/data/images/aiBlack.webp'
-import { CodingTimeline } from '@/components/CodingTimeline'
+import AILight from '@/public/images/general/ai-light.webp'
+import AIDark from '@/public/images/general/ai-dark.webp'
+import { CodingTimeline } from '@/components/coding-timeline'
 import SocialIcon from '@/components/social-icons'
 import Image from 'next/image'
-import ProjectCard from '@/components/ProjectCard'
+import ProjectCard from '@/components/project-card'
 import { Mdx } from '@/components/mdx/mdx'
 
 export default function About() {

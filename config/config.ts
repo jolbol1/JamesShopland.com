@@ -1,5 +1,5 @@
 import type { SearchConfig } from '../components/search'
-import type { GiscusConfig } from '../components/comments/Giscus'
+import type { GiscusConfig } from '../components/comments/giscus'
 
 // Test
 export interface CoreConfig {

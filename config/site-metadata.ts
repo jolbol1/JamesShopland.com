@@ -1,6 +1,6 @@
 // @ts-check
 
-import { SiteConfig } from 'utils/config'
+import { SiteConfig } from 'config/config'
 
 const siteMetadata: SiteConfig = {
   title: 'James Shopland',

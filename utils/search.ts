@@ -1,6 +1,6 @@
 import { writeFileSync } from 'fs'
-import { allCoreContent } from './contentlayer'
-import siteMetadata from '../data/siteMetadata'
+import { allCoreContent } from '../lib/contentlayer'
+import siteMetadata from '@/config/site-metadata'
 
 const search = (allBlogs) => {
   writeFileSync(

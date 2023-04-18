@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback, FC, ReactNode } from 'react'
 import { KBarProvider, type Action, Priority } from 'kbar'
 import Router from 'next/router.js'
-import { KBarModal as KBarModalType } from './KBarModal'
-import { KBarButton } from './KBarButton'
-import siteMetadata from '@/data/siteMetadata'
+import { KBarModal as KBarModalType } from './kbar-modal'
+import { KBarButton } from './kbar-button'
+import siteMetadata from '@/config/site-metadata'
 
 export interface KBarSearchProps {
   searchDocumentsPath: string
@@ -23,7 +23,7 @@ export const KBarSearchProvider: FC<{
     if (KBarModal) {
       return Promise.resolve()
     }
-    return Promise.all([import('./KBarModal')]).then(([{ KBarModal: Modal }]) => {
+    return Promise.all([import('./kbar-modal')]).then(([{ KBarModal: Modal }]) => {
       KBarModal = Modal
     })
   }, [])

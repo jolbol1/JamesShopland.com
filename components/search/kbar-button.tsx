@@ -1,7 +1,7 @@
 import { Priority, useKBar, useRegisterActions } from 'kbar'
 import { useTheme } from 'next-themes'
 import { useMemo } from 'react'
-import { SearchBarButton } from './SearchBarButton'
+import { SearchBarButton } from './search-bar-button'
 
 const ACTION_KEY_DEFAULT = 'CTRL'
 const ACTION_KEY_APPLE = '⌘'

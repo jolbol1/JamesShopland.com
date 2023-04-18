@@ -1,5 +1,5 @@
-import Link from '@/components/Link'
-import Tag from '@/components/Tag'
+import Link from '@/components/link'
+import Tag from '@/components/tag'
 import { formatDate } from '@/lib/utils'
 
 const MAX_DISPLAY = 3

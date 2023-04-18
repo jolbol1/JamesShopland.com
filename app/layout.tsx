@@ -1,11 +1,11 @@
-import '@/css/tailwind.css'
+import '@/styles/tailwind.css'
 
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import { ServerThemeProvider } from 'next-themes'
-import siteMetadata from '@/data/siteMetadata'
-import Footer from '@/components/Footer'
-import Nav from '@/components/Nav'
+import siteMetadata from '@/config/site-metadata'
+import Footer from '@/components/footer'
+import Nav from '@/components/nav'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -14,7 +14,7 @@ const inter = Inter({
 })
 
 const jetbrains = localFont({
-  src: '../data/fonts/JetBrainsMono-Regular.woff2',
+  src: '../public/fonts/JetBrainsMono-Regular.woff2',
   variable: '--font-code',
   display: 'swap',
 })

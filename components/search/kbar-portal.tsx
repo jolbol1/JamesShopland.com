@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Router from 'next/router'
-import { CoreContent, MDXDocument } from '../../utils/contentlayer'
+import { CoreContent, MDXDocument } from '../../lib/contentlayer'
 import {
   KBarPortal,
   KBarSearch,

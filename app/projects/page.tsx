@@ -1,5 +1,5 @@
 import projectsData from '@/data/projectsData'
-import ProjectCard from '@/components/ProjectCard'
+import ProjectCard from '@/components/project-card'
 
 export default async function Projects() {
   return (

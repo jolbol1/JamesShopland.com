@@ -1,8 +1,8 @@
 'use client'
 import { useState } from 'react'
-import Link from './Link'
-import headerNavLinks from '@/data/headerNavLinks'
-import DarkModeSwitch from './DarkModeSwitch'
+import Link from './link'
+import headerNavLinks from '@/config/nav-links'
+import DarkModeSwitch from './dark-mode-button'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)

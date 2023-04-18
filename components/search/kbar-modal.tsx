@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react'
-import { Portal } from './KBarPortal'
+import { Portal } from './kbar-portal'
 
 export const KBarModal: FC<{
   children: ReactNode

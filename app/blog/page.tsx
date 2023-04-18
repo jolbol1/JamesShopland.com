@@ -1,9 +1,9 @@
-import { sortedBlogPost, getAllTags, allCoreContent } from '../../utils/contentlayer'
+import { sortedBlogPost, getAllTags, allCoreContent } from '../../lib/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
-import Tags from '@/components/Tags'
+import Tags from '@/components/tags'
 import Link from 'next/link'
-import Tag from '@/components/Tag'
+import Tag from '@/components/tag'
 import { formatDate } from '@/lib/utils'
 
 export default async function BlogPage() {

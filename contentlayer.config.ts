@@ -9,8 +9,6 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
 import rehypePrettyCode from 'rehype-pretty-code'
 
-const root = process.cwd()
-
 const computedFields: ComputedFields = {
   readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
   slug: {

@@ -1,5 +1,5 @@
 'use client'
-import siteMetadata from '@/data/siteMetadata'
+import siteMetadata from '@/config/site-metadata'
 import { useEffect, useState } from 'react'
 
 const ScrollTopAndComment = () => {

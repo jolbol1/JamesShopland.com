@@ -1,11 +1,11 @@
-import siteMetadata from '@/data/siteMetadata'
-import headerNavLinks from '@/data/headerNavLinks'
-import Logo from '@/data/images/logo.webp'
-import Link from './Link'
-import MobileNav from './MobileNav'
-import DarkModeSwitch from './DarkModeSwitch'
+import siteMetadata from '@/config/site-metadata'
+import headerNavLinks from '@/config/nav-links'
+import Logo from '@/public/images/general/logo.webp'
+import Link from './link'
+import MobileNav from './mobile-nav'
+import DarkModeSwitch from './dark-mode-button'
 import Image from 'next/image'
-import { GlowDiv } from './GlowDiv'
+import { GlowDiv } from './glow-div'
 import KBarSearchProvider from './search'
 
 const Nav = () => {

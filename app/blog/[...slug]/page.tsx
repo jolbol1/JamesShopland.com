@@ -1,16 +1,16 @@
-import PageTitle from '@/components/PageTitle'
-import { sortedBlogPost, coreContent } from '../../../utils/contentlayer'
-import '@/css/mdx.css'
+import PageTitle from '@/components/page-title'
+import { sortedBlogPost, coreContent } from '../../../lib/contentlayer'
+import '@/styles/mdx.css'
 import { allBlogs, allAuthors } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
 import { Mdx } from '@/components/mdx/mdx'
 import Image from 'next/image'
-import siteMetadata from '@/data/siteMetadata'
+import siteMetadata from '@/config/site-metadata'
 import Link from 'next/link'
-import Tag from '@/components/Tag'
+import Tag from '@/components/tag'
 import { notFound } from 'next/navigation'
 import Comments from '@/components/comments'
-import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import ScrollTopAndComment from '@/components/floating-buttons'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/master/data/${path}`
 const discussUrl = (path) =>

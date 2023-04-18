@@ -1,9 +1,9 @@
 'use client'
 import dynamic from 'next/dynamic'
-import { GiscusConfig, GiscusProps } from './Giscus'
-import siteMetadata from '@/data/siteMetadata'
+import { GiscusConfig, GiscusProps } from './giscus'
+import siteMetadata from '@/config/site-metadata'
 import { useEffect, useRef, useState } from 'react'
-import useIntersectionObserver from 'utils/useIntersectionObserver'
+import useIntersectionObserver from 'hooks/use-observer'
 
 export type CommentsConfig = GiscusConfig
 
@@ -13,7 +13,7 @@ export interface CommentsProps {
 
 const GiscusComponent = dynamic<GiscusProps>(
   () => {
-    return import('./Giscus').then((mod) => mod.Giscus)
+    return import('./giscus').then((mod) => mod.Giscus)
   },
   { ssr: false }
 )

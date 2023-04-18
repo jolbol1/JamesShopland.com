@@ -1,8 +1,8 @@
-import { Header } from '@/components/Header'
-import { LatestPosts } from '@/components/LatestPosts'
-import { ShowcaseProjects } from '@/components/ShowcaseProjects'
+import { Header } from '@/components/header'
+import { LatestPosts } from '@/components/latest-posts'
+import { ShowcaseProjects } from '@/components/showcase-projects'
 import { Blog, allBlogs } from 'contentlayer/generated'
-import { allCoreContent, sortedBlogPost } from 'utils/contentlayer'
+import { allCoreContent, sortedBlogPost } from '@/lib/contentlayer'
 
 export default async function Home() {
   const sortedPosts = sortedBlogPost(allBlogs) as Blog[]

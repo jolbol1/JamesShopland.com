@@ -2,9 +2,9 @@ import { writeFileSync, mkdirSync } from 'fs'
 import path from 'path'
 import { slug } from 'github-slugger'
 import { escape } from './htmlEscaper'
-import type { CoreConfig } from './config'
-import type { MDXBlog } from './contentlayer'
-import { getAllTags } from './contentlayer'
+import type { CoreConfig } from '../config/config'
+import type { MDXBlog } from '../lib/contentlayer'
+import { getAllTags } from '../lib/contentlayer'
 
 const generateRssItem = (config: CoreConfig, post) => `
   <item>

@@ -1,5 +1,5 @@
 import { ProjectData } from '@/data/projectsData'
-import Link from './Link'
+import Link from './link'
 import { DevIcon } from './dev-icons'
 
 interface ProjectCardProps extends ProjectData {

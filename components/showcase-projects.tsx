@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import ProjectCard from './ProjectCard'
+import ProjectCard from './project-card'
 import projectsData from '@/data/projectsData'
 
 export function ShowcaseProjects() {

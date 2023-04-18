@@ -1,11 +1,10 @@
 import { notFound } from 'next/navigation'
 
-import { allCoreContent, getAllTags } from 'utils/contentlayer'
+import { allCoreContent, getAllTags } from '@/lib/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
-import Tags from '@/components/Tags'
+import Tags from '@/components/tags'
 import Link from 'next/link'
-import siteMetadata from '@/data/siteMetadata'
-import Tag from '@/components/Tag'
+import Tag from '@/components/tag'
 import { kebabCase } from 'utils/kebabCase'
 import { formatDate } from '@/lib/utils'
 

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import hero from '@/data/images/HeroImage.webp'
+import hero from '@/public/images/general/hero-image.webp'
 
 export function Header() {
   return (
