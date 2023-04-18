@@ -1,6 +1,5 @@
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
-import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from '@/lib/utils'
 
 const MAX_DISPLAY = 3
