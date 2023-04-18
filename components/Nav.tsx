@@ -6,7 +6,7 @@ import MobileNav from './MobileNav'
 import DarkModeSwitch from './DarkModeSwitch'
 import Image from 'next/image'
 import { GlowDiv } from './GlowDiv'
-import { KBarSearchProvider } from './search'
+import KBarSearchProvider from './search'
 
 const Nav = () => {
   return (

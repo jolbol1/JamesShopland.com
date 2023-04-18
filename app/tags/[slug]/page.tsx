@@ -4,10 +4,10 @@ import { allCoreContent, getAllTags } from 'utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
 import Tags from '@/components/Tags'
 import Link from 'next/link'
-import { formatDate } from 'utils/formatDate'
 import siteMetadata from '@/data/siteMetadata'
 import Tag from '@/components/Tag'
 import { kebabCase } from 'utils/kebabCase'
+import { formatDate } from '@/lib/utils'
 
 interface PageProps {
   params: {
@@ -95,7 +95,7 @@ export default async function PagePage({ params }: PageProps) {
                               </div>
                             </div>
                             <div className="flex w-full justify-between text-base font-medium leading-6">
-                              <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                              <time dateTime={date}>{formatDate(date)}</time>
 
                               <Link
                                 href={`/blog/${slug}`}

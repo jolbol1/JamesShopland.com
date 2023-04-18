@@ -1,8 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-
-import Image from '@/components/Image'
-
+import Image from 'next/image'
 import { useTheme } from 'next-themes'
 import { ImageProps, StaticImageData } from 'next/image'
 

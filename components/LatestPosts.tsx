@@ -1,7 +1,7 @@
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
-import { formatDate } from '../utils/formatDate'
+import { formatDate } from '@/lib/utils'
 
 const MAX_DISPLAY = 3
 
@@ -29,12 +29,6 @@ export function LatestPosts({ posts }) {
                 <li key={slug} className="py-6">
                   <article>
                     <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                      {/* <dl>
-                      <dt className="sr-only">Published on</dt>
-                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                        <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
-                      </dd>
-                    </dl> */}
                       <div className="space-y-5 xl:col-span-full">
                         <div className="space-y-6">
                           <div>
@@ -61,7 +55,7 @@ export function LatestPosts({ posts }) {
                           </div>
                         </div>
                         <div className="flex w-full justify-between text-base font-medium leading-6">
-                          <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                          <time dateTime={date}>{formatDate(date)}</time>
 
                           <Link
                             href={`/blog/${slug}`}

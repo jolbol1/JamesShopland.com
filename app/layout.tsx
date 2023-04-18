@@ -1,13 +1,11 @@
 import '@/css/tailwind.css'
-import '@/css/prism.css'
-import 'katex/dist/katex.css'
 
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
-import ServerNav from '@/components/server/ServerNav'
 import { ServerThemeProvider } from 'next-themes'
 import siteMetadata from '@/data/siteMetadata'
 import Footer from '@/components/Footer'
+import Nav from '@/components/Nav'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -31,7 +29,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <html lang="en" className={`${inter.variable} ${jetbrains.variable} `}>
         <head />
         <body className=" flex h-screen flex-col bg-white px-[5vw] py-3 dark:bg-black lg:py-3">
-          <ServerNav />
+          <Nav />
           <main className="mx-auto mb-auto max-w-8xl grow">{children}</main>
           <Footer />
         </body>

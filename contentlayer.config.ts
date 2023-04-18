@@ -1,22 +1,12 @@
 import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer/source-files'
 import readingTime from 'reading-time'
-import path from 'path'
 // Remark packages
 import remarkGfm from 'remark-gfm'
-import remarkMath from 'remark-math'
-import {
-  remarkExtractFrontmatter,
-  remarkCodeTitles,
-  remarkImgToJsx,
-  extractTocHeadings,
-} from './utils/mdx-plugins'
+
 // Rehype packages
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeKatex from 'rehype-katex'
-import rehypeCitation from 'rehype-citation'
-import rehypePrismPlus from 'rehype-prism-plus'
-import rehypePresetMinify from 'rehype-preset-minify'
+
 import rehypePrettyCode from 'rehype-pretty-code'
 
 const root = process.cwd()
@@ -35,7 +25,6 @@ const computedFields: ComputedFields = {
     type: 'string',
     resolve: (doc) => doc._raw.sourceFilePath,
   },
-  toc: { type: 'string', resolve: (doc) => extractTocHeadings(doc.body.raw) },
 }
 
 export const Blog = defineDocumentType(() => ({

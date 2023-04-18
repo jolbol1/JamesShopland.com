@@ -1,12 +1,10 @@
-import siteMetadata from '@/data/siteMetadata'
-
 import { sortedBlogPost, getAllTags, allCoreContent } from '../../utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
 import Tags from '@/components/Tags'
 import Link from 'next/link'
-import { formatDate } from 'utils/formatDate'
 import Tag from '@/components/Tag'
+import { formatDate } from '@/lib/utils'
 
 export default async function BlogPage() {
   const posts = allCoreContent(sortedBlogPost(allBlogs)) as Blog[]
@@ -70,7 +68,7 @@ export default async function BlogPage() {
                               </div>
                             </div>
                             <div className="flex w-full justify-between text-base font-medium leading-6">
-                              <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                              <time dateTime={date}>{formatDate(date)}</time>
 
                               <Link
                                 href={`/blog/${slug}`}

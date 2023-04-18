@@ -1,14 +1,14 @@
 // import { MDXLayoutRenderer } from '@/components/MDXComponents'
 
-import ImageSwitcher from '@/components/server/ImageSwitcher'
+import ImageSwitcher from '@/components/ImageSwitcher'
 import { allAuthors } from 'contentlayer/generated'
 import AILight from '@/data/images/aiLight.webp'
 import AIDark from '@/data/images/aiBlack.webp'
 import { CodingTimeline } from '@/components/CodingTimeline'
 import SocialIcon from '@/components/social-icons'
-import Image from '@/components/Image'
+import Image from 'next/image'
 import ProjectCard from '@/components/ProjectCard'
-import { Mdx } from '@/components/server/Mdx'
+import { Mdx } from '@/components/mdx/mdx'
 
 export default function About() {
   const author = allAuthors.find((p) => p.slug === 'default')
@@ -49,7 +49,7 @@ export default function About() {
             <SocialIcon kind="twitter" href={twitter} />
           </div>
         </div>
-        <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">
+        <div className="dark:prose-dark prose max-w-none pb-8 pt-8 xl:col-span-2">
           <Mdx code={author.body.code} />
 
           <div className="relative col-span-2 col-start-2 ">
