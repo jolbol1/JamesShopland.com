@@ -1,6 +1,14 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
-  "prHourlyLimit": 0,
-  "commitMessage": "{{:package:}} {{commitMessageAction}} {{commitMessageTopic}} {{commitMessageExtra}} {{commitMessageSuffix}}"
+   "$schema":"https://docs.renovatebot.com/renovate-schema.json",
+   "extends":[
+      "config:base",
+      "gitmoji"
+   ],
+   "prHourlyLimit":0,
+   "lockFileMaintenance":{
+      "enabled":true,
+      "automerge":true,
+      "automergeType":"pr",
+      "platformAutomerge":true
+   }
 }
