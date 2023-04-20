@@ -60,7 +60,7 @@ export default function About() {
           <Mdx code={author.body.code} />
 
           <div className="relative col-span-2 col-start-2 ">
-            <h3 className="mb-6 text-center text-3xl font-extrabold leading-9 tracking-tight text-gray-900  dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-left  md:leading-14">
+            <h3 className="my-12 text-center text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100  sm:text-4xl sm:leading-10 md:my-6 md:text-left  md:leading-14">
               My Coding Journey
             </h3>
             <CodingTimeline />
