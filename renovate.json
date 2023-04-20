@@ -11,10 +11,7 @@
       "automergeType":"branch",
       "platformAutomerge":true
    },
-   "packageRules": {
-      "enabled":true,
-      "automerge":true,
-      "automergeType":"branch",
-      "platformAutomerge":true
-   }
+   "automerge":true,
+   "automergeType":"branch",
+   "platformAutomerge":true
 }
