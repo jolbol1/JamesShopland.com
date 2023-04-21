@@ -10,7 +10,7 @@ import KBarSearchProvider from './search'
 
 const Nav = () => {
   return (
-    <nav className="mx-auto flex w-full max-w-8xl items-center justify-between py-10">
+    <nav className="mx-auto flex w-full max-w-8xl items-center justify-between pb-10 pt-[3.25rem]">
       <div>
         <Link href="/" aria-label={siteMetadata.headerTitle}>
           <div className="flex items-center justify-between align-middle">

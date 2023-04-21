@@ -85,11 +85,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <ServerThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
       <html lang="en" className={`${inter.variable} ${jetbrains.variable} `}>
         <head />
-        <body className=" flex h-screen flex-col bg-white px-[5vw] py-3 dark:bg-black lg:py-3">
-          <Nav />
-          <main className="mx-auto mb-auto max-w-8xl grow">{children}</main>
-          <Footer />
-          <Analytics />
+        <body className="min-h-screen bg-white px-[5vw]  dark:bg-black">
+          <div className="flex min-h-screen flex-col">
+            <Nav />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <Analytics />
+          </div>
         </body>
       </html>
     </ServerThemeProvider>

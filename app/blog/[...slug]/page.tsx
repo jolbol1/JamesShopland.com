@@ -123,7 +123,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <>
-      <article>
+      <article className="container relative">
         <div className="">
           <header className="pt-6 xl:pb-6">
             <div className="space-y-1 text-center">

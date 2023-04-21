@@ -15,6 +15,10 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      container: {
+        center: true,
+        maxWidth: '96rem',
+      },
       maxWidth: {
         '8xl': '96rem',
       },
