@@ -5,6 +5,7 @@ import { useMDXComponent } from 'next-contentlayer/hooks'
 import type { MDXComponents } from 'mdx/types'
 
 import { cn } from '@/lib/utils'
+import { Callout } from './callout'
 
 const components: MDXComponents = {
   h1: ({ className, ...props }) => (
@@ -138,7 +139,7 @@ const components: MDXComponents = {
       {...props}
     />
   ),
-
+  Callout,
   Image,
 }
 
