@@ -47,17 +47,4 @@
   @apply text-black dark:text-gray-100;
 }
 
-pre {
-  position: relative;
-}
 
-pre[data-language]:after {
-  content: attr(data-language);
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  padding: 0.2rem 0.5rem;
-  font-size: 0.7rem;
-  opacity: 0.7;
-  text-align: right;
-}
