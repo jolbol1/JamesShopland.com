@@ -20,7 +20,7 @@
     "@vercel/og": "^0.5.3",
     "autoprefixer": "^10.4.13",
     "clsx": "^1.2.1",
-    "contentlayer": "0.3.1",
+    "contentlayer": "0.3.2",
     "esbuild": "0.17.18",
     "fs": "^0.0.1-security",
     "github-slugger": "^2.0.0",
