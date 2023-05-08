@@ -27,7 +27,7 @@
     "kbar": "^0.1.0-beta.40",
     "mdx-bundler": "^9.0.1",
     "next": "13.4.1",
-    "next-contentlayer": "0.3.1",
+    "next-contentlayer": "0.3.2",
     "next-sitemap": "^4.0.7",
     "next-themes": "npm:@wits/next-themes@^0.2.16",
     "path": "^0.12.7",
