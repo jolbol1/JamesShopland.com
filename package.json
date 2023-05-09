@@ -48,7 +48,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@svgr/webpack": "^7.0.0",
+    "@svgr/webpack": "^8.0.0",
     "@types/react": "^18.0.18",
     "@types/rss": "^0.0.30",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
