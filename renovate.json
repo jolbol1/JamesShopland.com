@@ -4,6 +4,15 @@
       "config:base",
       "gitmoji"
    ],
+   "packageRules": [
+    {
+      "groupName": "Contentlayer",
+      "matchPackageNames": [
+        "contentlayer",
+        "next-contentlayer"
+      ]
+    }
+  ],
    "prHourlyLimit":0,
    "lockFileMaintenance":{
       "enabled":true,
