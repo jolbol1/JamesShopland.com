@@ -140,6 +140,7 @@ const components: MDXComponents = {
     />
   ),
   Callout,
+  // @ts-ignore
   Image,
 }
 
