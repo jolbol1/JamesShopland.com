@@ -37,7 +37,7 @@ module.exports = {
       },
       fontFamily: {
         mono: ['var(--font-code)', ...fontFamily.mono],
-        sans: ['Inter', ...fontFamily.sans],
+        sans: ['var(--font-inter)', ...fontFamily.sans],
       },
       colors: {
         primary: colors.blue,
