@@ -1,0 +1,149 @@
+---
+title: 'How I setup ESLint, Prettier and Commit Linting'
+date: '2023-07-01'
+tags: ['eslint', 'prettier', 'commitlint']
+draft: false
+summary: 'My process for setting up code and commit linting, utilizing tools like ESLint, Prettier, Husky, and lint-staged, which aid in maintaining code quality and enforcing a consistent coding and commit style. '
+---
+
+As a software developer, maintaining the consistency and quality of my code is something I always keep on top off. One way I ensure this is through the use of linting.
+Today, I'd like to walk you through my process of setting up code linting, with a focus on commit linting. We will do this using ESLint, Prettier, Husky, and lint-staged.
+
+<Callout>
+**Why use ESLint and Prettier together?**<br/>
+While ESLint helps in identifying and reporting potential issues in your ECMAScript/JavaScript code, its primary focus is not formatting.
+Prettier, on the other hand, is an opinionated code formatter, ensuring your code follows a consistent style.
+By using them together, we can get the best of both worlds
+
+</Callout>
+
+## Code Linting
+
+Linting is a method to automatically check your code for potential errors. It allows you to follow coding standards and avoid common mistakes.
+
+### Steps
+
+#### 1. Installing ESLint and Prettier
+
+To begin with, we need to install ESLint, Prettier, and eslint-config-prettier. ESLint helps in identifying and reporting on patterns found in ECMAScript/JavaScript code.
+Prettier is an opinionated code formatter, and eslint-config-prettier is a config that disables ESLint rules that conflict with Prettier.
+
+In your project directory, use the following npm command to install these as dev dependencies:
+
+```shell
+npm install eslint prettier eslint-config-prettier --save-dev
+```
+
+#### 2. Initialise ESLint
+
+Next, let's initialise ESLint with this command:
+
+```shell
+npm init @eslint/config
+```
+
+You'll be asked a few questions. When asked if you want to install 'eslint-config', answer 'Yes'.
+For the primary purpose of your configuration, choose 'To check syntax and find problems'. Answer the following questions based on your project.
+
+#### 3. Configure ESLint to Use Prettier
+
+In your ESLint configuration file, add "prettier" to the extends array:
+
+```json title=".eslintrc.js"
+"extends": ["eslint:recommended", "prettier"]
+```
+
+#### 4. Configure Prettier
+
+To prevent certain files from being formatted by Prettier, add a .prettierignore file in your root directory:
+
+```shell title=".prettierignore"
+# Ignore artifacts:
+package-lock.json
+build
+coverage
+```
+
+Then, add a .prettierrc file to configure Prettier. Here's an example:
+
+```json title=".prettierrc"
+{
+  "trailingComma": "all",
+  "tabWidth": 2,
+  "semi": false,
+  "singleQuote": true
+}
+```
+
+#### 5. Add Prettier and ESLint to Your Scripts
+
+Add the following lines to the "scripts" section of your package.json file:
+
+```json title="package.json"
+"prettier:check": "npx prettier --check .",
+"prettier:fix": "npx prettier --write .",
+"lint": "npx eslint ."
+```
+
+### Commit Linting
+
+Commit linting helps to enforce a consistent commit style, which is particularly useful when you want to automate tasks like releasing and generating changelogs.
+
+#### 6. Install and Initialise Husky
+
+Husky is a tool that lets you run scripts when specific Git events happen (like pre-commit, post-commit, etc.). Install it and initialise it using:
+
+```shell
+npx husky-init && npm install --save-dev
+```
+
+#### 7. Install lint-staged
+
+lint-staged runs linters on staged files. Install it with:
+
+```shell
+npm install lint-staged --save-dev
+```
+
+Then, add a lint-staged configuration to your package.json file:
+
+```json title="package.json"
+"lint-staged": {
+  "*.{css,less,scss,html,json,jsx,js}": [
+    "prettier --write ."
+  ],
+  "*.js": "eslint --fix"
+}
+```
+
+#### 8. Set Up Husky with lint-staged
+
+Next, you need to set up Husky to use lint-staged whenever a commit is made. This is accomplished by adding a pre-commit hook. Use this command:
+
+```shell
+npx husky add .husky/pre-commit "npx lint-staged"
+```
+
+After running the above command, a pre-commit file will be generated in the .husky directory. Open this file and ensure it contains the command "npx lint-staged". If you see a "test" command, you can remove it.
+
+#### 9. Install Commitizen
+
+Commitizen is a tool that makes creating commits following a standard format easier. To install Commitizen and initialize it with the cz-conventional-changelog adapter, use the following command:
+
+```shell
+npx commitizen init cz-conventional-changelog --save-dev --save-exact
+```
+
+The cz-conventional-changelog is an adapter that follows the conventional changelog specification. However, you can replace it with an adapter of your choosing.
+
+#### 10. Add Prepare Commit Hook
+
+Finally, add a hook for preparing commit messages with Commitizen. Here's the command:
+
+```shell
+npx husky add .husky/prepare-commit-msg "exec < /dev/tty && npx cz --hook || true"
+```
+
+This command will create a prepare-commit-msg file in the .husky directory. This ensures that every time you commit, you are prompted to follow the commit conventions.
+
+And that's it! You now have ESLint for checking your code, Prettier for formatting it, and lint-staged with Husky for managing your commits, all set up and ready to go. Happy coding!
