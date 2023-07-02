@@ -35,7 +35,7 @@ export default async function JustGivingUpdates() {
                 {item?.media[0]?.url && (
                   // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/img-redundant-alt
                   <img
-                    className="mx-auto my-3 max-w-[500px]"
+                    className="mx-auto my-3 w-full max-w-[500px]"
                     src={item.media[0].url}
                     alt={`update ${updateCount}`}
                     loading="lazy"
