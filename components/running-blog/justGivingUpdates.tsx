@@ -1,6 +1,3 @@
-'use client'
-import Image from 'next/image'
-
 async function getTimelineData() {
   const res = await fetch(
     'https://graphql.justgiving.com/?operationName=ListTimelineEntries&variables=%7B%22type%22%3A%22ONE_PAGE%22%2C%22slug%22%3A%22page%2Fjames-shopland%22%2C%22measurementSystem%22%3A%22IMPERIAL%22%2C%22first%22%3A3%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%227e52c2dab36016e39a126ead2c4c8f0f412c78de166a7a5d789d9dcf2a2f0a77%22%7D%7D'
