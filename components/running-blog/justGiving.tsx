@@ -20,9 +20,9 @@ export default async function JustGiving() {
   return (
     <>
       <div className="mb-1 mt-3 text-lg font-medium dark:text-white">
-        £{value} raised of £1,000 target <span className="text-xs">(plus £{giftAid} Gift Aid)</span>
+        £{value} raised of £1,000 target
       </div>
-      <div className="h-6 w-full rounded-full bg-gray-200 dark:bg-gray-700">
+      <div className="h-6 w-full rounded-full bg-gray-400 dark:bg-gray-700">
         <div
           className="flex h-6 items-center justify-center rounded-full bg-blue-600 p-0.5 text-center text-xs font-medium leading-none text-blue-100"
           style={{ width: '45%' }}
@@ -30,11 +30,12 @@ export default async function JustGiving() {
           <p className="text-md h-fit">{percentage}%</p>
         </div>
       </div>
+      <span className="text-xs">(plus £{giftAid} Gift Aid)</span>
       <a
         href="https://www.justgiving.com/page/james-shopland/donate"
         target="_blank"
         rel="noopener noreferrer"
-        className="mr-3 mt-6 inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-center text-base font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
+        className="mr-3 mt-3 inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-center text-base font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
       >
         Donate on JustGiving
       </a>
