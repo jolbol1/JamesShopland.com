@@ -6,7 +6,7 @@ import { GlowDiv } from './glow-div'
 
 const LightIcon = () => (
   <span
-    className="absolute inset-0 top-1 rotate-90 transform  transition duration-1000 motion-reduce:duration-[0s] dark:rotate-0 "
+    className="motion-reduce:duration-[0s] absolute inset-0 top-1 rotate-90  transform transition duration-1000 dark:rotate-0 "
     style={{ transformOrigin: '50% 100px' }}
   >
     <svg
@@ -28,7 +28,7 @@ const LightIcon = () => (
 
 const DarkIcon = () => (
   <span
-    className="absolute inset-0 top-1 rotate-0 transform  transition duration-1000 motion-reduce:duration-[0s] dark:-rotate-90 "
+    className="motion-reduce:duration-[0s] absolute inset-0 top-1 rotate-0  transform transition duration-1000 dark:-rotate-90 "
     style={{ transformOrigin: '50% 100px' }}
   >
     <svg
@@ -65,7 +65,7 @@ const DarkModeSwitch = ({ variant = 'icon' }: DarkModeSwitchProps) => {
           onClick={() => setTheme(theme === 'dark' || resolvedTheme === 'dark' ? 'light' : 'dark')}
           className={clsx(
             'mx-auto inline-flex h-8 items-center justify-center overflow-hidden rounded  bg-gray-200 text-gray-800 transition focus:outline-none  dark:bg-gray-800 dark:text-gray-200',
-            { 'w-8': variant === 'icon' }
+            { 'w-8': variant === 'icon', 'w-full': variant === 'button' }
           )}
         >
           {clientLoaded && (

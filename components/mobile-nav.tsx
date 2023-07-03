@@ -10,6 +10,7 @@ import headerNavLinks from '@/config/nav-links'
 import { GlowDiv } from './glow-div'
 import Image from 'next/image'
 import Logo from '@/public/images/general/logo.webp'
+import DarkModeSwitch from './dark-mode-button'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
@@ -54,7 +55,7 @@ const MobileNav = () => {
               )}
             </div>
           </MobileLink>
-          <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
+          <ScrollArea className="mt-4 h-[calc(100vh-8rem)] pb-10 pl-6">
             <div className="mt-3 flex flex-col space-y-6">
               {headerNavLinks?.map(
                 (item) =>
@@ -71,6 +72,9 @@ const MobileNav = () => {
               )}
             </div>
           </ScrollArea>
+          <div className="absolute bottom-6 left-0 w-full px-6">
+            <DarkModeSwitch variant="button" />
+          </div>
         </SheetContent>
       </Sheet>
     </div>
