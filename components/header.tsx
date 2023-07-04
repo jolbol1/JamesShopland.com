@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import hero from '@/public/images/general/hero-image.webp'
+import { Button } from './ui/button'
 
 export function Header() {
   return (
@@ -14,18 +15,19 @@ export function Header() {
             Full-stack Developer With A Passion For Front-End Development and Cloud Solutions
           </p>
           <div className="flex w-full">
-            <Link
-              href="/blog"
-              className="mr-3 inline-flex items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-center text-base font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-ring dark:focus:ring-ring"
+            <Button
+              asChild
+              className="mr-3 inline-flex items-center justify-center rounded-lg p-6 text-center text-base font-medium "
             >
-              View my blog
-            </Link>
-            <Link
-              href="/projects"
-              className="inline-flex items-center justify-center rounded-lg border border-blue-600 px-5 py-3 text-center text-base font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:border-blue-600 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+              <Link href="/blog">View my blog</Link>
+            </Button>
+            <Button
+              variant="outline"
+              asChild
+              className="inline-flex items-center justify-center rounded-lg border-primary p-6 text-center text-base font-medium"
             >
-              My projects
-            </Link>
+              <Link href="/projects">My projects</Link>
+            </Button>
           </div>
         </div>
         <div className="col-span-full mb-12 flex items-center justify-center lg:col-span-7 lg:col-start-6 lg:-mr-[5vw] lg:-mt-24 lg:mb-0 lg:px-0">
