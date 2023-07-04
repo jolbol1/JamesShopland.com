@@ -64,7 +64,7 @@ export default async function PagePage({ params }: TagPageProps) {
     <>
       <div className="container divide-y divide-gray-400 dark:divide-gray-700">
         <div className="space-y-2 pb-6 pt-6 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+          <h1 className="md:leading-14 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl">
             {title}
           </h1>
           <p className="pb-3 text-lg leading-7 text-gray-700 dark:text-gray-400 md:pb-0">
@@ -118,7 +118,7 @@ export default async function PagePage({ params }: TagPageProps) {
 
                               <Link
                                 href={`/blog/${slug}`}
-                                className="text-primary-700 hover:text-primary-600 dark:text-primary-500 dark:hover:text-primary-400"
+                                className="text-primary hover:text-primary-hover"
                                 aria-label={`Read "${title}"`}
                               >
                                 Read more &rarr;
@@ -135,7 +135,7 @@ export default async function PagePage({ params }: TagPageProps) {
           </div>
 
           <div className="col-span-12 row-start-3 h-fit divide-y divide-gray-400 rounded-xl bg-gray-200   dark:divide-gray-700  dark:bg-gray-900 sm:col-span-4 sm:col-start-9 sm:row-start-1">
-            <div className=" relative h-full rounded-2xl bg-card-gradient-dark p-[1px] dark:bg-card-gradient">
+            <div className=" bg-card-gradient-dark dark:bg-card-gradient relative h-full rounded-2xl p-[1px]">
               <div className="flex h-full flex-col gap-4 rounded-2xl bg-gradient-to-b from-slate-200 to-slate-100 p-6 dark:from-slate-950 dark:to-gray-950">
                 <h2 className="pb-2  text-2xl font-bold leading-8 tracking-tight">Tags</h2>
                 <div className="pt-2">

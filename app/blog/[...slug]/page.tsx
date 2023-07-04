@@ -165,7 +165,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                             {author.twitter && (
                               <Link
                                 href={author.twitter}
-                                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                                className="text-primary hover:text-primary-hover"
                               >
                                 {author.twitter.replace('https://twitter.com/', '@')}
                               </Link>
@@ -217,7 +217,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           Previous Article
                         </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                        <div className="text-primary hover:text-primary-hover">
                           <Link href={`/${prev.path}`}>{prev.title}</Link>
                         </div>
                       </div>
@@ -227,7 +227,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           Next Article
                         </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                        <div className="text-primary hover:text-primary-hover">
                           <Link href={`/${next.path}`}>{next.title}</Link>
                         </div>
                       </div>
@@ -239,7 +239,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <Link
                   type="button"
                   href={`/blog`}
-                  className="w-full rounded-lg  bg-primary-600 p-3 text-center font-bold text-gray-200 hover:scale-110"
+                  className="w-full rounded-lg  bg-primary p-3 text-center font-bold text-gray-200 hover:scale-110"
                   aria-label="Back to the blogs"
                 >
                   &larr; Back to the blog

@@ -14,9 +14,9 @@ interface LatestPostsProps {
 export function LatestPosts({ posts }: LatestPostsProps) {
   return (
     <>
-      <div className="mx-auto max-w-3xl  px-4 sm:px-6 xl:max-w-5xl ">
+      <div className="max-w-3xl xl:max-w-5xl  mx-auto px-4 sm:px-6 ">
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <h1 className="pb-3 text-center text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+          <h1 className="md:leading-14 pb-3 text-center text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl">
             Latest Posts
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
@@ -66,7 +66,7 @@ export function LatestPosts({ posts }: LatestPostsProps) {
 
                           <Link
                             href={`/blog/${slug}`}
-                            className="h-fit text-blue-700 hover:text-primary-600 dark:text-primary-500 dark:hover:text-primary-400"
+                            className="h-fit text-primary hover:text-primary-hover"
                             aria-label={`Read "${title}"`}
                           >
                             {`Read ${
@@ -86,10 +86,10 @@ export function LatestPosts({ posts }: LatestPostsProps) {
           </ul>
         </div>
       </div>
-      <div className="mx-auto mt-6 flex max-w-3xl justify-center px-4 text-base  font-medium leading-6 sm:px-6 xl:max-w-5xl">
+      <div className="max-w-3xl xl:max-w-5xl mx-auto mt-6 flex justify-center px-4  text-base font-medium leading-6 sm:px-6">
         <Link
           href="/blog"
-          className="my-3 w-full rounded-lg bg-primary-600 p-3 text-center text-white"
+          className="bg-primary-600 my-3 w-full rounded-lg p-3 text-center text-white"
           aria-label="All posts"
         >
           See the full blog &rarr;

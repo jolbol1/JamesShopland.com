@@ -47,7 +47,7 @@ export const Portal = ({ searchDocumentsPath }: { searchDocumentsPath: string })
   return (
     <KBarPortal>
       <KBarPositioner className="bg-gray-300/50 p-4 backdrop-blur backdrop-filter dark:bg-black/50">
-        <KBarAnimator className="w-full max-w-xl">
+        <KBarAnimator className="max-w-xl w-full">
           <div className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-50 dark:border-gray-800 dark:bg-gray-900">
             <div className="flex items-center space-x-4 p-4">
               <span className="block w-5">
@@ -93,14 +93,14 @@ const RenderResults = () => {
           <div>
             {typeof item === 'string' ? (
               <div className="pt-3">
-                <div className="block border-t border-gray-100 px-4 pb-2 pt-6 text-xs font-semibold uppercase text-primary-600 dark:border-gray-800">
+                <div className="block border-t border-gray-100 px-4 pb-2 pt-6 text-xs font-semibold uppercase text-primary dark:border-gray-800">
                   {item}
                 </div>
               </div>
             ) : (
               <div
                 className={`block cursor-pointer px-4 py-2 text-gray-600 hover:text-gray-200 dark:text-gray-200 ${
-                  active ? 'bg-primary-600 !text-gray-200' : 'bg-transparent'
+                  active ? 'bg-primary !text-gray-200' : 'bg-transparent'
                 }`}
               >
                 {item.subtitle && (

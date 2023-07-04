@@ -36,7 +36,7 @@ export default async function JustGiving() {
         href="https://www.justgiving.com/page/james-shopland/donate"
         target="_blank"
         rel="noopener noreferrer"
-        className="mr-3 mt-3 inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-center text-base font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
+        className="mr-3 mt-3 inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-center text-base font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-ring"
       >
         Donate on JustGiving
       </a>

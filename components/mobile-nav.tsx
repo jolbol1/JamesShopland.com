@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { useRouter } from 'next/navigation'
 import Link, { LinkProps } from 'next/link'
 import { cn } from '@/lib/utils'
@@ -57,6 +57,14 @@ const MobileNav = () => {
           </MobileLink>
           <ScrollArea className="mt-4 h-[calc(100vh-8rem)] pb-10 pl-6">
             <div className="mt-3 flex flex-col space-y-6">
+              <MobileLink
+                key={'home-link-mnav'}
+                href={'/'}
+                onOpenChange={setNavShow}
+                className="mt-3 text-2xl font-semibold"
+              >
+                Home
+              </MobileLink>
               {headerNavLinks?.map(
                 (item) =>
                   item.href && (

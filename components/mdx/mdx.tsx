@@ -64,10 +64,7 @@ const components: MDXComponents = {
   ),
   a: ({ className, ...props }) => (
     // eslint-disable-next-line jsx-a11y/anchor-has-content
-    <a
-      className={cn('font-medium text-primary-600 dark:text-primary-500 ', className)}
-      {...props}
-    />
+    <a className={cn('font-medium text-primary  ', className)} {...props} />
   ),
   p: ({ className, ...props }) => (
     <p className={cn('leading-7 [&:not(:first-child)]:mt-6', className)} {...props} />
