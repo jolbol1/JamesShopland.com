@@ -13,14 +13,14 @@ module.exports = {
     './data/**/*.mdx',
   ],
   theme: {
-    container: {
-      center: true,
-      maxWidth: '96rem',
-    },
-    maxWidth: {
-      '8xl': '96rem',
-    },
     extend: {
+      container: {
+        center: true,
+        maxWidth: '96rem',
+      },
+      maxWidth: {
+        '8xl': '96rem',
+      },
       fontFamily: {
         mono: ['var(--font-code)', ...fontFamily.mono],
         sans: ['var(--font-inter)', ...fontFamily.sans],
