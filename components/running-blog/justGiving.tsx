@@ -26,7 +26,7 @@ export default async function JustGiving() {
       <div className="h-6 w-full rounded-full bg-gray-400 dark:bg-gray-700">
         <div
           className="flex h-6 items-center justify-center rounded-full bg-blue-600 p-0.5 text-center text-xs font-medium leading-none text-blue-100"
-          style={{ width: `${percentage}%` }}
+          style={{ width: `${Number.parseInt(percentage) >= 100 ? 100 : percentage}%` }}
         >
           <p className="text-md h-fit">{percentage}%</p>
         </div>
