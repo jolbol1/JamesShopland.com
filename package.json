@@ -14,7 +14,7 @@
     "prettier:fix": "npx prettier --write ."
   },
   "dependencies": {
-    "@next/bundle-analyzer": "13.4.17",
+    "@next/bundle-analyzer": "13.4.18",
     "@types/mdx": "^2.0.4",
     "@vercel/analytics": "^1.0.0",
     "@vercel/og": "^0.5.3",
@@ -26,7 +26,7 @@
     "github-slugger": "^2.0.0",
     "kbar": "^0.1.0-beta.40",
     "mdx-bundler": "^9.0.1",
-    "next": "13.4.17",
+    "next": "13.4.18",
     "next-contentlayer": "0.3.4",
     "next-sitemap": "^4.0.7",
     "next-themes": "npm:@wits/next-themes@^0.2.16",
@@ -55,7 +55,7 @@
     "@typescript-eslint/parser": "^6.0.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.38.0",
-    "eslint-config-next": "13.4.17",
+    "eslint-config-next": "13.4.18",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "husky": "^8.0.0",
