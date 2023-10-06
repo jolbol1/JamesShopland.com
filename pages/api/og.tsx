@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
+// @ts-nocheck
 import { NextRequest } from "next/server"
 
 import { ImageResponse } from "@vercel/og"
