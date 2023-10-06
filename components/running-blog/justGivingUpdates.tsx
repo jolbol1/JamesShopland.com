@@ -21,7 +21,7 @@ export default async function JustGivingUpdates() {
       {timeline &&
         timeline.map(
           (item: { id: string; message: string; media: [{ url: string }] }, index: number) => {
-            const updateCount = index + 1
+            const updateCount = timeline.length - index
             return (
               <>
                 <h3 className="mt-8 scroll-m-20 text-2xl font-semibold tracking-tight text-black dark:text-white">
