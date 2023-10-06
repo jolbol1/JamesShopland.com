@@ -1,19 +1,26 @@
-import React, { useState, useEffect } from 'react'
-import { CoreContent, MDXDocument } from '../../lib/contentlayer'
+import React, { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+
 import {
-  KBarPortal,
-  KBarSearch,
+  Action,
   KBarAnimator,
+  KBarPortal,
   KBarPositioner,
   KBarResults,
+  KBarSearch,
   useMatches,
   useRegisterActions,
-  Action,
-} from 'kbar'
-import { formatDate } from '@/lib/utils'
-import { useRouter } from 'next/navigation'
+} from "kbar"
 
-export const Portal = ({ searchDocumentsPath }: { searchDocumentsPath: string }) => {
+import { formatDate } from "@/lib/utils"
+
+import { CoreContent, MDXDocument } from "../../lib/contentlayer"
+
+export const Portal = ({
+  searchDocumentsPath,
+}: {
+  searchDocumentsPath: string
+}) => {
   const [searchActions, setSearchActions] = useState<Action[]>([])
   const router = useRouter()
 
@@ -24,10 +31,10 @@ export const Portal = ({ searchDocumentsPath }: { searchDocumentsPath: string })
         actions.push({
           id: post.path,
           name: post.title,
-          keywords: post?.summary || '',
-          section: 'Content',
+          keywords: post?.summary || "",
+          section: "Content",
           subtitle: formatDate(post.date),
-          perform: () => router.push('/' + post.path),
+          perform: () => router.push("/" + post.path),
         })
       }
       return actions
@@ -91,7 +98,7 @@ const RenderResults = () => {
         items={results}
         onRender={({ item, active }) => (
           <div>
-            {typeof item === 'string' ? (
+            {typeof item === "string" ? (
               <div className="pt-3">
                 <div className="block border-t border-gray-100 px-4 pb-2 pt-6 text-xs font-semibold uppercase text-primary-600 dark:border-gray-800">
                   {item}
@@ -100,13 +107,15 @@ const RenderResults = () => {
             ) : (
               <div
                 className={`block cursor-pointer px-4 py-2 text-gray-600 hover:text-gray-200 dark:text-gray-200 ${
-                  active ? 'bg-primary-600 !text-gray-200' : 'bg-transparent'
+                  active ? "bg-primary-600 !text-gray-200" : "bg-transparent"
                 }`}
               >
                 {item.subtitle && (
                   <div
                     className={`${
-                      active ? 'text-gray-200' : 'text-gray-400 dark:text-gray-500'
+                      active
+                        ? "text-gray-200"
+                        : "text-gray-400 dark:text-gray-500"
                     } text-xs`}
                   >
                     {item.subtitle}

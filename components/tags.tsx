@@ -1,6 +1,7 @@
-import Link from '@/components/link'
-import Tag from '@/components/tag'
-import { slug } from 'github-slugger'
+import { slug } from "github-slugger"
+
+import Link from "@/components/link"
+import Tag from "@/components/tag"
 
 interface TagsProps {
   tags: Record<string, number>
@@ -10,7 +11,7 @@ export default function Tags({ tags }: TagsProps) {
   const sortedTags = Object.keys(tags).sort((a, b) => tags[b] - tags[a])
   return (
     <div className="flex  flex-wrap gap-2">
-      {Object.keys(tags).length === 0 && 'No tags found.'}
+      {Object.keys(tags).length === 0 && "No tags found."}
       {sortedTags.map((t) => {
         return (
           <div

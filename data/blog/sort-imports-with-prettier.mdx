@@ -1,7 +1,7 @@
 ---
-title: 'Organising your JavaScript imports with Prettier'
-date: '2023-10-06'
-tags: ['eslint', 'prettier', 'javascript', 'sort-imports']
+title: "Organising your JavaScript imports with Prettier"
+date: "2023-10-06"
+tags: ["eslint", "prettier", "javascript", "sort-imports"]
 draft: false
 summary: "How to organise your JavaScript imports using Prettier and @ianvs/prettier-plugin-sort-imports. I'll show you how powerful this plugin can be as its completely customisable, fitting to your needs."
 ---
@@ -35,24 +35,25 @@ import EditorJS from '@editorjs/editorjs'
 To something you have configured, like this:
 
 ```tsx
-import * as React from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import * as React from "react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 
-import EditorJS from '@editorjs/editorjs'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Post } from '@prisma/client'
-import { useForm } from 'react-hook-form'
-import TextareaAutosize from 'react-textarea-autosize'
-import * as z from 'zod'
+import EditorJS from "@editorjs/editorjs"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Post } from "@prisma/client"
+import { useForm } from "react-hook-form"
+import TextareaAutosize from "react-textarea-autosize"
+import * as z from "zod"
 
-import { cn } from '@/lib/utils'
-import { postPatchSchema } from '@/lib/validations/post'
-import { buttonVariants } from '@/components/ui/button'
-import { toast } from '@/components/ui/use-toast'
-import { Icons } from '@/components/icons'
+import { cn } from "@/lib/utils"
+import { postPatchSchema } from "@/lib/validations/post"
 
-import '@/styles/editor.css'
+import { buttonVariants } from "@/components/ui/button"
+import { toast } from "@/components/ui/use-toast"
+import { Icons } from "@/components/icons"
+
+import "@/styles/editor.css"
 ```
 
 ## How To

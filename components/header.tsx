@@ -1,6 +1,7 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import hero from '@/public/images/general/hero-image.webp'
+import Image from "next/image"
+import Link from "next/link"
+
+import hero from "@/public/images/general/hero-image.webp"
 
 export function Header() {
   return (
@@ -11,7 +12,8 @@ export function Header() {
             Hello, I'm James
           </h1>
           <p className="mb-6 max-w-2xl  text-gray-500 dark:text-gray-400 md:text-lg lg:mb-8 lg:text-xl">
-            Full-stack Developer With A Passion For Front-End Development and Cloud Solutions
+            Full-stack Developer With A Passion For Front-End Development and
+            Cloud Solutions
           </p>
           <div className="flex w-full">
             <Link
@@ -33,7 +35,7 @@ export function Header() {
             <Image
               src={hero}
               alt={
-                'cartoon image of james shopland with icons of programming languages surrounding him'
+                "cartoon image of james shopland with icons of programming languages surrounding him"
               }
               priority
               className="h-auto max-h-[50vh] w-full object-contain lg:max-h-[75vh]"

@@ -1,25 +1,25 @@
 ---
-title: 'Markdown Guide'
-date: '2019-10-11'
-tags: ['github', 'guide']
+title: "Markdown Guide"
+date: "2019-10-11"
+tags: ["github", "guide"]
 draft: true
-summary: 'Markdown cheatsheet for all your blogging needs - headers, lists, images, tables and more! An illustrated guide based on GitHub Flavored Markdown.'
+summary: "Markdown cheatsheet for all your blogging needs - headers, lists, images, tables and more! An illustrated guide based on GitHub Flavored Markdown."
 ---
 
 # Introduction
 
 ```ts showLineNumbers title="next.config.js" {3} /appDir: true/
-import { withContentlayer } from 'next-contentlayer'
+import { withContentlayer } from "next-contentlayer"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['avatars.githubusercontent.com'],
+    domains: ["avatars.githubusercontent.com"],
   },
   experimental: {
     appDir: true,
-    serverComponentsExternalPackages: ['@prisma/client'],
+    serverComponentsExternalPackages: ["@prisma/client"],
   },
 }
 
@@ -166,7 +166,7 @@ And here's how it looks - nicely colored with styled code titles!
 ```jsx
 function fancyAlert(arg) {
   if (arg) {
-    $.facebox({ div: '#foo' })
+    $.facebox({ div: "#foo" })
   }
 }
 ```

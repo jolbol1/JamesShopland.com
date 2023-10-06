@@ -1,10 +1,11 @@
-import Mail from './mail.svg'
-import Github from './github.svg'
-import Facebook from './facebook.svg'
-import Youtube from './youtube.svg'
-import Linkedin from './linkedin.svg'
-import Twitter from './twitter.svg'
-import Rss from './rss.svg'
+import Facebook from "./facebook.svg"
+import Github from "./github.svg"
+import Linkedin from "./linkedin.svg"
+import Mail from "./mail.svg"
+import Rss from "./rss.svg"
+import Twitter from "./twitter.svg"
+import Youtube from "./youtube.svg"
+
 // Icons taken from: https://simpleicons.org/
 
 const components = {
@@ -24,7 +25,11 @@ interface SocialIconProps {
 }
 
 const SocialIcon = ({ kind, href, size = 8 }: SocialIconProps) => {
-  if (!href || (kind === 'mail' && !/^mailto:\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(href)))
+  if (
+    !href ||
+    (kind === "mail" &&
+      !/^mailto:\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(href))
+  )
     return null
 
   const SocialSvg = components[kind]

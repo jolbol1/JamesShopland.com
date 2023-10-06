@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
+import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
 
 const Analytics = () => {
   return <VercelAnalytics />

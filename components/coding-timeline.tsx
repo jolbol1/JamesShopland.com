@@ -28,9 +28,10 @@ export function CodingTimeline() {
           2023
         </time>
         <p className="mb-4 text-base font-normal text-gray-700 dark:text-gray-400">
-          During my time at Frazer-Nash I worked on my passion for frontend development. This lead
-          me to take on a new role this year at Imparta as a Software Engineer, where I am able to
-          focus on frontend development and continue to develop my skills in this area.
+          During my time at Frazer-Nash I worked on my passion for frontend
+          development. This lead me to take on a new role this year at Imparta
+          as a Software Engineer, where I am able to focus on frontend
+          development and continue to develop my skills in this area.
         </p>
       </li>
       <li className="mb-10 ml-8">
@@ -52,9 +53,10 @@ export function CodingTimeline() {
           2022
         </time>
         <p className="mb-4 text-base font-normal text-gray-700 dark:text-gray-400">
-          I started work as an Engineer at Frazer-Nash, where I was part of the Cloud Technologies
-          group. This role allowed me to further develop my skills in software engineering and
-          explore my passion for problem-solving and creativity in the rapidly changing field of
+          I started work as an Engineer at Frazer-Nash, where I was part of the
+          Cloud Technologies group. This role allowed me to further develop my
+          skills in software engineering and explore my passion for
+          problem-solving and creativity in the rapidly changing field of
           technology.
         </p>
       </li>
@@ -77,9 +79,10 @@ export function CodingTimeline() {
           2021
         </time>
         <p className="text-base font-normal text-gray-700 dark:text-gray-400">
-          I made the switch to a developer job, leaving my previous career in accounting to pursue
-          my passion for coding full-time. This decision allowed me to fully immerse myself in the
-          world of software engineering and explore new technologies and approaches.
+          I made the switch to a developer job, leaving my previous career in
+          accounting to pursue my passion for coding full-time. This decision
+          allowed me to fully immerse myself in the world of software
+          engineering and explore new technologies and approaches.
         </p>
       </li>
       <li className="mb-10 ml-8">
@@ -94,14 +97,17 @@ export function CodingTimeline() {
             <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2 .5v2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5zm0 4v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM4.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM4 12.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM7.5 6a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM7 9.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM10 6.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-.5-.5h-1z" />
           </svg>
         </span>
-        <h3 className="mb-1 text-lg font-semibold text-gray-900 dark:text-white">Accountant</h3>
+        <h3 className="mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+          Accountant
+        </h3>
         <time className="text-md my-2  block font-bold leading-none text-gray-600 dark:text-gray-200">
           2019 - 2021
         </time>
         <p className="text-base font-normal text-gray-700 dark:text-gray-400">
-          I was tasked with helping the IT team at an accounting firm create a web app to improve
-          workflows in creating reports, while I was bookeeping. I was initially brought on to test
-          the app and provide feedback on what features to add, but as I worked on the project, I
+          I was tasked with helping the IT team at an accounting firm create a
+          web app to improve workflows in creating reports, while I was
+          bookeeping. I was initially brought on to test the app and provide
+          feedback on what features to add, but as I worked on the project, I
           found myself becoming increasingly interested in coding.
         </p>
       </li>
@@ -124,10 +130,11 @@ export function CodingTimeline() {
           2019
         </time>
         <p className="text-base font-normal text-gray-700 dark:text-gray-400">
-          I wrote a dissertation on behavioral finance, which gave me insights into user experience
-          and design. This sparked my interest in the intersection between psychology and
-          technology, and I began to explore opportunities in software engineering that allowed me
-          to incorporate this knowledge into my work.
+          I wrote a dissertation on behavioral finance, which gave me insights
+          into user experience and design. This sparked my interest in the
+          intersection between psychology and technology, and I began to explore
+          opportunities in software engineering that allowed me to incorporate
+          this knowledge into my work.
         </p>
       </li>
       <li className="mb-10 ml-8">
@@ -150,9 +157,10 @@ export function CodingTimeline() {
           2016 - 2019
         </time>
         <p className="text-base font-normal text-gray-700 dark:text-gray-400">
-          I started university to study Accounting and Finance, where I continued to pursue my
-          passion for coding as a hobby. This provided me with a well-rounded education and a strong
-          foundation in business and financial principles.
+          I started university to study Accounting and Finance, where I
+          continued to pursue my passion for coding as a hobby. This provided me
+          with a well-rounded education and a strong foundation in business and
+          financial principles.
         </p>
       </li>
       <li className="mb-10 ml-8">
@@ -174,11 +182,12 @@ export function CodingTimeline() {
           2011 - 2015
         </time>
         <p className="text-base font-normal text-gray-700 dark:text-gray-400">
-          I started a YouTube channel to post tutorials on completing difficult levels on an iPad
-          app. Over time, my channel grew to include a wide variety of Mac-based tutorials, with two
-          of my videos amassing over 40,000 views. Despite the tutorials being rather out of date,
-          the channel did its best over COVID-19, as people were stuck at home and looking for ways
-          to improve their computer skills.
+          I started a YouTube channel to post tutorials on completing difficult
+          levels on an iPad app. Over time, my channel grew to include a wide
+          variety of Mac-based tutorials, with two of my videos amassing over
+          40,000 views. Despite the tutorials being rather out of date, the
+          channel did its best over COVID-19, as people were stuck at home and
+          looking for ways to improve their computer skills.
         </p>
       </li>
       <li className="ml-8">
@@ -201,9 +210,10 @@ export function CodingTimeline() {
           2011
         </time>
         <p className="text-base font-normal text-gray-700 dark:text-gray-400">
-          I began developing Java plugins for Minecraft, which quickly gained popularity and amassed
-          over 100,000 downloads. This experience sparked my interest in coding and set me on a path
-          towards a career in software engineering.
+          I began developing Java plugins for Minecraft, which quickly gained
+          popularity and amassed over 100,000 downloads. This experience sparked
+          my interest in coding and set me on a path towards a career in
+          software engineering.
         </p>
       </li>
     </ol>

@@ -1,12 +1,15 @@
-import siteMetadata from '@/config/site-metadata'
-import headerNavLinks from '@/config/nav-links'
-import Logo from '@/public/images/general/logo.webp'
-import Link from './link'
-import MobileNav from './mobile-nav'
-import DarkModeSwitch from './dark-mode-button'
-import Image from 'next/image'
-import { GlowDiv } from './glow-div'
-import KBarSearchProvider from './search'
+import Image from "next/image"
+
+import Logo from "@/public/images/general/logo.webp"
+
+import headerNavLinks from "@/config/nav-links"
+import siteMetadata from "@/config/site-metadata"
+
+import DarkModeSwitch from "./dark-mode-button"
+import { GlowDiv } from "./glow-div"
+import Link from "./link"
+import MobileNav from "./mobile-nav"
+import KBarSearchProvider from "./search"
 
 const Nav = () => {
   return (
@@ -16,10 +19,15 @@ const Nav = () => {
           <div className="flex items-center justify-between align-middle">
             <div className="mr-3">
               <GlowDiv>
-                <Image src={Logo} height={48} width={48} alt="James Shopland Logo" />
+                <Image
+                  src={Logo}
+                  height={48}
+                  width={48}
+                  alt="James Shopland Logo"
+                />
               </GlowDiv>
             </div>
-            {typeof siteMetadata.headerTitle === 'string' ? (
+            {typeof siteMetadata.headerTitle === "string" ? (
               <div className="underlined after:bottom[0px]  text-xl font-semibold   [@media(min-width:440px)]:text-2xl">
                 {siteMetadata.headerTitle}
               </div>

@@ -1,9 +1,13 @@
-'use client'
-import dynamic from 'next/dynamic'
-import { GiscusConfig, GiscusProps } from './giscus'
-import siteMetadata from '@/config/site-metadata'
-import { useEffect, useRef, useState } from 'react'
-import useIntersectionObserver from 'hooks/use-observer'
+"use client"
+
+import { useEffect, useRef, useState } from "react"
+import dynamic from "next/dynamic"
+
+import useIntersectionObserver from "hooks/use-observer"
+
+import siteMetadata from "@/config/site-metadata"
+
+import { GiscusConfig, GiscusProps } from "./giscus"
 
 export type CommentsConfig = GiscusConfig
 
@@ -13,7 +17,7 @@ export interface CommentsProps {
 
 const GiscusComponent = dynamic<GiscusProps>(
   () => {
-    return import('./giscus').then((mod) => mod.Giscus)
+    return import("./giscus").then((mod) => mod.Giscus)
   },
   { ssr: false }
 )
@@ -30,8 +34,14 @@ const Comments = () => {
   }, [isVisible])
 
   return (
-    <div className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment" ref={ref}>
-      {!loadComments && <button onClick={() => setLoadComments(true)}>Load Comments</button>}
+    <div
+      className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"
+      id="comment"
+      ref={ref}
+    >
+      {!loadComments && (
+        <button onClick={() => setLoadComments(true)}>Load Comments</button>
+      )}
       {loadComments && <GiscusComponent {...commentsConfig} />}
     </div>
   )

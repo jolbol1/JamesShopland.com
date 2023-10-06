@@ -1,8 +1,11 @@
-'use client'
-import { useState } from 'react'
-import Link from './link'
-import headerNavLinks from '@/config/nav-links'
-import DarkModeSwitch from './dark-mode-button'
+"use client"
+
+import { useState } from "react"
+
+import headerNavLinks from "@/config/nav-links"
+
+import DarkModeSwitch from "./dark-mode-button"
+import Link from "./link"
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
@@ -10,10 +13,10 @@ const MobileNav = () => {
   const onToggleNav = () => {
     setNavShow((status) => {
       if (status) {
-        document.body.style.overflow = 'auto'
+        document.body.style.overflow = "auto"
       } else {
         // Prevent scrolling
-        document.body.style.overflow = 'hidden'
+        document.body.style.overflow = "hidden"
       }
       return !status
     })
@@ -41,7 +44,7 @@ const MobileNav = () => {
       </button>
       <div
         className={`fixed left-0 top-0 z-10 h-full w-full transform bg-gray-200 opacity-95 duration-300 ease-in-out dark:bg-black ${
-          navShow ? 'translate-x-0' : 'translate-x-full'
+          navShow ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex justify-end">
@@ -65,13 +68,13 @@ const MobileNav = () => {
           </button>
         </div>
         <nav className="fixed mt-8 h-full">
-          <div key={'home'} className="px-12 py-4">
+          <div key={"home"} className="px-12 py-4">
             <Link
-              href={'/'}
+              href={"/"}
               className="text-2xl font-bold  text-gray-900 dark:text-gray-100"
               onClick={onToggleNav}
             >
-              {'Home'}
+              {"Home"}
             </Link>
           </div>
           {headerNavLinks.map((link) => (

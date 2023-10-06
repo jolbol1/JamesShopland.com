@@ -46,7 +46,7 @@ input:-webkit-autofill:focus {
 
 .underlined:after {
   bottom: -4px;
-  content: '';
+  content: "";
   display: block;
   height: 2px;
   left: 0;

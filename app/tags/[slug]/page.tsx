@@ -1,13 +1,15 @@
-import { notFound } from 'next/navigation'
+import { Metadata } from "next"
+import Link from "next/link"
+import { notFound } from "next/navigation"
 
-import { allCoreContent, getAllTags } from '@/lib/contentlayer'
-import { allBlogs } from 'contentlayer/generated'
-import Tags from '@/components/tags'
-import Link from 'next/link'
-import Tag from '@/components/tag'
-import { slug } from 'github-slugger'
-import { formatDate } from '@/lib/utils'
-import { Metadata } from 'next'
+import { allBlogs } from "contentlayer/generated"
+import { slug } from "github-slugger"
+
+import { allCoreContent, getAllTags } from "@/lib/contentlayer"
+import { formatDate } from "@/lib/utils"
+
+import Tag from "@/components/tag"
+import Tags from "@/components/tags"
 
 interface TagPageProps {
   params: {
@@ -15,7 +17,7 @@ interface TagPageProps {
   }
 }
 
-async function getPageFromParams(params: TagPageProps['params']) {
+async function getPageFromParams(params: TagPageProps["params"]) {
   const slug = params.slug
   const tags = await getAllTags(allBlogs)
   const page = Object.keys(tags).find((tag) => tag === slug)
@@ -27,7 +29,9 @@ async function getPageFromParams(params: TagPageProps['params']) {
   return page
 }
 
-export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: TagPageProps): Promise<Metadata> {
   const page = await getPageFromParams(params)
 
   if (!page) {
@@ -39,7 +43,9 @@ export async function generateMetadata({ params }: TagPageProps): Promise<Metada
   }
 }
 
-export async function generateStaticParams(): Promise<TagPageProps['params'][]> {
+export async function generateStaticParams(): Promise<
+  TagPageProps["params"][]
+> {
   const tags = await getAllTags(allBlogs)
   return Object.keys(tags).map((doc) => ({
     slug: doc,
@@ -53,11 +59,14 @@ export default async function PagePage({ params }: TagPageProps) {
     notFound()
   }
 
-  const title = page[0].toUpperCase() + page.split(' ').join('-').slice(1)
+  const title = page[0].toUpperCase() + page.split(" ").join("-").slice(1)
 
   const tags = await getAllTags(allBlogs)
   const posts = allCoreContent(
-    allBlogs.filter((post) => post.draft !== true && post.tags?.map((t) => slug(t)).includes(page))
+    allBlogs.filter(
+      (post) =>
+        post.draft !== true && post.tags?.map((t) => slug(t)).includes(page)
+    )
   )
 
   return (
@@ -68,12 +77,14 @@ export default async function PagePage({ params }: TagPageProps) {
             {title}
           </h1>
           <p className="pb-3 text-lg leading-7 text-gray-700 dark:text-gray-400 md:pb-0">
-            Welcome to my blog, where I share my experiences and insights in the world of
-            technology. As a software engineer with a passion for problem-solving and creativity, I
-            love exploring new ideas and discovering the latest trends in this rapidly changing
-            field. In this blog, I share my thoughts on various topics, from projects I have worked
-            on to emerging technologies and industry news. Join me on this exciting journey and stay
-            up-to-date with the latest developments in the tech world.
+            Welcome to my blog, where I share my experiences and insights in the
+            world of technology. As a software engineer with a passion for
+            problem-solving and creativity, I love exploring new ideas and
+            discovering the latest trends in this rapidly changing field. In
+            this blog, I share my thoughts on various topics, from projects I
+            have worked on to emerging technologies and industry news. Join me
+            on this exciting journey and stay up-to-date with the latest
+            developments in the tech world.
           </p>
         </div>
 
@@ -137,7 +148,9 @@ export default async function PagePage({ params }: TagPageProps) {
           <div className="col-span-12 row-start-3 h-fit divide-y divide-gray-400 rounded-xl bg-gray-200   dark:divide-gray-700  dark:bg-gray-900 sm:col-span-4 sm:col-start-9 sm:row-start-1">
             <div className=" relative h-full rounded-2xl bg-card-gradient-dark p-[1px] dark:bg-card-gradient">
               <div className="flex h-full flex-col gap-4 rounded-2xl bg-gradient-to-b from-slate-200 to-slate-100 p-6 dark:from-slate-950 dark:to-gray-950">
-                <h2 className="pb-2  text-2xl font-bold leading-8 tracking-tight">Tags</h2>
+                <h2 className="pb-2  text-2xl font-bold leading-8 tracking-tight">
+                  Tags
+                </h2>
                 <div className="pt-2">
                   <Tags tags={tags} />
                 </div>

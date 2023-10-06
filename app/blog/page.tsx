@@ -1,13 +1,21 @@
-import { sortedBlogPost, getAllTags, allCoreContent } from '../../lib/contentlayer'
-import { allBlogs } from 'contentlayer/generated'
-import type { Blog } from 'contentlayer/generated'
-import Tags from '@/components/tags'
-import Link from 'next/link'
-import Tag from '@/components/tag'
-import { formatDate } from '@/lib/utils'
+import Link from "next/link"
+
+import { allBlogs } from "contentlayer/generated"
+import type { Blog } from "contentlayer/generated"
+
+import { formatDate } from "@/lib/utils"
+
+import Tag from "@/components/tag"
+import Tags from "@/components/tags"
+
+import {
+  allCoreContent,
+  getAllTags,
+  sortedBlogPost,
+} from "../../lib/contentlayer"
 
 export const metadata = {
-  title: 'Blog',
+  title: "Blog",
 }
 
 export default async function BlogPage() {
@@ -26,12 +34,14 @@ export default async function BlogPage() {
             Blog
           </h1>
           <p className="pb-3 text-lg leading-7 text-gray-700 dark:text-gray-400 md:pb-0">
-            Welcome to my blog, where I share my experiences and insights in the world of
-            technology. As a software engineer with a passion for problem-solving and creativity, I
-            love exploring new ideas and discovering the latest trends in this rapidly changing
-            field. In this blog, I share my thoughts on various topics, from projects I have worked
-            on to emerging technologies and industry news. Join me on this exciting journey and stay
-            up-to-date with the latest developments in the tech world.
+            Welcome to my blog, where I share my experiences and insights in the
+            world of technology. As a software engineer with a passion for
+            problem-solving and creativity, I love exploring new ideas and
+            discovering the latest trends in this rapidly changing field. In
+            this blog, I share my thoughts on various topics, from projects I
+            have worked on to emerging technologies and industry news. Join me
+            on this exciting journey and stay up-to-date with the latest
+            developments in the tech world.
           </p>
         </div>
 
@@ -39,7 +49,9 @@ export default async function BlogPage() {
           <div className="col-span-12 col-start-1 sm:col-span-8 ">
             <div className="flex-1 rounded-3xl bg-gradient-to-br from-blue-200 to-blue-600 p-[1px] transition duration-300 hover:shadow-2xl hover:shadow-blue-800">
               <ul className="flex h-full flex-col justify-between divide-y divide-gray-400 rounded-3xl bg-slate-200 px-6 dark:divide-gray-700 dark:bg-slate-950">
-                {!filteredBlogPosts.length && <p className="py-3">No posts found.</p>}
+                {!filteredBlogPosts.length && (
+                  <p className="py-3">No posts found.</p>
+                )}
                 {displayPosts.map((post) => {
                   const { slug, date, title, summary, tags } = post
                   return (
@@ -82,8 +94,13 @@ export default async function BlogPage() {
                               >
                                 {`Read ${
                                   post.readingTime.text
-                                    ? '(' + post.readingTime.text.replace(' read', '') + ')'
-                                    : 'more'
+                                    ? "(" +
+                                      post.readingTime.text.replace(
+                                        " read",
+                                        ""
+                                      ) +
+                                      ")"
+                                    : "more"
                                 }`}
                                 &rarr;
                               </Link>
@@ -101,7 +118,9 @@ export default async function BlogPage() {
           <div className="col-span-12 row-start-3 h-fit divide-y divide-gray-400 rounded-xl bg-gray-200   dark:divide-gray-700  dark:bg-gray-900 sm:col-span-4 sm:col-start-9 sm:row-start-1">
             <div className=" relative h-full rounded-2xl bg-card-gradient-dark p-[1px] dark:bg-card-gradient">
               <div className="flex h-full flex-col gap-4 rounded-2xl bg-gradient-to-b from-slate-200 to-slate-100 p-6 dark:from-slate-950 dark:to-gray-950">
-                <h2 className="pb-2  text-2xl font-bold leading-8 tracking-tight">Tags</h2>
+                <h2 className="pb-2  text-2xl font-bold leading-8 tracking-tight">
+                  Tags
+                </h2>
                 <div className="pt-2">
                   <Tags tags={tags} />
                 </div>

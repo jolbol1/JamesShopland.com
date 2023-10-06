@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { slug } from 'github-slugger'
-import type { Document, MDX } from 'contentlayer/core'
+import type { Document, MDX } from "contentlayer/core"
+import { slug } from "github-slugger"
 
 export type MDXDocument = Document & { body: MDX }
 export type MDXDocumentDate = MDXDocument & {
@@ -60,7 +60,10 @@ export const pick = <Obj, Keys extends keyof Obj>(
  * @param {Keys[]} keys
  * @return {*}  {Omit<Obj, Keys>}
  */
-export const omit = <Obj, Keys extends keyof Obj>(obj: Obj, keys: Keys[]): Omit<Obj, Keys> => {
+export const omit = <Obj, Keys extends keyof Obj>(
+  obj: Obj,
+  keys: Keys[]
+): Omit<Obj, Keys> => {
   const result = Object.assign({}, obj)
   keys.forEach((key) => {
     delete result[key]
@@ -68,14 +71,16 @@ export const omit = <Obj, Keys extends keyof Obj>(obj: Obj, keys: Keys[]): Omit<
   return result
 }
 
-export type CoreContent<T> = Omit<T, 'body' | '_raw' | '_id'>
+export type CoreContent<T> = Omit<T, "body" | "_raw" | "_id">
 
 export function coreContent<T extends MDXDocument>(content: T) {
-  return omit(content, ['body', '_raw', '_id'])
+  return omit(content, ["body", "_raw", "_id"])
 }
 
 export function allCoreContent<T extends MDXDocument>(contents: T[]) {
-  return contents.map((c) => coreContent(c)).filter((c) => !('draft' in c && c.draft === true))
+  return contents
+    .map((c) => coreContent(c))
+    .filter((c) => !("draft" in c && c.draft === true))
 }
 
 // TODO: refactor into contentlayer once compute over all docs is enabled

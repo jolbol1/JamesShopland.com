@@ -1,12 +1,12 @@
 async function getPageData() {
   const res = await fetch(
-    'https://graphql.justgiving.com/?operationName=basePageData&variables=%7B%22includeEvent%22%3Afalse%2C%22type%22%3A%22ONE_PAGE%22%2C%22slug%22%3A%22page%2Fjames-shopland%22%2C%22preview%22%3Afalse%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%2249069c2015a87c32f24a03c0634367a55cc5a39a8e068038aa0a03935e7a50e6%22%7D%7D',
+    "https://graphql.justgiving.com/?operationName=basePageData&variables=%7B%22includeEvent%22%3Afalse%2C%22type%22%3A%22ONE_PAGE%22%2C%22slug%22%3A%22page%2Fjames-shopland%22%2C%22preview%22%3Afalse%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%2249069c2015a87c32f24a03c0634367a55cc5a39a8e068038aa0a03935e7a50e6%22%7D%7D",
     { next: { revalidate: 600 } }
   )
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
+    throw new Error("Failed to fetch data")
   }
 
   return res.json()
@@ -14,9 +14,12 @@ async function getPageData() {
 
 export default async function JustGiving() {
   const data = await getPageData()
-  const percentage = (data.data.page.donationSummary.totalAmount.value / 1000).toFixed(2)
+  const percentage = (
+    data.data.page.donationSummary.totalAmount.value / 1000
+  ).toFixed(2)
   const value = data.data.page.donationSummary.totalAmount.value / 100
-  const giftAid = data.data.page.donationSummary.totalMatched[0].amount.value / 100
+  const giftAid =
+    data.data.page.donationSummary.totalMatched[0].amount.value / 100
 
   return (
     <>
@@ -26,7 +29,9 @@ export default async function JustGiving() {
       <div className="h-6 w-full rounded-full bg-gray-400 dark:bg-gray-700">
         <div
           className="flex h-6 items-center justify-center rounded-full bg-blue-600 p-0.5 text-center text-xs font-medium leading-none text-blue-100"
-          style={{ width: `${Number.parseInt(percentage) >= 100 ? 100 : percentage}%` }}
+          style={{
+            width: `${Number.parseInt(percentage) >= 100 ? 100 : percentage}%`,
+          }}
         >
           <p className="text-md h-fit">{percentage}%</p>
         </div>

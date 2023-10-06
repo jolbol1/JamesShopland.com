@@ -1,10 +1,12 @@
-import { Priority, useKBar, useRegisterActions } from 'kbar'
-import { useTheme } from 'next-themes'
-import { useMemo } from 'react'
-import { SearchBarButton } from './search-bar-button'
+import { useMemo } from "react"
 
-const ACTION_KEY_DEFAULT = 'CTRL'
-const ACTION_KEY_APPLE = '⌘'
+import { Priority, useKBar, useRegisterActions } from "kbar"
+import { useTheme } from "next-themes"
+
+import { SearchBarButton } from "./search-bar-button"
+
+const ACTION_KEY_DEFAULT = "CTRL"
+const ACTION_KEY_APPLE = "⌘"
 
 function isAppleDevice() {
   return /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)
@@ -18,7 +20,7 @@ interface KBarButtonProps {
 export const KBarButton = ({ loaded, onOpen }: KBarButtonProps) => {
   const context = useKBar()
   const key = useMemo(() => {
-    if (typeof navigator !== 'undefined') {
+    if (typeof navigator !== "undefined") {
       return isAppleDevice() ? ACTION_KEY_APPLE : ACTION_KEY_DEFAULT
     }
   }, [])
@@ -27,11 +29,14 @@ export const KBarButton = ({ loaded, onOpen }: KBarButtonProps) => {
   useRegisterActions(
     [
       {
-        id: 'theme',
-        name: 'Toggle Theme',
-        keywords: 'toggle light mode dark theme',
-        section: 'Utils',
-        perform: () => setTheme(theme === 'dark' || resolvedTheme === 'dark' ? 'light' : 'dark'),
+        id: "theme",
+        name: "Toggle Theme",
+        keywords: "toggle light mode dark theme",
+        section: "Utils",
+        perform: () =>
+          setTheme(
+            theme === "dark" || resolvedTheme === "dark" ? "light" : "dark"
+          ),
         priority: Priority.HIGH,
       },
     ],

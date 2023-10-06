@@ -1,8 +1,9 @@
-import projectsData from '@/data/projectsData'
-import ProjectCard from '@/components/project-card'
+import projectsData from "@/data/projectsData"
+
+import ProjectCard from "@/components/project-card"
 
 export const metadata = {
-  title: 'About',
+  title: "About",
   description: `My projects page, where I showcase some of my software engineering projects. From building web apps with TypeScript and react to developing Java plugins for game, my projects demonstrate my diverse skill set and experience. Explore my work work and get a glimpse into my passion for problem-solving and creativity in the rapidly changing field of technology.`,
 }
 
@@ -14,11 +15,12 @@ export default async function Projects() {
           Projects
         </h1>
         <p className="text-lg leading-7 text-gray-700 dark:text-gray-400">
-          Welcome to my projects page, where I showcase some of my software engineering projects.
-          From building web apps with TypeScript and react to developing Java plugins for game, my
-          projects demonstrate my diverse skill set and experience. Explore my work work and get a
-          glimpse into my passion for problem-solving and creativity in the rapidly changing field
-          of technology.
+          Welcome to my projects page, where I showcase some of my software
+          engineering projects. From building web apps with TypeScript and react
+          to developing Java plugins for game, my projects demonstrate my
+          diverse skill set and experience. Explore my work work and get a
+          glimpse into my passion for problem-solving and creativity in the
+          rapidly changing field of technology.
         </p>
       </div>
       <div className=" pt-12">

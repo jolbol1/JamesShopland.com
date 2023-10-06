@@ -1,13 +1,16 @@
-'use client'
-import { useEffect, useState } from 'react'
-import { useTheme } from 'next-themes'
-import clsx from 'clsx'
-import { GlowDiv } from './glow-div'
+"use client"
+
+import { useEffect, useState } from "react"
+
+import clsx from "clsx"
+import { useTheme } from "next-themes"
+
+import { GlowDiv } from "./glow-div"
 
 const LightIcon = () => (
   <span
     className="absolute inset-0 top-1 rotate-90 transform  transition duration-1000 motion-reduce:duration-[0s] dark:rotate-0 "
-    style={{ transformOrigin: '50% 100px' }}
+    style={{ transformOrigin: "50% 100px" }}
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +32,7 @@ const LightIcon = () => (
 const DarkIcon = () => (
   <span
     className="absolute inset-0 top-1 rotate-0 transform  transition duration-1000 motion-reduce:duration-[0s] dark:-rotate-90 "
-    style={{ transformOrigin: '50% 100px' }}
+    style={{ transformOrigin: "50% 100px" }}
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -49,10 +52,10 @@ const DarkIcon = () => (
 )
 
 interface DarkModeSwitchProps {
-  variant?: 'icon' | 'button'
+  variant?: "icon" | "button"
 }
 
-const DarkModeSwitch = ({ variant = 'icon' }: DarkModeSwitchProps) => {
+const DarkModeSwitch = ({ variant = "icon" }: DarkModeSwitchProps) => {
   const [clientLoaded, setClientLoaded] = useState(false)
   const { theme, setTheme, resolvedTheme } = useTheme()
 
@@ -62,10 +65,14 @@ const DarkModeSwitch = ({ variant = 'icon' }: DarkModeSwitchProps) => {
     <GlowDiv>
       <div className="rounded bg-gray-800 p-[1px] leading-[0]  hover:bg-gradient-to-r  hover:from-blue-600 hover:to-cyan-600 dark:bg-gray-200">
         <button
-          onClick={() => setTheme(theme === 'dark' || resolvedTheme === 'dark' ? 'light' : 'dark')}
+          onClick={() =>
+            setTheme(
+              theme === "dark" || resolvedTheme === "dark" ? "light" : "dark"
+            )
+          }
           className={clsx(
-            'mx-auto inline-flex h-8 items-center justify-center overflow-hidden rounded  bg-gray-200 text-gray-800 transition focus:outline-none  dark:bg-gray-800 dark:text-gray-200',
-            { 'w-8': variant === 'icon' }
+            "mx-auto inline-flex h-8 items-center justify-center overflow-hidden rounded  bg-gray-200 text-gray-800 transition focus:outline-none  dark:bg-gray-800 dark:text-gray-200",
+            { "w-8": variant === "icon" }
           )}
         >
           {clientLoaded && (
@@ -75,11 +82,13 @@ const DarkModeSwitch = ({ variant = 'icon' }: DarkModeSwitchProps) => {
             </div>
           )}
           <span
-            className={clsx('pr-3 text-sm text-black dark:text-white', {
-              'sr-only': variant === 'icon',
+            className={clsx("pr-3 text-sm text-black dark:text-white", {
+              "sr-only": variant === "icon",
             })}
           >
-            <p>Toggle {clientLoaded && theme === 'dark' ? 'light' : 'dark'} mode</p>
+            <p>
+              Toggle {clientLoaded && theme === "dark" ? "light" : "dark"} mode
+            </p>
           </span>
         </button>
       </div>

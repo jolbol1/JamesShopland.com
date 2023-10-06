@@ -1,6 +1,8 @@
-import Link from '@/components/link'
-import FourZeroFour from '@/public/images/general/404.png'
-import Image from 'next/image'
+import Image from "next/image"
+
+import FourZeroFour from "@/public/images/general/404.png"
+
+import Link from "@/components/link"
 
 export default function NotFound() {
   return (
@@ -10,7 +12,7 @@ export default function NotFound() {
           priority={true}
           src={FourZeroFour}
           height={320}
-          alt={'cartoon james shopland looking confused'}
+          alt={"cartoon james shopland looking confused"}
         />
         <h1 className="mt-6 w-full text-center text-6xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100  md:text-8xl">
           404
