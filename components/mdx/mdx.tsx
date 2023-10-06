@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/heading-has-content */
 import * as React from 'react'
-import Image from 'next/image'
+import NextImage, { ImageProps } from 'next/image'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 import type { MDXComponents } from 'mdx/types'
 
@@ -141,7 +141,7 @@ const components: MDXComponents = {
   ),
   Callout,
   // @ts-ignore
-  Image,
+  Image: (props: ImageProps) => <NextImage {...props} />
 }
 
 interface MdxProps {

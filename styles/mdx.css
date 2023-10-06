@@ -3,10 +3,10 @@
   counter-reset: line;
   box-decoration-break: clone;
 }
-[data-rehype-pretty-code-fragment] .line {
+[data-rehype-pretty-code-fragment] [data-line] {
   @apply px-4 py-1;
 }
-[data-rehype-pretty-code-fragment] [data-line-numbers] > .line::before {
+[data-rehype-pretty-code-fragment] [data-line-numbers] > [data-line]::before {
   counter-increment: line;
   content: counter(line);
   display: inline-block;
