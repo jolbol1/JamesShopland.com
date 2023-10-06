@@ -1,11 +1,13 @@
-import Link from '@/components/link'
-import Tag from '@/components/tag'
-import { formatDate } from '@/lib/utils'
-import type { Blog } from 'contentlayer/generated'
+import type { Blog } from "contentlayer/generated"
+
+import { formatDate } from "@/lib/utils"
+
+import Link from "@/components/link"
+import Tag from "@/components/tag"
 
 const MAX_DISPLAY = 3
 
-type Posts = Omit<Blog, 'body' | '_raw' | '_id'>[]
+type Posts = Omit<Blog, "body" | "_raw" | "_id">[]
 
 interface LatestPostsProps {
   posts: Posts
@@ -20,15 +22,16 @@ export function LatestPosts({ posts }: LatestPostsProps) {
             Latest Posts
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            As a software engineer with a passion for problem-solving and creativity, I love
-            exploring new ideas and discovering the latest trends in this rapidly changing field. In
-            this blog, I share my thoughts on various topics, from projects I have worked on to
+            As a software engineer with a passion for problem-solving and
+            creativity, I love exploring new ideas and discovering the latest
+            trends in this rapidly changing field. In this blog, I share my
+            thoughts on various topics, from projects I have worked on to
             emerging technologies and industry news
           </p>
         </div>
         <div className="flex-1 rounded-3xl bg-gradient-to-br from-blue-200 to-blue-600 p-[1px] transition duration-300 hover:shadow-2xl hover:shadow-blue-800">
           <ul className="flex h-full flex-col justify-between divide-y divide-gray-400 rounded-3xl bg-slate-200 px-6 dark:divide-gray-700 dark:bg-slate-950">
-            {!posts.length && 'No posts found.'}
+            {!posts.length && "No posts found."}
             {posts.slice(0, MAX_DISPLAY).map((post) => {
               const { slug, date, title, summary, tags } = post
               return (
@@ -71,10 +74,12 @@ export function LatestPosts({ posts }: LatestPostsProps) {
                           >
                             {`Read ${
                               post.readingTime.text
-                                ? '(' + post.readingTime.text.replace(' read', '') + ')'
-                                : 'more'
+                                ? "(" +
+                                  post.readingTime.text.replace(" read", "") +
+                                  ")"
+                                : "more"
                             }`}
-                            &rarr;{' '}
+                            &rarr;{" "}
                           </Link>
                         </div>
                       </div>

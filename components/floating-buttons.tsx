@@ -1,6 +1,8 @@
-'use client'
-import siteMetadata from '@/config/site-metadata'
-import { useEffect, useState } from 'react'
+"use client"
+
+import { useEffect, useState } from "react"
+
+import siteMetadata from "@/config/site-metadata"
 
 const ScrollTopAndComment = () => {
   const [show, setShow] = useState(false)
@@ -11,19 +13,21 @@ const ScrollTopAndComment = () => {
       else setShow(false)
     }
 
-    window.addEventListener('scroll', handleWindowScroll)
-    return () => window.removeEventListener('scroll', handleWindowScroll)
+    window.addEventListener("scroll", handleWindowScroll)
+    return () => window.removeEventListener("scroll", handleWindowScroll)
   }, [])
 
   const handleScrollTop = () => {
     window.scrollTo({ top: 0 })
   }
   const handleScrollToComment = () => {
-    document.querySelector('#comment')?.scrollIntoView()
+    document.querySelector("#comment")?.scrollIntoView()
   }
   return (
     <div
-      className={`fixed bottom-8 right-8 hidden flex-col gap-3 ${show ? 'md:flex' : 'md:hidden'}`}
+      className={`fixed bottom-8 right-8 hidden flex-col gap-3 ${
+        show ? "md:flex" : "md:hidden"
+      }`}
     >
       {siteMetadata.giscusConfig && (
         <button

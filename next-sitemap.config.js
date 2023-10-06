@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://jamesshopland.com',
+  siteUrl: "https://jamesshopland.com",
   generateRobotsTxt: true,
   generateIndexSitemap: false,
 }

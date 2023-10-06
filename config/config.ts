@@ -1,5 +1,5 @@
-import type { SearchConfig } from '../components/search'
-import type { GiscusConfig } from '../components/comments/giscus'
+import type { GiscusConfig } from "../components/comments/giscus"
+import type { SearchConfig } from "../components/search"
 
 // Test
 export interface CoreConfig {
@@ -9,7 +9,7 @@ export interface CoreConfig {
   description: string
   language: string
   /** light and dark */
-  theme: 'system' | 'dark' | 'light'
+  theme: "system" | "dark" | "light"
   siteUrl: string
   siteRepo: string
   siteLogo: string

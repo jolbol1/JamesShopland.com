@@ -1,23 +1,31 @@
-import '@/styles/mdx.css'
+import "@/styles/mdx.css"
 
-import PageTitle from '@/components/page-title'
-import { sortedBlogPost, coreContent } from '../../../lib/contentlayer'
-import { allBlogs, allAuthors } from 'contentlayer/generated'
-import type { Blog } from 'contentlayer/generated'
-import { Mdx } from '@/components/mdx/mdx'
-import Image from 'next/image'
-import siteMetadata from '@/config/site-metadata'
-import Link from 'next/link'
-import Tag from '@/components/tag'
-import { notFound } from 'next/navigation'
-import Comments from '@/components/comments'
-import ScrollTopAndComment from '@/components/floating-buttons'
-import { formatDate } from '@/lib/utils'
-import { Metadata } from 'next'
+import { Metadata } from "next"
+import Image from "next/image"
+import Link from "next/link"
+import { notFound } from "next/navigation"
 
-const editUrl = (path: string) => `${siteMetadata.siteRepo}/blob/master/data/${path}`
+import { allAuthors, allBlogs } from "contentlayer/generated"
+import type { Blog } from "contentlayer/generated"
+
+import siteMetadata from "@/config/site-metadata"
+
+import { formatDate } from "@/lib/utils"
+
+import Comments from "@/components/comments"
+import ScrollTopAndComment from "@/components/floating-buttons"
+import { Mdx } from "@/components/mdx/mdx"
+import PageTitle from "@/components/page-title"
+import Tag from "@/components/tag"
+
+import { coreContent, sortedBlogPost } from "../../../lib/contentlayer"
+
+const editUrl = (path: string) =>
+  `${siteMetadata.siteRepo}/blob/master/data/${path}`
 const discussUrl = (path: string) =>
-  `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${siteMetadata.siteUrl}/${path}`)}`
+  `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+    `${siteMetadata.siteUrl}/${path}`
+  )}`
 
 interface BlogPostPageProps {
   params: {
@@ -33,19 +41,23 @@ interface PostPageDetails {
 }
 
 async function getPostFromParams(
-  params: BlogPostPageProps['params']
+  params: BlogPostPageProps["params"]
 ): Promise<PostPageDetails | null> {
-  const slug = params.slug.join('/')
+  const slug = params.slug.join("/")
   const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
   const postIndex = sortedPosts.findIndex((p) => p.slug === slug)
   if (postIndex === -1) return null
   const post = sortedPosts[postIndex]
   const prevContent = sortedPosts[postIndex + 1] || null
-  const prev = (prevContent && (prevContent?.draft ? null : coreContent(prevContent))) || null
+  const prev =
+    (prevContent && (prevContent?.draft ? null : coreContent(prevContent))) ||
+    null
   const nextContent = sortedPosts[postIndex - 1] || null
-  const next = (nextContent && (nextContent?.draft ? null : coreContent(nextContent))) || null
+  const next =
+    (nextContent && (nextContent?.draft ? null : coreContent(nextContent))) ||
+    null
 
-  const authorList = post.authors || ['default']
+  const authorList = post.authors || ["default"]
   const authorDetails = authorList.map((author) => {
     const authorResults = allAuthors.find((p) => p.slug === author)
     if (!authorResults) return null
@@ -60,7 +72,9 @@ async function getPostFromParams(
   }
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: BlogPostPageProps): Promise<Metadata> {
   const details = await getPostFromParams(params)
 
   if (!details || !details.post) {
@@ -72,9 +86,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const url = siteMetadata.siteUrl
 
   const ogUrl = new URL(`${url}/api/og`)
-  ogUrl.searchParams.set('heading', post.title)
-  ogUrl.searchParams.set('type', 'Blog Post')
-  ogUrl.searchParams.set('mode', 'dark')
+  ogUrl.searchParams.set("heading", post.title)
+  ogUrl.searchParams.set("type", "Blog Post")
+  ogUrl.searchParams.set("mode", "dark")
 
   return {
     title: post.title,
@@ -82,13 +96,13 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     authors: post.authors?.map((author) => ({
       name: author,
     })),
-    alternates :{
+    alternates: {
       canonical: `${siteMetadata.siteUrl}/blog/${post.slug}`,
     },
     openGraph: {
       title: post.title,
       description: post.summary,
-      type: 'article',
+      type: "article",
       url: `${siteMetadata.siteUrl}/blog/${post.slug}`,
       images: [
         {
@@ -100,7 +114,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: post.title,
       description: post.summary,
       images: [ogUrl.toString()],
@@ -108,9 +122,11 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 }
 
-export async function generateStaticParams(): Promise<BlogPostPageProps['params'][]> {
+export async function generateStaticParams(): Promise<
+  BlogPostPageProps["params"][]
+> {
   return allBlogs.map((post) => ({
-    slug: post.slugAsParams.split('/'),
+    slug: post.slugAsParams.split("/"),
   }))
 }
 
@@ -120,9 +136,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { post, prev, next, authorDetails } = pageDetails
   const { filePath, path, date, title, tags } = post
   const jsonLd = post.structuredData
-  jsonLd['author'] = authorDetails.map((author) => {
+  jsonLd["author"] = authorDetails.map((author) => {
     return {
-      '@type': 'Person',
+      "@type": "Person",
       name: author?.name,
     }
   })
@@ -157,7 +173,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
                   {authorDetails.map((author) =>
                     !author ? null : (
-                      <li className="flex items-center space-x-2" key={author.name}>
+                      <li
+                        className="flex items-center space-x-2"
+                        key={author.name}
+                      >
                         {author.avatar && (
                           <Image
                             src={author.avatar}
@@ -169,7 +188,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         )}
                         <dl className="whitespace-nowrap text-sm font-medium leading-5">
                           <dt className="sr-only">Name</dt>
-                          <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
+                          <dd className="text-gray-900 dark:text-gray-100">
+                            {author.name}
+                          </dd>
                           <dt className="sr-only">Twitter</dt>
                           <dd>
                             {author.twitter && (
@@ -177,7 +198,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                                 href={author.twitter}
                                 className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                               >
-                                {author.twitter.replace('https://twitter.com/', '@')}
+                                {author.twitter.replace(
+                                  "https://twitter.com/",
+                                  "@"
+                                )}
                               </Link>
                             )}
                           </dd>

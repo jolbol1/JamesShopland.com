@@ -1,11 +1,14 @@
-const ACTION_KEY_DEFAULT = 'CTRL'
+const ACTION_KEY_DEFAULT = "CTRL"
 
 interface SearchBarButtonProps {
   onClick?: () => void
   kbd?: string
 }
 
-export const SearchBarButton = ({ onClick, kbd = ACTION_KEY_DEFAULT }: SearchBarButtonProps) => {
+export const SearchBarButton = ({
+  onClick,
+  kbd = ACTION_KEY_DEFAULT,
+}: SearchBarButtonProps) => {
   return (
     <button
       onClick={onClick}
@@ -32,12 +35,12 @@ export const SearchBarButton = ({ onClick, kbd = ACTION_KEY_DEFAULT }: SearchBar
         Search...
       </span>
       <kbd
-        className={`hidden  whitespace-nowrap rounded px-1 align-middle font-medium leading-4 tracking-wide [font-size:10px] [@media(min-width:810px)]:inline-block ${'border border-slate-400/70 text-slate-500 dark:border-slate-600 dark:text-slate-400'}`}
+        className={`hidden  whitespace-nowrap rounded px-1 align-middle font-medium leading-4 tracking-wide [font-size:10px] [@media(min-width:810px)]:inline-block ${"border border-slate-400/70 text-slate-500 dark:border-slate-600 dark:text-slate-400"}`}
       >
         {kbd}
       </kbd>
       <kbd
-        className={`ml-1 hidden whitespace-nowrap rounded px-1 pl-1 align-middle font-medium leading-4 tracking-wide [font-size:10px] [@media(min-width:810px)]:inline-block ${'border border-slate-400/70 text-slate-500 dark:border-slate-600 dark:text-slate-400'}`}
+        className={`ml-1 hidden whitespace-nowrap rounded px-1 pl-1 align-middle font-medium leading-4 tracking-wide [font-size:10px] [@media(min-width:810px)]:inline-block ${"border border-slate-400/70 text-slate-500 dark:border-slate-600 dark:text-slate-400"}`}
       >
         K
       </kbd>

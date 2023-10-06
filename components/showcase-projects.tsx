@@ -1,6 +1,8 @@
-import Link from 'next/link'
-import ProjectCard from './project-card'
-import projectsData from '@/data/projectsData'
+import Link from "next/link"
+
+import projectsData from "@/data/projectsData"
+
+import ProjectCard from "./project-card"
 
 export function ShowcaseProjects() {
   return (
@@ -12,9 +14,10 @@ export function ShowcaseProjects() {
               Showcase Projects
             </h1>
             <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-              Here are some of my favourite software engineering projects. These projects are prime
-              examples of my diverse skill set and experience, demonstrating my ability to use code
-              to solve problems, and to have some fun 😊
+              Here are some of my favourite software engineering projects. These
+              projects are prime examples of my diverse skill set and
+              experience, demonstrating my ability to use code to solve
+              problems, and to have some fun 😊
             </p>
           </div>
           <div className=" py-3">

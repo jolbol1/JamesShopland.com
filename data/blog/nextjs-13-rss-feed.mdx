@@ -1,9 +1,10 @@
 ---
-title: 'Setting up an RSS Feed in a Next.js 13 App Directory'
-date: '2023-04-21'
-tags: ['nextjs', 'rss', 'feed', 'app directory', 'web-development', 'contentlayer']
+title: "Setting up an RSS Feed in a Next.js 13 App Directory"
+date: "2023-04-21"
+tags:
+  ["nextjs", "rss", "feed", "app directory", "web-development", "contentlayer"]
 draft: false
-summary: 'Learn how to set up an RSS feed for your Next.js 13 application using the rss package and contentlayer. This step-by-step guide will walk you through the process of generating an RSS feed, making it easier for your users to stay updated on your latest blog posts.'
+summary: "Learn how to set up an RSS feed for your Next.js 13 application using the rss package and contentlayer. This step-by-step guide will walk you through the process of generating an RSS feed, making it easier for your users to stay updated on your latest blog posts."
 ---
 
 RSS (Rich Site Summary or Really Simple Syndication) feeds are an excellent way to distribute your website's content, making it accessible to users and allowing them to stay updated on new posts.
@@ -38,8 +39,8 @@ npm install rss
 To create a rss.xml route in the Next.js app directory, create a `feed.xml` folder in the top level of the app directory, then create a `route.ts` in that directory. This is called a [route handler](https://beta.nextjs.org/docs/routing/route-handlers).
 
 <Callout>
-  You can call this directory whatever you want, it will be the URL for the rss feed. In this case
-  `/feed.xml`
+  You can call this directory whatever you want, it will be the URL for the rss
+  feed. In this case `/feed.xml`
 </Callout>
 
 ```md
@@ -76,8 +77,9 @@ If you want to skip this, you can just replace anywhere we use `siteMetadata` wi
 Inside the `GET` function, create a new instance of the `Rss` class and configure it with some basic site information. You can view all available feed options [here](https://www.npmjs.com/package/rss).
 
 ```tsx title="feed.xml/route.ts"
-import Rss from 'rss'
-import siteMetadata from '@/config/site-metadata'
+import Rss from "rss"
+
+import siteMetadata from "@/config/site-metadata"
 
 export async function GET() {
   const feed = new Rss({
@@ -87,7 +89,7 @@ export async function GET() {
     site_url: siteMetadata.siteUrl,
     webMaster: `${siteMetadata.author} <${siteMetadata.email}>`,
     managingEditor: `${siteMetadata.author} <${siteMetadata.email}>`,
-    language: 'en-US',
+    language: "en-US",
   })
 }
 ```
@@ -97,9 +99,9 @@ This sets up the basic information about our RSS feed. Next we need to add the a
 ### 6. Add blog posts to the feed
 
 <Callout>
-  As stated in the introduction, for getting all my blog posts, I will be using content layer and
-  some helper functions. This guide assumes you have already set up a blog site, so should be
-  familiar with how you fetch content.
+  As stated in the introduction, for getting all my blog posts, I will be using
+  content layer and some helper functions. This guide assumes you have already
+  set up a blog site, so should be familiar with how you fetch content.
 </Callout>
 
 To add your blog posts, we can use the `.item` function on the feed we creating above. Using a loop,
@@ -111,7 +113,7 @@ allCoreContent(allBlogs).forEach((article) => {
   const author = article.authors ? article.authors[0] : siteMetadata.author
   feed.item({
     title: article.title,
-    description: article.summary ?? '',
+    description: article.summary ?? "",
     url: `${siteMetadata.siteUrl}/blog/${article.slug}`,
     guid: `${siteMetadata.siteUrl}/blog/${article.slug}`,
     date: article.date,
@@ -150,10 +152,12 @@ Dont worry, this is a good thing, CDATA sections may occur anywhere character da
 Here is the final working route.ts file. This is the file used to generate [my rss feed.](/feed.xml)
 
 ```tsx title="feed.xml/route.ts"
-import { allBlogs } from 'contentlayer/generated'
-import Rss from 'rss'
-import siteMetadata from '@/config/site-metadata'
-import { allCoreContent } from '@/lib/contentlayer'
+import { allBlogs } from "contentlayer/generated"
+import Rss from "rss"
+
+import siteMetadata from "@/config/site-metadata"
+
+import { allCoreContent } from "@/lib/contentlayer"
 
 export async function GET() {
   const feed = new Rss({
@@ -163,14 +167,14 @@ export async function GET() {
     site_url: siteMetadata.siteUrl,
     webMaster: `${siteMetadata.author} <${siteMetadata.email}>`,
     managingEditor: `${siteMetadata.author} <${siteMetadata.email}>`,
-    language: 'en-US',
+    language: "en-US",
   })
 
   allCoreContent(allBlogs).forEach((article) => {
     const author = article.authors ? article.authors[0] : siteMetadata.author
     feed.item({
       title: article.title,
-      description: article.summary ?? '',
+      description: article.summary ?? "",
       url: `${siteMetadata.siteUrl}/blog/${article.slug}`,
       guid: `${siteMetadata.siteUrl}/blog/${article.slug}`,
       date: article.date,
@@ -181,7 +185,7 @@ export async function GET() {
 
   return new Response(feed.xml(), {
     headers: {
-      'Content-Type': 'application/xml',
+      "Content-Type": "application/xml",
     },
   })
 }

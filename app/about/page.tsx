@@ -1,24 +1,35 @@
 // import { MDXLayoutRenderer } from '@/components/MDXComponents'
 
-import ImageSwitcher from '@/components/image-switcher'
-import { allAuthors } from 'contentlayer/generated'
-import AILight from '@/public/images/general/ai-light.webp'
-import AIDark from '@/public/images/general/ai-dark.webp'
-import { CodingTimeline } from '@/components/coding-timeline'
-import SocialIcon from '@/components/social-icons'
-import Image from 'next/image'
-import ProjectCard from '@/components/project-card'
-import { Mdx } from '@/components/mdx/mdx'
-import { notFound } from 'next/navigation'
+import Image from "next/image"
+import { notFound } from "next/navigation"
+
+import AIDark from "@/public/images/general/ai-dark.webp"
+import AILight from "@/public/images/general/ai-light.webp"
+import { allAuthors } from "contentlayer/generated"
+
+import { CodingTimeline } from "@/components/coding-timeline"
+import ImageSwitcher from "@/components/image-switcher"
+import { Mdx } from "@/components/mdx/mdx"
+import ProjectCard from "@/components/project-card"
+import SocialIcon from "@/components/social-icons"
 
 export const metadata = {
-  title: 'About',
+  title: "About",
 }
 
 export default function About() {
-  const author = allAuthors.find((p) => p.slug === 'default')
+  const author = allAuthors.find((p) => p.slug === "default")
   if (!author) notFound()
-  const { name, avatar, occupation, company, email, twitter, linkedin, github } = author
+  const {
+    name,
+    avatar,
+    occupation,
+    company,
+    email,
+    twitter,
+    linkedin,
+    github,
+  } = author
 
   return (
     <div className="container divide-y divide-gray-200 dark:divide-gray-700">
@@ -32,7 +43,7 @@ export default function About() {
           <ImageSwitcher
             light={AIDark}
             dark={AILight}
-            alt={'image made with ai art'}
+            alt={"image made with ai art"}
             width={250}
             height={106}
             className="absolute top-[-6px]"
@@ -47,7 +58,9 @@ export default function About() {
               priority={true}
             />
           )}
-          <h2 className="pb-2 pt-4 text-2xl font-bold leading-8 tracking-tight">{name}</h2>
+          <h2 className="pb-2 pt-4 text-2xl font-bold leading-8 tracking-tight">
+            {name}
+          </h2>
           <div className="text-gray-700 dark:text-gray-400">{occupation}</div>
           <div className="text-gray-700 dark:text-gray-400">{company}</div>
           <div className="flex space-x-3 pt-6">
@@ -72,16 +85,18 @@ export default function About() {
             Professional Certificates
           </h3>
           <ProjectCard
-            title={'AZ-204: Developing Solutions for Microsoft Azure'}
+            title={"AZ-204: Developing Solutions for Microsoft Azure"}
             description="From requirements definition and design to development, deployment, and maintenance. Use cloud DBAs, cloud administrators, and clients to implement solutions."
             links={[
               {
-                title: 'View Exam Details',
-                href: 'https://learn.microsoft.com/en-us/certifications/exams/az-204/',
+                title: "View Exam Details",
+                href: "https://learn.microsoft.com/en-us/certifications/exams/az-204/",
               },
             ]}
-            titleLink={'https://learn.microsoft.com/en-us/certifications/exams/az-204/'}
-            icons={['azure']}
+            titleLink={
+              "https://learn.microsoft.com/en-us/certifications/exams/az-204/"
+            }
+            icons={["azure"]}
             className=" md relative col-span-2 col-start-2 w-full grow xl:w-1/2 "
           />
         </div>

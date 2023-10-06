@@ -1,17 +1,18 @@
-import Image, { ImageProps } from 'next/image'
-import azure from './azure.webp'
-import csharp from './csharp.webp'
-import git from './git.webp'
-import javascript from './javascript.webp'
-import react from './react.webp'
-import svelte from './svelte.webp'
-import tailwind from './tailwind.webp'
-import typescript from './typescript.webp'
-import java from './java.webp'
-import next from './next.webp'
-import npm from './npm.webp'
-import python from './python.webp'
-import php from './php.webp'
+import Image, { ImageProps } from "next/image"
+
+import azure from "./azure.webp"
+import csharp from "./csharp.webp"
+import git from "./git.webp"
+import java from "./java.webp"
+import javascript from "./javascript.webp"
+import next from "./next.webp"
+import npm from "./npm.webp"
+import php from "./php.webp"
+import python from "./python.webp"
+import react from "./react.webp"
+import svelte from "./svelte.webp"
+import tailwind from "./tailwind.webp"
+import typescript from "./typescript.webp"
 
 const components = {
   azure,
@@ -31,7 +32,7 @@ const components = {
 
 export type DevIconTypes = keyof typeof components
 
-interface DevIconProps extends Omit<ImageProps, 'src'> {
+interface DevIconProps extends Omit<ImageProps, "src"> {
   kind: DevIconTypes
 }
 
