@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
-// @ts-nocheck
 import { NextRequest } from "next/server"
 
 import { ImageResponse } from "@vercel/og"
@@ -37,7 +36,7 @@ export default async function handler(req: NextRequest) {
     const { mode } = values
     const paint = mode === "dark" ? "#fff" : "#000"
 
-    const fontSize = heading.length > 100 ? "70px" : "100px"
+    const fontSize = heading.length > 30 ? "70px" : "100px"
 
     const imageData = await image
     const image2Data = await image2
@@ -64,7 +63,7 @@ export default async function handler(req: NextRequest) {
             <h1 tw="pl-4">James Shopland</h1>
           </div>
 
-          <div tw="flex flex-col flex-1 py-10">
+          <div tw="flex flex-col flex-1 ">
             <div
               tw="flex text-xl uppercase font-bold tracking-tight"
               style={{ fontFamily: "Inter", fontWeight: "normal" }}
