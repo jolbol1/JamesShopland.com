@@ -1,0 +1,237 @@
+---
+title: 'Organising your JavaScript imports with Prettier'
+date: '2023-10-06'
+tags: ['eslint', 'prettier', 'javascript', 'sort-imports']
+draft: false
+summary: "How to organise your JavaScript imports using Prettier and @ianvs/prettier-plugin-sort-imports. I'll show you how powerful this plugin can be as its completely customisable, fitting to your needs."
+---
+
+Ever find that your Javascript imports are getting messy. Particularly when you use a framework such as React where you are importing several components, utilities and third party libraries?
+
+https://www.youtube.com/watch?v=Lf8VFt-RVeE
+
+### Example
+
+Today I'll show you a plugin you can use on top of Prettier to have your imports automatically sorted, in a completely configurable way. From this:
+
+```tsx
+import { toast } from '@/components/ui/use-toast'
+import { cn } from '@/lib/utils'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { buttonVariants } from '@/components/ui/button'
+import TextareaAutosize from 'react-textarea-autosize'
+import { Icons } from '@/components/icons'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { postPatchSchema } from '@/lib/validations/post'
+import { Post } from '@prisma/client'
+import Link from 'next/link'
+import * as z from 'zod'
+import '@/styles/editor.css'
+import * as React from 'react'
+import EditorJS from '@editorjs/editorjs'
+```
+
+To something you have configured, like this:
+
+```tsx
+import * as React from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+
+import EditorJS from '@editorjs/editorjs'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Post } from '@prisma/client'
+import { useForm } from 'react-hook-form'
+import TextareaAutosize from 'react-textarea-autosize'
+import * as z from 'zod'
+
+import { cn } from '@/lib/utils'
+import { postPatchSchema } from '@/lib/validations/post'
+import { buttonVariants } from '@/components/ui/button'
+import { toast } from '@/components/ui/use-toast'
+import { Icons } from '@/components/icons'
+
+import '@/styles/editor.css'
+```
+
+## How To
+
+Before we start, make sure [Prettier](https://prettier.io/) is installed an setup.
+
+### Installing
+
+#### 1. Installing the Prettier plugin
+
+To begin with, we need to install `@ianvs/prettier-plugin-sort-imports`
+
+Do this using your package manager, pnpm, yarn or npm
+
+```shell
+npm install @ianvs/prettier-plugin-sort-imports --save-dev
+```
+
+#### 2. Add the plugin to Prettier config
+
+Next, we need to tell Prettier to use this plugin. We do this by adding to the prettier config. In my example the config is called `prettier.config.js` yours may be something different but that will not matter.
+
+We need to add a plugins array to the config object and add `@ianvs/prettier-plugin-sort-imports`. If you have other plugins already, simply just extend the array.
+
+```json title="prettier.config.js"
+/** @type {import('prettier').Config} */
+module.exports = {
+  ...your config options
+  plugins: ["@ianvs/prettier-plugin-sort-imports"],
+}
+```
+
+### Configuration
+
+Now that the plugin is installed, you would find that if you ran Prttier it would have some defaults, which is sorting imports alphabetically. This isnt what I want, so lets jump in to some basic configuration.
+
+If you'd like to see more example, visit the documentation [here](https://www.npmjs.com/package/@ianvs/prettier-plugin-sort-imports)
+
+#### Put specific dependencies at top
+
+If we wanted to ensure specific imports are always at the top, for example react, we need to add another line to our prettier config, `importOrder`
+
+```json title="prettier.config.js"
+/** @type {import('prettier').Config} */
+module.exports = {
+  ...your config options
+  importOrder: ["react", "<THIRD_PARTY_MODULES>", "^[.]"]
+  plugins: ["@ianvs/prettier-plugin-sort-imports"],
+}
+```
+
+This will match anything with react, and place it at the top. Next, any import not matched by one of these rules is placed where `<THIRD_PARTY_MODULES>`, lastly `^[.]` will place any local import at the bottom.
+
+Now when we run prettier, any imports with react in them will be placed at the top, such as:
+
+```jsx
+import * as React from 'react'
+import { useForm } from 'react-hook-form'
+import TextareaAutosize from 'react-textarea-autosize'
+import { Icons } from '@/components/icons'
+import { buttonVariants } from '@/components/ui/button'
+```
+
+However, this isnt exactly what I wanted, as you may notice `react-hook-form` has been sorted to the top too. To target specific imports we can utilise some basic regex.
+
+To target react, and any import under react we can use this `"^(react/(.*)$)|^(react$)"`. This regex targets react exactly, and anything after the slash `react/nested`.
+
+Lastly, I want a empty line to be placed under my react imports to keep things cleaner. To do this we can use an empty string in the array: `""`
+
+For example
+
+```json title="prettier.config.js"
+/** @type {import('prettier').Config} */
+module.exports = {
+  ...
+  importOrder: [
+    "^(react/(.*)$)|^(react$)",
+    "",
+    "<THIRD_PARTY_MODULES>",
+    "^[.]"
+    ],
+  ...
+}
+```
+
+Now when we run prettier, we get this:
+
+```jsx
+import * as React from "react"
+
+import { Icons } from "@/components/icons"
+import { buttonVariants } from "@/components/ui/button"
+import { toast } from "@/components/ui/use-toast"
+import { cn } from "@/lib/utils"
+...
+```
+
+#### Keep css at the bottom
+
+If we wanted to ensure our css files are always at the bottom of imports, we can use the following regex: `"^(?!.*[.]css$)[./].*$", ".css$"`
+
+```json title="prettier.config.js"
+/** @type {import('prettier').Config} */
+module.exports = {
+  ...
+  importOrder: [
+    "^(react/(.*)$)|^(react$)",
+    "", "<THIRD_PARTY_MODULES>",
+    "^(?!.*[.]css$)[./].*$",
+    ".css$"
+    ],
+  ...
+}
+```
+
+#### Organising your own imports
+
+In this next section, we are going to utilise the path section of `tsconfig.json` or `jsconfig.json`. You can find out how to do this [here](https://dev.to/yteruel31/setup-a-path-aliasmapping-through-ts-config-1mlg).
+
+Essentially, it allows your imports to go from `../../../components/Button` to `@/components/Button`
+
+Once you have these set-up you can target them using regex like this: `"^@/components/(.*)$"`. This will sort all imports with `@/components/` where we want them. For example:
+
+```json title="prettier.config.js"
+/** @type {import('prettier').Config} */
+module.exports = {
+  ...
+  importOrder: [
+    "^(react/(.*)$)|^(react$)",
+    "", "<THIRD_PARTY_MODULES>",
+    "^@/components/(.*)$",
+    ],
+  ...
+}
+```
+
+This will sort components at the bottom, like this
+
+```jsx
+import * as React from "react"
+
+...other imports
+import { Icons } from "@/components/icons"
+import { buttonVariants } from "@/components/ui/button"
+import { toast } from "@/components/ui/use-toast"
+...
+```
+
+#### Full example
+
+Now that you have learnt some of this cool techniques above, Im going to show you a full example that I like to use. This is from shadcn's [taxonomy](https://github.com/shadcn-ui/taxonomy/blob/main/prettier.config.js) project.
+
+```json title="prettier.config.js"
+/** @type {import('prettier').Config} */
+module.exports = {
+  ...
+  importOrder: [
+    "^(react/(.*)$)|^(react$)",
+    "^(next/(.*)$)|^(next$)",
+    "",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^types$",
+    "^@/env(.*)$",
+    "^@/types/(.*)$",
+    "^@/config/(.*)$",
+    "^@/lib/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/components/ui/(.*)$",
+    "^@/components/(.*)$",
+    "^@/styles/(.*)$",
+    "^@/app/(.*)$",
+    "",
+    "^[./]",
+    ],
+  ...
+}
+```
+
+This is the config I used to sort the example at the top!
+
+Thanks for reading, if you have any more questions feel free to leave a comment, or reach out to me on [Twitter](https://twitter.com/JollyShopland)

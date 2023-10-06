@@ -141,7 +141,7 @@ const components: MDXComponents = {
   ),
   Callout,
   // @ts-ignore
-  Image: (props: ImageProps) => <NextImage {...props} />
+  Image: (props: ImageProps) => <NextImage {...props} />,
 }
 
 interface MdxProps {

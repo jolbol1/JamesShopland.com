@@ -2,12 +2,15 @@ import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer/sou
 import readingTime from 'reading-time'
 // Remark packages
 import remarkGfm from 'remark-gfm'
+import remarkEmbedder, { type TransformerInfo } from '@remark-embedder/core'
+import oembedTransformer from '@remark-embedder/transformer-oembed'
 
 // Rehype packages
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
 import rehypePrettyCode, { type Options } from 'rehype-pretty-code'
+import siteMetadata from './config/site-metadata'
 
 const computedFields: ComputedFields = {
   readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
@@ -29,6 +32,14 @@ const computedFields: ComputedFields = {
   },
 }
 
+const genOgUrl = (title: string) => {
+  const ogUrl = new URL(`${siteMetadata.siteUrl}/api/og`)
+  ogUrl.searchParams.set('heading', title)
+  ogUrl.searchParams.set('type', 'Blog Post')
+  ogUrl.searchParams.set('mode', 'dark')
+  return ogUrl.toString()
+}
+
 export const Blog = defineDocumentType(() => ({
   name: 'Blog',
   filePathPattern: 'blog/**/*.mdx',
@@ -46,7 +57,22 @@ export const Blog = defineDocumentType(() => ({
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
   },
-  computedFields,
+  computedFields: {
+    ...computedFields,
+    structuredData: {
+      type: 'json',
+      resolve: (doc) => ({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: doc.title,
+        datePublished: doc.date,
+        dateModified: doc.lastmod || doc.date,
+        description: doc.summary,
+        image: genOgUrl(doc.title),
+        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+      }),
+    },
+  },
 }))
 
 export const Authors = defineDocumentType(() => ({
@@ -68,28 +94,62 @@ export const Authors = defineDocumentType(() => ({
 }))
 
 const prettyOptions: Options = {
-          theme: 'github-dark',
-          grid: true,
-          keepBackground: false,
-          onVisitHighlightedLine(node) {
-            node.properties.className?.push('line--highlighted')
-          },
-          onVisitHighlightedChars(node) {
-            node.properties.className = ['word--highlighted']
-          },
-        }
+  theme: 'github-dark',
+  grid: true,
+  keepBackground: false,
+  onVisitHighlightedLine(node) {
+    node.properties.className?.push('line--highlighted')
+  },
+  onVisitHighlightedChars(node) {
+    node.properties.className = ['word--highlighted']
+  },
+}
+
+function handleEmbedderError({ url }: { url: string }) {
+  return `<p>Error embedding <a href="${url}">${url}</a></p>.`
+}
+
+type GottenHTML = string | null
+function handleEmbedderHtml(html: GottenHTML, info: TransformerInfo) {
+  if (!html) return null
+
+  const url = new URL(info.url)
+  // matches youtu.be and youtube.com
+  if (/youtu\.?be/.test(url.hostname)) {
+    // this allows us to set youtube embeds to 100% width and the
+    // height will be relative to that width with a good aspect ratio
+    return makeEmbed(html, 'youtube')
+  }
+  if (url.hostname.includes('codesandbox.io')) {
+    return makeEmbed(html, 'codesandbox', '80%')
+  }
+  return html
+}
+
+function makeEmbed(html: string, type: string, heightRatio = '56.25%') {
+  return `
+  <div class="embed" data-embed-type="${type}">
+    <div style="padding-bottom: ${heightRatio}">
+      ${html}
+    </div>
+  </div>
+`
+}
+
+const remarkOembedOptions = {
+  handleError: handleEmbedderError,
+  handleHTML: handleEmbedderHtml,
+  transformers: [oembedTransformer.default],
+}
 
 export default makeSource({
   contentDirPath: 'data',
   documentTypes: [Blog, Authors],
   mdx: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [remarkGfm, [remarkEmbedder.default, remarkOembedOptions]],
     rehypePlugins: [
       rehypeSlug,
-      [
-        rehypePrettyCode as any,
-        prettyOptions
-      ],
+      [rehypePrettyCode as any, prettyOptions],
       [
         rehypeAutolinkHeadings,
         {
