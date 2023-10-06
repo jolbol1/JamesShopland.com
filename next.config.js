@@ -9,11 +9,11 @@ const ContentSecurityPolicy = `
   default-src 'self' *.jamesshopland.com;
   script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app;
   style-src 'self' 'unsafe-inline' giscus.app;
-  img-src * blob: data:;
+  img-src * blob: data: i.ytimg.com;
   media-src 'none';
   connect-src *;
   font-src 'self';
-  frame-src giscus.app 'self' https://www.strava.com/
+  frame-src giscus.app 'self' https://www.strava.com/ youtube.com www.youtube.com youtu.be youtube-nocookie.com www.youtube-nocookie.com;
 `
 
 const securityHeaders = [

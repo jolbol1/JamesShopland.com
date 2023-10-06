@@ -47,4 +47,17 @@
   @apply text-black dark:text-gray-100;
 }
 
+.embed {
+  @apply relative mt-8 -mx-6;
+}
 
+.embed > div {
+  @apply h-0;
+}
+
+.embed > div > iframe {
+  @apply top-0 left-0 absolute border-none;
+  height: 100% !important;
+  width: 100% !important;
+  border-radius: 0 !important;
+}

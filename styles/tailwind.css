@@ -25,7 +25,9 @@
 /* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
-  transition: background-color 600000s 0s, color 600000s 0s;
+  transition:
+    background-color 600000s 0s,
+    color 600000s 0s;
 }
 
 .underlined {
@@ -77,7 +79,9 @@ input:-webkit-autofill:focus {
 
 .typing-demo {
   width: 11ch;
-  animation: typing 2s steps(16), blink 0.5s step-end 5 alternate;
+  animation:
+    typing 2s steps(16),
+    blink 0.5s step-end 5 alternate;
   white-space: nowrap;
   overflow: hidden;
   border-right: 5px solid;

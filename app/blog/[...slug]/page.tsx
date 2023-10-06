@@ -82,11 +82,14 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     authors: post.authors?.map((author) => ({
       name: author,
     })),
+    alternates :{
+      canonical: `${siteMetadata.siteUrl}/blog/${post.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.summary,
       type: 'article',
-      url: `${siteMetadata.siteUrl}/${post.slug}`,
+      url: `${siteMetadata.siteUrl}/blog/${post.slug}`,
       images: [
         {
           url: ogUrl.toString(),
@@ -116,6 +119,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   if (!pageDetails) return notFound()
   const { post, prev, next, authorDetails } = pageDetails
   const { filePath, path, date, title, tags } = post
+  const jsonLd = post.structuredData
+  jsonLd['author'] = authorDetails.map((author) => {
+    return {
+      '@type': 'Person',
+      name: author?.name,
+    }
+  })
 
   if (!post || post.draft) {
     notFound()
@@ -250,6 +260,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
       </article>
       <ScrollTopAndComment />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </>
   )
 }
