@@ -1,0 +1,116 @@
+---
+title: "The Easiest Way to Make Emails in JavaScript"
+date: "2023-10-12"
+tags: ["eslint", "prettier", "commitlint"]
+draft: false
+summary: "The easiest way to craft emails in JavaScript. I will show you React Email and the power of this package in crafting emails in any framework. Although it may sound like a React package, you dont need to have a React application to use this."
+---
+
+If you have ever had to write and style an email using code, you know the pain of the email HTML. Its a mess of different compatibility and not as simple as just making a webpage. React email aims to solve this in JavaScript (not just React) and is one of the easiest ways I have seen to make a styled email with great compatibility, and even supports some of Tailwind.
+
+<Callout>
+**Don't I need React?**<br/>
+No. While the package sounds like it was made for React projects only, its more complex than that. React wasn't just built for the web and Theo has a great explainer of this [here](https://www.youtube.com/watch?v=Y12sGu8-qFE). 
+Essentially, React is the underlying technology to make things composable and React-Dom is the layer that renders to HTML, React Email is the renderer to email HTML, which can be annoyingly difficult.
+</Callout>
+
+https://www.youtube.com/watch?v=Z3kcE8cMcL0
+
+## Getting Started
+
+
+#### 1. Installing React Email
+
+To start, we need to install react-email and its components. You can install all the components separately, but for now I will install a package with all of them.
+
+```shell
+npm install react-email @react-email/components @react-email/render -E
+```
+
+#### 2. Add a script to your package.json
+
+Next, react-email has a preview mode to easily test your emails design. We are going to add a script to our `package.json` to easily run this. You can run the command manually if wanted.
+
+```json title="package.json"
+{
+  "scripts": {
+    //...
+    "dev": "email dev"
+  }
+}
+```
+
+If you are using NextJs I recommend making the script `email dev --port 3001`. This is because the email preview site also uses next, so it defaults to port 3000 which could conflict with your dev server.
+
+#### 3. Create an emails folder
+
+By default, React-Email looks for a folder called `emails` for its email templates. You can change this by appending `--dir [FOLDER]` if wanted.
+
+Once created we can add our first email template. This can have any name but must be a `jsx` or `tsx`.
+
+```tsx title="example-email.tsx"
+import * as React from "react";
+import { Html, Button } from "@react-email/components";
+
+export default function Email() {
+  return (
+    <Html>
+      <Button
+        href="https://example.com"
+        style={{ background: "#000", color: "#fff", padding: "12px 20px" }}
+      >
+        Click me
+      </Button>
+    </Html>
+  );
+}
+```
+
+[See here](https://demo.react.email/preview/vercel-invite-user) for more complex examples.
+
+#### 5. Run the email preview site
+
+If you added the script to your package.json above, all we have to do is:
+
+```shell
+npm run email
+```
+Now visit `localhost:3000` to preview your emails.
+
+#### 6. React email to Html
+
+Now that you have your template working, how do you utilize this in your email sender, such as nodemailer?
+
+For this we need to make use of the `render` function. The example below is built using nodemailer, in a NextJS API Route.
+
+```ts title="api/send-mail/route.ts"
+import type { NextApiRequest, NextApiResponse } from "next";
+import Email from "@/emails/example-email";
+import { render } from "@react-email/render";
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  await sendEmail({
+    to: "hello@world.com",
+    subject: "Hello",
+    html: render(Email()),
+  });
+
+  return res.status(200).json({ message: "Success" });
+}
+```
+
+This render function will return a string of the HTML of your email. You can pass in props to the `Email()` function too, for example if you needed to address someone by name, it would look like this `Email({ name })`, and the Email template would just have name as a React prop.
+
+
+### Tailwind?
+
+React-Email has some support for tailwind. See their [docs](https://react.email/docs/components/tailwind). Its worth noting it will only work with basic styling needs as email css support varies.
+
+## Emails, made simple
+
+That is all you need to get started writing email easily in JavaScript. The react-email [docs](https://react.email/docs/integrations/overview) have lots of example, and show you how to integrate with things such as Nodemailer, SendGrid, Postmark, AWS SES, MailerSend, Plunk and more.
+
+Its also worth checking out [Resend](https://resend.com/). They are the maintainers of React-Email and have made a service to send messages with easy-to-use APIs/SDKs without having to worry about emails going to the spam folder.
