@@ -23,6 +23,7 @@ const Nav = () => {
                   src={Logo}
                   height={48}
                   width={48}
+                  priority
                   alt="James Shopland Logo"
                 />
               </GlowDiv>
