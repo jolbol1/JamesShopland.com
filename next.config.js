@@ -55,12 +55,15 @@ const securityHeaders = [
 ]
 
 /**
- * @type {import('next/dist/next-server/server/config').NextConfig}
+ * @type {import('next').NextConfig}
  **/
 module.exports = () => {
   const plugins = [withContentlayer, withBundleAnalyzer]
   return plugins.reduce((acc, next) => next(acc), {
     reactStrictMode: true,
+    images: {
+      formats: ['image/avif', 'image/webp'],    
+    },
     pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
     eslint: {
       dirs: ["pages", "components", "lib", "layouts", "scripts"],
