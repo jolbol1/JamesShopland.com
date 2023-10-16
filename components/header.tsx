@@ -34,6 +34,7 @@ export function Header() {
           <div className="relative">
             <Image
               src={hero}
+              quality={50}
               alt={
                 "cartoon image of james shopland with icons of programming languages surrounding him"
               }
