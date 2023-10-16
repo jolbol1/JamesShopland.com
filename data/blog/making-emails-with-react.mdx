@@ -19,7 +19,7 @@ https://www.youtube.com/watch?v=Z3kcE8cMcL0
 ## Getting Started
 
 
-#### 1. Installing React Email
+### 1. Installing React Email
 
 To start, we need to install react-email and its components. You can install all the components separately, but for now I will install a package with all of them.
 
@@ -27,7 +27,7 @@ To start, we need to install react-email and its components. You can install all
 npm install react-email @react-email/components @react-email/render -E
 ```
 
-#### 2. Add a script to your package.json
+### 2. Add a script to your package.json
 
 Next, react-email has a preview mode to easily test your emails design. We are going to add a script to our `package.json` to easily run this. You can run the command manually if wanted.
 
@@ -42,7 +42,7 @@ Next, react-email has a preview mode to easily test your emails design. We are g
 
 If you are using NextJs I recommend making the script `email dev --port 3001`. This is because the email preview site also uses next, so it defaults to port 3000 which could conflict with your dev server.
 
-#### 3. Create an emails folder
+### 3. Create an emails folder
 
 By default, React-Email looks for a folder called `emails` for its email templates. You can change this by appending `--dir [FOLDER]` if wanted.
 
@@ -68,7 +68,7 @@ export default function Email() {
 
 [See here](https://demo.react.email/preview/vercel-invite-user) for more complex examples.
 
-#### 5. Run the email preview site
+### 4. Run the email preview site
 
 If you added the script to your package.json above, all we have to do is:
 
@@ -77,7 +77,7 @@ npm run email
 ```
 Now visit `localhost:3000` to preview your emails.
 
-#### 6. React email to Html
+### 5. React email to Html
 
 Now that you have your template working, how do you utilize this in your email sender, such as nodemailer?
 
@@ -105,7 +105,7 @@ export default async function handler(
 This render function will return a string of the HTML of your email. You can pass in props to the `Email()` function too, for example if you needed to address someone by name, it would look like this `Email({ name })`, and the Email template would just have name as a React prop.
 
 
-### Tailwind?
+## Tailwind?
 
 React-Email has some support for tailwind. See their [docs](https://react.email/docs/components/tailwind). Its worth noting it will only work with basic styling needs as email css support varies.
 
