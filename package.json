@@ -23,7 +23,7 @@
     "autoprefixer": "^10.4.16",
     "clsx": "^2.0.0",
     "contentlayer": "0.3.4",
-    "esbuild": "0.19.4",
+    "esbuild": "0.19.5",
     "fs": "^0.0.1-security",
     "github-slugger": "^2.0.0",
     "kbar": "^0.1.0-beta.43",
