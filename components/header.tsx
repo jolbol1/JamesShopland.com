@@ -2,6 +2,8 @@ import Image from "next/image"
 import Link from "next/link"
 
 import hero from "@/public/images/general/hero-image.webp"
+import Youtube from "@/components/social-icons/youtube.svg"
+import siteMetadata from "@/config/site-metadata"
 
 export function Header() {
   return (
@@ -23,10 +25,12 @@ export function Header() {
               View my blog
             </Link>
             <Link
-              href="/projects"
-              className="inline-flex items-center justify-center rounded-lg border border-blue-600 px-5 py-3 text-center text-base font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:border-blue-600 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+              href={siteMetadata.youtube}
+              target="_blank"
+              className="inline-flex group items-center gap-2 justify-center bg-[#FF0000] hover:bg-opacity-75 text-white rounded-lg border border-[#FF0000] px-5 py-3 text-center text-base font-medium   focus:ring-4 focus:ring-gray-100  dark:text-white  dark:focus:ring-gray-800"
             >
-              My projects
+              <Youtube className="fill-current h-4 w-4 "/>
+              <span className="sm:group-hover:before:content-['Subscribe!'] before:content-['YouTube']" ></span>
             </Link>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils"
 import Facebook from "./facebook.svg"
 import Github from "./github.svg"
 import Linkedin from "./linkedin.svg"
@@ -22,9 +23,10 @@ interface SocialIconProps {
   kind: keyof typeof components
   href: string
   size?: number
+  className?: string
 }
 
-const SocialIcon = ({ kind, href, size = 8 }: SocialIconProps) => {
+const SocialIcon = ({ kind, href, size = 8, className }: SocialIconProps) => {
   if (
     !href ||
     (kind === "mail" &&
@@ -43,7 +45,7 @@ const SocialIcon = ({ kind, href, size = 8 }: SocialIconProps) => {
     >
       <span className="sr-only">{kind}</span>
       <SocialSvg
-        className={`fill-current text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400 h-${size} w-${size}`}
+        className={cn(`fill-current text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400 h-${size} w-${size}`, className)}
       />
     </a>
   )

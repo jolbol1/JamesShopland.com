@@ -19,7 +19,7 @@ export interface CoreConfig {
   github: string
   twitter: string
   facebook?: string
-  youtube?: string
+  youtube: string
   linkedin: string
   locale: string
 }

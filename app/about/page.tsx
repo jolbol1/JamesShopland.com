@@ -29,6 +29,7 @@ export default function About() {
     twitter,
     linkedin,
     github,
+    youtube
   } = author
 
   return (
@@ -64,6 +65,7 @@ export default function About() {
           <div className="text-gray-700 dark:text-gray-400">{occupation}</div>
           <div className="text-gray-700 dark:text-gray-400">{company}</div>
           <div className="flex space-x-3 pt-6">
+            {youtube && <SocialIcon kind="youtube" href={youtube} />}
             {email && <SocialIcon kind="mail" href={`mailto:${email}`} />}
             {github && <SocialIcon kind="github" href={github} />}
             {linkedin && <SocialIcon kind="linkedin" href={linkedin} />}

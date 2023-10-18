@@ -19,7 +19,7 @@ const siteMetadata: SiteConfig = {
   github: "https://github.com/jolbol1",
   twitter: "https://twitter.com/JollyShopland",
   facebook: "https://facebook.com",
-  youtube: "https://youtube.com",
+  youtube: "https://www.youtube.com/@JollyCoding",
   linkedin: "https://www.linkedin.com/in/james-shopland",
   locale: "en-GB",
   giscusConfig: {
