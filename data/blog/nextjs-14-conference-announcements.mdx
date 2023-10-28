@@ -1,0 +1,83 @@
+---
+title: "NextJS 14 and more announcements from NextJS conf"
+date: "2023-10-28"
+tags: ["nextjs", "video", "blog", "Nextjs 14"]
+draft: false
+summary: "Take a brief look into what was announced to be coming in NextJS 14 as well as a few other announcements from the NextJS conference"
+---
+
+NextJS just held their conference in which some excellent talks were walking through the latest and greatest of front-end development. Some of the talks had announcements about what's coming up in NextJS 14 as well as some new releases you can start using now!
+
+https://www.youtube.com/watch?v=GEVujxZK99c
+
+## Server Actions
+Server actions are the new feature in React canary which NextJS 14 will be utilising. This is a divisive feature and I have seen a lot of debate about it online. 
+
+Essentially what it allows you to do is do away with the traditional post request to API route to handle your data mutations, we can just put them in the same component using the `"use server"` declaration.
+
+```tsx title="example.tsx"
+export default function Page() {
+  async function create(formData: FormData) {
+    'use server';
+    const id = await createItem(formData);
+  }
+ 
+  return (
+    <form action={create}>
+      <input type="text" name="name" />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+You can even call these functions outside of a form route, such as in a button click. Further, you will have all the access to the app router functionality to handle revalidation, cookies, and caching plus some helper hooks for loading states. All with type safety if you are using Typescript!
+
+## Partial Rendering
+
+The idea of partial rendering is to enable a fast initial static response from the server, making your sites feel snappier.
+
+It's built on top of React Suspense and will prerender the fallback route, serving it up as static HTML initially and then if your component inside the suspense needs to access cookies for example, will enable the server to stream the component in without sending a new call to the server, saving another roundtrip.
+
+This feature is in preview mode and actively being worked on. Expect more in a minor update.
+
+## Viewport Metadata changes
+
+In NextJS 14 they are moving the viewport metadata out into a separate object. Now to utilise viewport metadata you will use `viewport` or `generateViewport` ([docs](https://nextjs.org/docs/app/api-reference/functions/generate-viewport))
+
+This was done as the viewport metadata was blocking, so they are ensuring that for their new Partial rendering, they can load in the metadata for you without impacting that.
+
+## Vercel's font
+
+At the conference, Vercel announced that they were releasing their own, open source font: [Geist](https://vercel.com/font). It comes with a Sans and Mono variant and I expect a lot of sites will start utilising this!
+
+This is a cool trend from companies, it follows those such as [cal.com](cal.com) who also released their own open source one [CalSans](https://github.com/calcom/font)
+
+## Third-party libraries
+
+This announcement was awesome to me. @next/third-parties is a library that provides a collection of components and utilities that improve the performance and developer experience of loading popular third-party libraries in your Next.js application.
+
+It currently has support for Google tags, maps and YouTube (one I will be using)
+
+For example, to load a YouTube embed in the best way for NextJS we can simply use:
+
+```
+import { YouTubeEmbed } from '@next/third-parties/google'
+ 
+export default function Page() {
+  return <YouTubeEmbed videoid="ogfYd705cRs" height={400} params="controls=0" />
+}
+```
+
+It's cool to see this dedication to improving the developer experience.
+
+## Turbopack
+
+Turbopack now passes 90%+ tests, nearing its way to the default for `next dev`. They even have a site to track the tests passing [AreWeTurboYet.com](https://areweturboyet.com/)
+You can utilise turbopack now with `next dev --turbopack` and it already promises 50% faster dev server load times and 90%+ Fast Refresh improvements
+
+## Breaking changes:
+- Minimum Node.js version is now 18.17
+- Removes WASM target for next-swc build 
+- Dropped support for @next/font in favor of next/font 
+- Changed ImageResponse import from next/server to next/og 
+- `next export` command is deprecated in favor of output: 'export' 
