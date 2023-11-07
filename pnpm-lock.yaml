@@ -125,8 +125,8 @@ devDependencies:
     specifier: ^18.2.25
     version: 18.2.35
   '@types/rss':
-    specifier: ^0.0.31
-    version: 0.0.31
+    specifier: ^0.0.32
+    version: 0.0.32
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.7.4
     version: 6.9.1(@typescript-eslint/parser@6.9.1)(eslint@8.53.0)(typescript@5.2.2)
@@ -2879,8 +2879,8 @@ packages:
     resolution: {integrity: sha512-l1YzFLj8Y6OhLdt7HKXlz56DoEmksB7qR8KVk+MpFsS4duwnoszLgDlLxJB0vgSqtg/rAS5gmYg5Bjw2sMJ8Ew==}
     dev: false
 
-  /@types/rss@0.0.31:
-    resolution: {integrity: sha512-iW6iqXCU1+t61uMkwIQQ4/TOq4QelIo9SfRJ717niStG5Z09B0pWhHkKujo2a0jsjHlga3yhGiemukLPYdl6iQ==}
+  /@types/rss@0.0.32:
+    resolution: {integrity: sha512-2oKNqKyUY4RSdvl5eZR1n2Q9yvw3XTe3mQHsFPn9alaNBxfPnbXBtGP8R0SV8pK1PrVnLul0zx7izbm5/gF5Qw==}
     dev: true
 
   /@types/scheduler@0.16.5:
