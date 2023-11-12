@@ -1,0 +1,311 @@
+---
+title: "TailwindCSS: Master Advanced Techniques for Dark Mode, Theming, and More"
+date: "2023-11-12"
+tags: ["tailwindcss", "css", "dark mode", "theming", "helper functions", "eslint"]
+draft: false
+summary: "Explore advanced TailwindCSS techniques for effective dark mode implementation, custom theming, and utility helpers. Enhance your UI design efficiency and user experience with these practical methods."
+---
+
+I have recently been using a lot of [tailwindcss](https://tailwindcss.com/docs/installation) based components such as [shadcn/ui](https://ui.shadcn.com/) as well as creating my own. This has taught me a lot of the best ways to utilize tailwind to suit your needs and I wanted to document that.
+
+TailwindCSS has revolutionized the way we design interfaces, offering unparalleled flexibility and control. In this post, we'll dive into advanced techniques for leveraging TailwindCSS, focusing on custom theming, dark mode, and helper functions. These methods will not only streamline your workflow but also elevate your UI designs.
+
+This guide will assume you have installed tailwind and done the basic configuration. Further, I recommend the [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) vscode plugin.
+
+## Theming
+
+When it comes to colors in tailwind you may be used to using them like this: `bg-red-600`. While this is an okay method it has some downsides. Firstly, you are bound to tailwind's predefined colors. Secondly, if you want to change your sites theme
+you will have to find every entry of that color to update it. Instead we could create our own themes and extend tailwind to use these.
+
+### 1. Add to css
+
+First we need to add the custom colors to your tailwind css file (This is where you would have added the tailwind directives on setup). [shadcn/ui](https://ui.shadcn.com/docs/theming#list-of-variables) has some good defaults of this, but we need to come up with a few sensible variables to meet our needs.
+
+Colors will be defined in the HLS color channels. This allows us to use the opacity modifiers such as `bg-background/80`. If you want to go from rgb/hex to hls, you can paste it into google and it will usually show the hls variant as well. Don't include the color space function or opacity modifiers won't work
+
+Lets start with a background color and a foreground color. Background is self explanatory, foreground will be used for things such as text, so it should be a color that works well on the background.
+
+You will want to add all these variables within the root selector, and  tailwinds `@layer base`.
+
+```css title="globals.css"
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 222.2 47.4% 11.2%;
+    }
+}
+```
+
+Now lets add a custom color for elements like buttons. Again here, primary will be the color of a button for example whereas the foreground variant will be text that works well on that color.
+```css title="globals.css"
+--primary: 222.2 47.4% 11.2%;
+--primary-foreground: 210 40% 98%;
+```
+
+Now lets add a few more color defaults:
+```css title="globals.css"
+--border: 214.3 31.8% 91.4%; /* color for borders */
+--ring: 215 20.2% 65.1%; /* color for focus rings */
+```
+
+Another useful helper we can use is radius. This again gives us the option to modify this on all components later on if needed.
+```css title="globals.css"
+--radius: 0.5rem;
+```
+
+For more examples, check out this page by shadcn: https://ui.shadcn.com/docs/theming#list-of-variables
+
+### 2. Add to tailwind
+
+Now we have our CSS variables we need to extend tailwind to enable us to use these.
+
+Go to your tailwind config and modify it like so, replacing the names with those you defined earlier:
+```js title="tailwind.config.js"
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        border: "hsl(var(--border))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+      },
+      borderRadius: {
+        xl: `calc(var(--radius) + 4px)`,
+        lg: `var(--radius)`,
+        md: `calc(var(--radius) - 2px)`,
+        sm: "calc(var(--radius) - 4px)",
+      },
+    },
+  },
+ // Rest of config
+}
+```
+Above you will notice we have extended border radius to allow us to still use the size modifiers, with our custom definition of a base radius. 
+
+Further, primary is defined as an object with `DEFAULT` and `foreground`. This allows us
+to use `bg-primary` which will use that the `--primary` variable and `bg-primary-foreground` to use the foreground one.
+
+Now you can get started using these as you would with any other tailwind classes, such as `bg-primary text-foreground rounded-sm`
+
+## Dark mode
+
+Tailwind makes it really easy to utilize dark mode, using the `dark:` modifier. However, we can make this easier using the variables we defined above, making it so we don't even need to use the dark modifier.
+
+First, in your tailwind config file, ensure dark mode is configured using class mode.
+
+```ts title="tailwind.config.js"
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: ["class"],
+  // rest of config
+}
+```
+
+Next we can go back to our custom variables in our css file to add our dark mode theme.
+
+In the same `@layer base` we defined earlier, add `.dark` outside of the root definition and for each color we defined earlier, add the color it should be in dark mode:
+
+```css
+@layer base {
+  :root {
+    /* colors we defined earlier */
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --border: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}
+```
+
+That is all. Now whenever the tailwind theme is switched from light mode to dark mode, your theme should adjust with it automatically. This works as the color definitions are changed when the html element has the class `dark` applied. 
+If you want to add your own theme switcher, view the tailwind [docs](https://tailwindcss.com/docs/dark-mode#supporting-system-preference-and-manual-selection)
+
+## Helper Functions 
+
+You may have seem a helper function in various projects for tailwind called `cn`. This uses a combination of [clsx](https://www.npmjs.com/package/clsx) and [tailwind-merge](https://www.npmjs.com/package/tailwind-merge). It enables conditional classes and stops styling conflicts.
+
+To get started we need to install those 2 packages:
+```sh
+npm install clsx tailwind-merge
+```
+
+Now, we need to add a function. You can place this anywhere you like, most place it in `lib/utils.ts` 
+```ts title="lib/utils.ts"
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+ 
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+```
+
+Now we have the function what does it do?
+
+### tailwind-merge
+Firstly, the tailwind-merge aspect of it stops style conflicts by merging classes where possible. For example with the button below, we have set the padding 3 times `px-1 py-2` and `p-3`.
+```tsx
+<button className={cn("px-1 py-2 bg-primary rounded-sm", "p-3")} >Click Me</button>
+```
+The cn helper using tailwind-merge will merge this, using the last class passed in as priority so the button styling will become 
+```html title="index.html"
+<button class="bg-primary p-3 rounded-sm">Click Me</button>
+```
+
+### Why?
+You may be wondering what the use-case of this is. The best example is when building custom components that allow some styling overriding. Using the button above as an example, say we exposed a className prop to allow the components styles to be overridden if needed for a one off for example.
+
+```tsx
+export const ExampleButton = ({ className }) => {
+    return (
+        <button className={cn("px-1 py-2 bg-primary rounded-sm", className)}></button>
+    )
+}
+```
+
+We can now override the style on the button if needed without worrying about conflicts.
+```tsx
+<ExampleButton className="p-3 bg-red-600" />
+
+// Renders to
+<button class="p-3 bg-red-600 rounded-sm"></button>
+```
+### clsx
+
+The clsx part of the helper allows us to construct our class names conditionally.
+
+For example:
+```tsx
+export const ExampleDiv = ({ className, isError, isWarning, children }) => {
+    return <div className={cn("border-black", isWarning && "border-yellow-200", isError && "border-red-600")}>{children}</div>
+}
+```
+
+Now in the above component, we can style based on a prop or state being true. So if `isWarning` is true, it will be yellow and if `isError` is true is will be red.
+
+There are several ways to write these conditions that are documented [here](https://www.npmjs.com/package/clsx). You could use objects for example, the above would become:
+```tsx
+export const ExampleDiv = ({ className, isError, isWarning, children }) => {
+    return <div className={cn("border-black", { "border-yellow-200": isWarning, "border-red-600": isError})}>{children}</div>
+}
+```
+
+Hopefully that explains why the cn helper is so powerful and useful when building out your own custom components.
+
+## Variants
+
+Lastly, I want to show off `class-variance-authority`. This is a useful helper to manage different variants of components that you may need without needing to duplicate the logic for it. For example, a button with a primary, secondary and destructive design.
+
+To get started install the package:
+```sh
+npm i class-variance-authority
+```
+
+Further, if you are using the [tailwind intellisense plugin](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) you will want to add the following to you .vs settings.json
+```json
+{
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ]
+}
+```
+This will enable the intellisense plugin to work on cva functions as well.
+
+### Usage
+
+For the usage of this we will look at a simple button. We need to create a variants function:
+```tsx
+const buttonVariants = cva(
+  "inline-flex items-center justify-center rounded-md text-sm font-medium",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        destructive:
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline:
+          "border border-input hover:bg-accent hover:text-accent-foreground",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+      },
+      size: {
+        default: "h-10 py-2 px-4",
+        sm: "h-9 px-3 rounded-md",
+        lg: "h-11 px-8 rounded-md",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
+
+export const Button = ({ className, variant, size }) => {
+    return <button className={cn(buttonVariants({ variant, size, className }))}>Click Me</button>
+}
+
+//usage
+<Button variant="outline" size="sm" />
+```
+The above is a simple variants example. Essentially, the first string of tailwind classes are the defaults, that are applied to every variant.
+
+Next we define our variants in an object, utilizing 2 selectors, variant and size. These are sensibly separated to allow us to change the size of each variant.
+
+Lastly, we tell cva what should be used as default, if nothing is supplied to the function. Aka, the default style.
+
+Now when we use this in our component, we can pass through the variant and size name as strings/props such as "destructive" and "lg". We do this all in the cn helper as well to help with style conflicts as explained above.
+
+You can explore the cva docs [here](https://cva.style/docs) for more examples and complex use cases.
+
+
+## ESLint
+
+Lastly, we can utilize an [eslint plugin](https://www.npmjs.com/package/eslint-plugin-tailwindcss) to enforce best practices and consistency using tailwind. While there is an official prettier plugin from tailwind for ordering classNames the eslint plugin offers this and more.
+
+To install this, I will assume you already have eslint set up.
+
+First install the eslint plugin
+```sh
+npm i -D eslint-plugin-tailwindcss
+```
+
+Next make the following changes to your eslint file:
+```json title="eslintrc.json"
+{
+  "root": true, // ensure this is true
+  "extends": [
+    "plugin:tailwindcss/recommended" // Add this to your extends
+  ],
+  "plugins": ["tailwindcss"], // Add tailwindcss to plugins
+  "rules": {
+    "tailwindcss/no-custom-classname": "off", // Change this based on your need. If on it wont allow any non tw classes on components
+    "tailwindcss/classnames-order": "warn" // Change this to error or warn based on your preference
+  },
+  "settings": {
+    "tailwindcss": { // The following settings allow it to read your config as well as telling it that taiwlind will be found in our custom helper function
+      "callees": ["cn"],
+      "config": "tailwind.config.js"
+    },
+  },
+}
+```
+Thats all! Now you should get helpful hints about tailwind className orders, that are auto fixable using eslint as well as some other best practice rules. For example if you had `px-2 py-2` the plugin would warn you that this could be condensed to `p-2`
+
+For more of the rules, see [here](https://www.npmjs.com/package/eslint-plugin-tailwindcss)
+
+
+## Wrap Up
+
+Thanks for reading, hopefully this has gone over some of the best ways to use tailwind in a project and shown you some awesome techniques to help with creating custom components.  From customizing themes to effortless dark mode integration, these strategies are key to creating dynamic and visually appealing UIs. I encourage you to experiment with these methods in your projects. Share your experiences or any questions in the comments below!
