@@ -127,9 +127,18 @@ In the same `@layer base` we defined earlier, add `.dark` outside of the root de
   }
 }
 ```
-
 That is all. Now whenever the tailwind theme is switched from light mode to dark mode, your theme should adjust with it automatically. This works as the color definitions are changed when the html element has the class `dark` applied. 
 If you want to add your own theme switcher, view the tailwind [docs](https://tailwindcss.com/docs/dark-mode#supporting-system-preference-and-manual-selection)
+
+If you want to set the theme only by the users color scheme choice, you could modify the above and add a copy of your colors but dark mode based into here:
+
+```css
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Your dark mode colors */
+  }
+}
+```
 
 ## Helper Functions 
 
