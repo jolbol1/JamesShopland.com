@@ -21,7 +21,7 @@ import Tag from "@/components/tag"
 import { coreContent, sortedBlogPost } from "../../../lib/contentlayer"
 
 const editUrl = (path: string) =>
-  `${siteMetadata.siteRepo}/blob/master/data/${path}`
+  `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path: string) =>
   `https://twitter.com/intent/tweet?text=${encodeURIComponent(
     `${siteMetadata.siteUrl}/${path}`
@@ -83,12 +83,10 @@ export async function generateMetadata({
 
   const post = details.post
 
-  const url = siteMetadata.siteUrl
-
-  const ogUrl = new URL(`${url}/api/og`)
-  ogUrl.searchParams.set("heading", post.title)
-  ogUrl.searchParams.set("type", "Blog Post")
-  ogUrl.searchParams.set("mode", "dark")
+  const ogParams = new URLSearchParams()
+  ogParams.set("heading", post.title)
+  ogParams.set("type", "Blog Post")
+  ogParams.set("mode", "dark")
 
   return {
     title: post.title,
@@ -97,16 +95,16 @@ export async function generateMetadata({
       name: author,
     })),
     alternates: {
-      canonical: `${siteMetadata.siteUrl}/blog/${post.slug}`,
+      canonical: `/blog/${post.slug}`,
     },
     openGraph: {
       title: post.title,
       description: post.summary,
       type: "article",
-      url: `${siteMetadata.siteUrl}/blog/${post.slug}`,
+      url: `/blog/${post.slug}`,
       images: [
         {
-          url: ogUrl.toString(),
+          url: `/api/og?${ogParams.toString()}`,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -117,7 +115,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post.title,
       description: post.summary,
-      images: [ogUrl.toString()],
+      images: [`/api/og?${ogParams.toString()}`],
     },
   }
 }

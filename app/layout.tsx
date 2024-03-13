@@ -28,6 +28,7 @@ export const metadata = {
     default: siteMetadata.title,
     template: `%s | ${siteMetadata.title}`,
   },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? siteMetadata.siteUrl),
   description: siteMetadata.description,
   keywords: [
     "Next.js",
@@ -53,7 +54,7 @@ export const metadata = {
     siteName: siteMetadata.title,
     images: [
       {
-        url: `${siteMetadata.siteUrl}/og.jpg`,
+        url: `/og.jpg`,
         width: 1200,
         height: 630,
         alt: siteMetadata.title,
@@ -64,7 +65,7 @@ export const metadata = {
     card: "summary_large_image",
     title: siteMetadata.title,
     description: siteMetadata.description,
-    images: [`${siteMetadata.siteUrl}/og.png`],
+    images: [`/og.png`],
     creator: "@jollyshopland",
   },
   icons: {
@@ -72,7 +73,7 @@ export const metadata = {
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
-  manifest: `${siteMetadata.siteUrl}/site.webmanifest`,
+  manifest: `/site.webmanifest`,
 }
 
 export const viewport: Viewport = {
