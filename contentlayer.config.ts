@@ -4,7 +4,7 @@ import {
   ComputedFields,
   defineDocumentType,
   makeSource,
-} from "contentlayer/source-files"
+} from "contentlayer-temp/source-files"
 import readingTime from "reading-time"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypePrettyCode, { type Options } from "rehype-pretty-code"
@@ -92,7 +92,7 @@ export const Authors = defineDocumentType(() => ({
     linkedin: { type: "string" },
     github: { type: "string" },
     layout: { type: "string" },
-    youtube: { type: "string"}
+    youtube: { type: "string" }
   },
   computedFields,
 }))
