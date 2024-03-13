@@ -3,13 +3,13 @@ import "@/styles/tailwind.css"
 import { Inter } from "next/font/google"
 import localFont from "next/font/local"
 
-import { ServerThemeProvider } from "next-themes"
-
 import siteMetadata from "@/config/site-metadata"
 
 import Analytics from "@/components/analytics"
 import Footer from "@/components/footer"
 import Nav from "@/components/nav"
+import { Providers } from "@/components/providers"
+import { Viewport } from "next"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -44,10 +44,6 @@ export const metadata = {
     },
   ],
   creator: "James Shopland",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
   openGraph: {
     type: "website",
     locale: "en_GB",
@@ -79,24 +75,30 @@ export const metadata = {
   manifest: `${siteMetadata.siteUrl}/site.webmanifest`,
 }
 
+export const viewport: Viewport = {
+    themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+}
 interface RootLayoutProps {
   children: React.ReactNode
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <ServerThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
       <html lang="en" className={`${inter.variable} ${jetbrains.variable} `}>
         <head />
         <body className="min-h-screen bg-white px-[5vw]  dark:bg-black">
+        <Providers>
           <div className="flex min-h-screen flex-col">
             <Nav />
             <main className="flex-1">{children}</main>
             <Footer />
             <Analytics />
           </div>
+          </Providers>
         </body>
       </html>
-    </ServerThemeProvider>
   )
 }
