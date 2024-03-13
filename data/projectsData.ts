@@ -11,21 +11,30 @@ export interface ProjectData {
 const projectsData: ProjectData[] = [
   {
     title: "JollyUI",
-    description: "Styled React Aria components that you can copy and paste into your apps. The components are accessible, customizable, and open source. Over 300 GitHub stars! \n The library includes components like date pickers, sliders, progress bars, meters and more...",
+    description:
+      "Styled React Aria components that you can copy and paste into your apps. The components are accessible, customizable, and open source. Over 300 GitHub stars! \n The library includes components like date pickers, sliders, progress bars, meters and more...",
     titleLink: "https://jollyui.dev",
-    links: [{
-      title: "Docs", href: "https://jollyui.dev"
-    }, { title: "GitHub", href: "https://github.com/jolbol1/jolly-ui" }],
-    icons: ["react", "tailwind", "typescript"]
+    links: [
+      {
+        title: "Docs",
+        href: "https://jollyui.dev",
+      },
+      { title: "GitHub", href: "https://github.com/jolbol1/jolly-ui" },
+    ],
+    icons: ["react", "tailwind", "typescript"],
   },
   {
     title: "F1 GPT",
-    description: "A OpenAI powered chat application with access to realtime F1 data. You can ask about events of the race, conditions and even transcribe radio messages. Uses Vercel Generative UI to reply with components for a better user experience.",
+    description:
+      "A OpenAI powered chat application with access to realtime F1 data. You can ask about events of the race, conditions and even transcribe radio messages. Uses Vercel Generative UI to reply with components for a better user experience.",
     titleLink: "https://f1-gpt.vercel.app",
-    links: [{
-      title: "Demo", href: "https://f1-gpt.vercel.app"
-    }],
-    icons: ["next", "react", "typescript"]
+    links: [
+      {
+        title: "Demo",
+        href: "https://f1-gpt.vercel.app",
+      },
+    ],
+    icons: ["next", "react", "typescript"],
   },
   {
     title: "Opening Lines",

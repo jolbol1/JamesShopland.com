@@ -2,8 +2,10 @@ import Image from "next/image"
 import Link from "next/link"
 
 import hero from "@/public/images/general/hero-image.webp"
-import Youtube from "@/components/social-icons/youtube.svg"
+
 import siteMetadata from "@/config/site-metadata"
+
+import Youtube from "@/components/social-icons/youtube.svg"
 
 export function Header() {
   return (
@@ -29,8 +31,8 @@ export function Header() {
               target="_blank"
               className="inline-flex group items-center gap-2 justify-center bg-[#FF0000] hover:bg-opacity-75 text-white rounded-lg border border-[#FF0000] px-5 py-3 text-center text-base font-medium   focus:ring-4 focus:ring-gray-100  dark:text-white  dark:focus:ring-gray-800"
             >
-              <Youtube className="fill-current h-4 w-4 "/>
-              <span className="sm:group-hover:before:content-['Subscribe!'] before:content-['YouTube']" ></span>
+              <Youtube className="fill-current h-4 w-4 " />
+              <span className="sm:group-hover:before:content-['Subscribe!'] before:content-['YouTube']"></span>
             </Link>
           </div>
         </div>

@@ -62,7 +62,7 @@ module.exports = () => {
   return plugins.reduce((acc, next) => next(acc), {
     reactStrictMode: true,
     images: {
-      formats: ['image/avif', 'image/webp'],    
+      formats: ["image/avif", "image/webp"],
     },
     pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
     eslint: {

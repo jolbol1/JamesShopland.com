@@ -11,25 +11,27 @@ NextJS just held their conference in which some excellent talks were walking thr
 https://www.youtube.com/watch?v=GEVujxZK99c
 
 ## Server Actions
-Server actions are the new feature in React canary which NextJS 14 will be utilising. This is a divisive feature and I have seen a lot of debate about it online. 
+
+Server actions are the new feature in React canary which NextJS 14 will be utilising. This is a divisive feature and I have seen a lot of debate about it online.
 
 Essentially what it allows you to do is do away with the traditional post request to API route to handle your data mutations, we can just put them in the same component using the `"use server"` declaration.
 
 ```tsx title="example.tsx"
 export default function Page() {
   async function create(formData: FormData) {
-    'use server';
-    const id = await createItem(formData);
+    "use server"
+    const id = await createItem(formData)
   }
- 
+
   return (
     <form action={create}>
       <input type="text" name="name" />
       <button type="submit">Submit</button>
     </form>
-  );
+  )
 }
 ```
+
 You can even call these functions outside of a form route, such as in a button click. Further, you will have all the access to the app router functionality to handle revalidation, cookies, and caching plus some helper hooks for loading states. All with type safety if you are using Typescript!
 
 ## Partial Rendering
@@ -62,7 +64,7 @@ For example, to load a YouTube embed in the best way for NextJS we can simply us
 
 ```
 import { YouTubeEmbed } from '@next/third-parties/google'
- 
+
 export default function Page() {
   return <YouTubeEmbed videoid="ogfYd705cRs" height={400} params="controls=0" />
 }
@@ -76,8 +78,9 @@ Turbopack now passes 90%+ tests, nearing its way to the default for `next dev`. 
 You can utilise turbopack now with `next dev --turbopack` and it already promises 50% faster dev server load times and 90%+ Fast Refresh improvements
 
 ## Breaking changes:
+
 - Minimum Node.js version is now 18.17
-- Removes WASM target for next-swc build 
-- Dropped support for @next/font in favor of next/font 
-- Changed ImageResponse import from next/server to next/og 
-- `next export` command is deprecated in favor of output: 'export' 
+- Removes WASM target for next-swc build
+- Dropped support for @next/font in favor of next/font
+- Changed ImageResponse import from next/server to next/og
+- `next export` command is deprecated in favor of output: 'export'

@@ -6,22 +6,29 @@ draft: false
 summary: "A quick tutorial on how to set up the Firebase Admin SDK on Nextjs 13, and how to use it in server components. I'll also show you how to hide firebase download urls using an API route."
 ---
 
-I recently had to use Firestore Database and Firebase Storage for the backend of a NextJs application. This is a guide on how you can set this up. We will look at how to pull in a list of collections and their data, get a specific document by its ID, and lastly get an image from storage using the public download url. 
+I recently had to use Firestore Database and Firebase Storage for the backend of a NextJs application. This is a guide on how you can set this up. We will look at how to pull in a list of collections and their data, get a specific document by its ID, and lastly get an image from storage using the public download url.
 
-I also show you how you can hide this public download url behind an API route for another level of obfuscation for your front-end. 
+I also show you how you can hide this public download url behind an API route for another level of obfuscation for your front-end.
 
 https://youtu.be/30ydBNgDsow
 
 <Callout>
-**Firebase Admin SDK**<br/>
-It's crucial to note that the Firebase Admin SDK and the Firebase SDK serve different purposes. The Firebase Admin SDK is designed for server-side environments, providing privileged access to your Firebase project's resources, such as Firebase Authentication, Realtime Database, Cloud Firestore, and more. On the other hand, the Firebase SDK is aimed at client-side development, enabling interaction with Firebase features directly from client applications. This guide is for the Admin SDK
+  **Firebase Admin SDK**
+  <br />
+  It's crucial to note that the Firebase Admin SDK and the Firebase SDK serve
+  different purposes. The Firebase Admin SDK is designed for server-side
+  environments, providing privileged access to your Firebase project's
+  resources, such as Firebase Authentication, Realtime Database, Cloud
+  Firestore, and more. On the other hand, the Firebase SDK is aimed at
+  client-side development, enabling interaction with Firebase features directly
+  from client applications. This guide is for the Admin SDK
 </Callout>
 
 ## Getting Started
 
 The first thing you are going to need is a Firebase Project. To set this up start [here](https://console.firebase.google.com). I go through this in the video above, if you do not already have one set up.
 
-Once you have created the project, create a new web app within that project. 
+Once you have created the project, create a new web app within that project.
 
 Once that is created, go ahead to the project settings. Here we need to download a service account private key. Go to the service accounts tab and click `Generate new private key`. This should download a JSON file we will use later
 
@@ -39,9 +46,13 @@ FIREBASE_CLIENT_EMAIL=
 Fill these values in with the respective values from the JSON you downloaded earlier. Storage bucket by default will be the project ID plus `.appspot.com` at the end. You can also find this in your project settings, under the web app configuration.
 
 <Callout type="danger">
-**Warning:**<br/>
-Its worth reiterating, you do not want the contents of that JSON file to leak as someone could get access to your database with admin permissions, this is why we utilise the environment variables.
-The ProjectID and Storage Bucket can be on the front-end however as they are not private. This is why they are prefixed with `NEXT_PUBLIC`.
+  **Warning:**
+  <br />
+  Its worth reiterating, you do not want the contents of that JSON file to leak
+  as someone could get access to your database with admin permissions, this is
+  why we utilise the environment variables. The ProjectID and Storage Bucket can
+  be on the front-end however as they are not private. This is why they are
+  prefixed with `NEXT_PUBLIC`.
 </Callout>
 ### 2. Install npm packages
 
@@ -61,38 +72,39 @@ Now that we have our configuration values, we need to create a function to utili
 Populate the file with the code below, I'll explain the key points:
 
 ```ts title="firebaseAdmin.ts"
-import "server-only";
-import admin from "firebase-admin";
+import "server-only"
+
+import admin from "firebase-admin"
 
 interface FirebaseAdminAppParams {
-  projectId: string;
-  clientEmail: string;
-  storageBucket: string;
-  privateKey: string;
+  projectId: string
+  clientEmail: string
+  storageBucket: string
+  privateKey: string
 }
 
 function formatPrivateKey(key: string) {
-  return key.replace(/\\n/g, "\n");
+  return key.replace(/\\n/g, "\n")
 }
 
 export function createFirebaseAdminApp(params: FirebaseAdminAppParams) {
-  const privateKey = formatPrivateKey(params.privateKey);
+  const privateKey = formatPrivateKey(params.privateKey)
 
   if (admin.apps.length > 0) {
-    return admin.app();
+    return admin.app()
   }
 
   const cert = admin.credential.cert({
     projectId: params.projectId,
     clientEmail: params.clientEmail,
     privateKey,
-  });
+  })
 
   return admin.initializeApp({
     credential: cert,
     projectId: params.projectId,
     storageBucket: params.storageBucket,
-  });
+  })
 }
 
 export async function initAdmin() {
@@ -101,11 +113,10 @@ export async function initAdmin() {
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL as string,
     storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET as string,
     privateKey: process.env.FIREBASE_PRIVATE_KEY as string,
-  };
+  }
 
-  return createFirebaseAdminApp(params);
+  return createFirebaseAdminApp(params)
 }
-
 ```
 
 At the top of the file we import `server-only`. This adds a build time check to our project, that ensures any function run in this file is run in a server environment. This helps catch leaks into client components. [Read more here](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#:~:text=to%20the%20client.-,To%20prevent%20this,-sort%20of%20unintended).
@@ -119,39 +130,40 @@ To fetch some data from firestore, I am again going to create a new file to hous
 I am going to add some example functions in here to fetch some data I have stored in the database, as well as a public download URL for a file I have stored in storage.
 
 ```ts title="firebase.ts"
-import "server-only";
-import { getFirestore } from "firebase-admin/firestore";
-import { getDownloadURL, getStorage } from "firebase-admin/storage";
+import "server-only"
+
+import { getFirestore } from "firebase-admin/firestore"
+import { getDownloadURL, getStorage } from "firebase-admin/storage"
 
 export const getLinks = async () => {
-  const firestore = getFirestore();
-  const linkSnapshot = await firestore.collection("links").get();
+  const firestore = getFirestore()
+  const linkSnapshot = await firestore.collection("links").get()
   const documents = linkSnapshot.docs.map((link) => ({
     url: link.data().url,
     title: link.data().title,
     desc: link.data().desc,
-  }));
+  }))
 
-  return documents;
-};
+  return documents
+}
 
 export const getLogo = async () => {
-  const firestore = getFirestore();
-  const logoSnapshot = await firestore.collection("images").doc("logo").get();
-  const logoData = logoSnapshot.data() as { url: string } | undefined;
+  const firestore = getFirestore()
+  const logoSnapshot = await firestore.collection("images").doc("logo").get()
+  const logoData = logoSnapshot.data() as { url: string } | undefined
   if (!logoSnapshot.exists || !logoData) {
-    return null;
+    return null
   }
-  return logoData.url;
-};
+  return logoData.url
+}
 
 export const getLogoFromStorage = async () => {
-  const bucket = getStorage().bucket();
-  const file = bucket.file("logo.png");
-  const imageUrl = await getDownloadURL(file);
-  console.log(imageUrl);
-  return imageUrl;
-};
+  const bucket = getStorage().bucket()
+  const file = bucket.file("logo.png")
+  const imageUrl = await getDownloadURL(file)
+  console.log(imageUrl)
+  return imageUrl
+}
 ```
 
 In the function `getLogoFromStorage` its worth noting the `logo.png` is the path to the file in firebases storage. So if you had it nested in a folder it would look something like this `images/logo.png`.
@@ -162,7 +174,7 @@ Lastly, these functions will not work unless we call the `initAdmin` function we
 
 ### 5. Using in Server Components
 
-To use these in a server component, make sure the default export is an async function. 
+To use these in a server component, make sure the default export is an async function.
 
 After that we need to make sure we call `await initAdmin()` to initalise the application set-up if it has not been already.
 
@@ -188,21 +200,21 @@ First create the API route, this will be a folder structure like this `app/api/i
 Next, add the following:
 
 ```ts title="route.ts"
-import { getLogoFromStorage } from "@/db/firebase";
-import { initAdmin } from "@/db/firebaseAdmin";
+import { getLogoFromStorage } from "@/db/firebase"
+import { initAdmin } from "@/db/firebaseAdmin"
 
 export async function GET(request: Request) {
-  await initAdmin();
+  await initAdmin()
 
-  const imageUrl = await getLogoFromStorage();
+  const imageUrl = await getLogoFromStorage()
 
-  const response = await fetch(imageUrl);
+  const response = await fetch(imageUrl)
 
-  return new Response(response.body, { headers: response.headers });
+  return new Response(response.body, { headers: response.headers })
 }
 ```
 
-Again, we are calling the `initAdmin` function to ensure the application is initialised. 
+Again, we are calling the `initAdmin` function to ensure the application is initialised.
 
 Next we are simply using the same method to get the URL, but this time it will only occur on the server.
 
@@ -211,6 +223,7 @@ Lastly, we fetch the URL from within the function, and we return its response as
 Now when you go to `/api/image` it will load in the image, but with a clean URL, and the public download URL with the access token has only been exposed to the server.
 
 ## Links
+
 - [Server Only](https://www.npmjs.com/package/server-only)
 - [Firebase Download URL explainer](https://www.sentinelstand.com/article/guide-to-firebase-storage-download-urls-tokens)
 - [Firebase Admin Docs](https://firebase.google.com/docs/admin/setup)

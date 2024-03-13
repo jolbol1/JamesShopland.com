@@ -9,15 +9,19 @@ summary: "The easiest way to craft emails in JavaScript. I will show you React E
 If you have ever had to write and style an email using code, you know the pain of the email HTML. Its a mess of different compatibility and not as simple as just making a webpage. React email aims to solve this in JavaScript (not just React) and is one of the easiest ways I have seen to make a styled email with great compatibility, and even supports some of Tailwind.
 
 <Callout>
-**Don't I need React?**<br/>
-No. While the package sounds like it was made for React projects only, its more complex than that. React wasn't just built for the web and Theo has a great explainer of this [here](https://www.youtube.com/watch?v=Y12sGu8-qFE). 
-Essentially, React is the underlying technology to make things composable and React-Dom is the layer that renders to HTML, React Email is the renderer to email HTML, which can be annoyingly difficult.
+  **Don't I need React?**
+  <br />
+  No. While the package sounds like it was made for React projects only, its
+  more complex than that. React wasn't just built for the web and Theo has a
+  great explainer of this [here](https://www.youtube.com/watch?v=Y12sGu8-qFE).
+  Essentially, React is the underlying technology to make things composable and
+  React-Dom is the layer that renders to HTML, React Email is the renderer to
+  email HTML, which can be annoyingly difficult.
 </Callout>
 
 https://www.youtube.com/watch?v=Z3kcE8cMcL0
 
 ## Getting Started
-
 
 ### 1. Installing React Email
 
@@ -49,8 +53,9 @@ By default, React-Email looks for a folder called `emails` for its email templat
 Once created we can add our first email template. This can have any name but must be a `jsx` or `tsx`.
 
 ```tsx title="example-email.tsx"
-import * as React from "react";
-import { Html, Button } from "@react-email/components";
+import * as React from "react"
+
+import { Button, Html } from "@react-email/components"
 
 export default function Email() {
   return (
@@ -62,7 +67,7 @@ export default function Email() {
         Click me
       </Button>
     </Html>
-  );
+  )
 }
 ```
 
@@ -75,6 +80,7 @@ If you added the script to your package.json above, all we have to do is:
 ```shell
 npm run email
 ```
+
 Now visit `localhost:3000` to preview your emails.
 
 ### 5. React email to Html
@@ -84,9 +90,10 @@ Now that you have your template working, how do you utilize this in your email s
 For this we need to make use of the `render` function. The example below is built using nodemailer, in a NextJS API Route.
 
 ```ts title="api/send-mail/route.ts"
-import type { NextApiRequest, NextApiResponse } from "next";
-import Email from "@/emails/example-email";
-import { render } from "@react-email/render";
+import type { NextApiRequest, NextApiResponse } from "next"
+
+import Email from "@/emails/example-email"
+import { render } from "@react-email/render"
 
 export default async function handler(
   req: NextApiRequest,
@@ -96,14 +103,13 @@ export default async function handler(
     to: "hello@world.com",
     subject: "Hello",
     html: render(Email()),
-  });
+  })
 
-  return res.status(200).json({ message: "Success" });
+  return res.status(200).json({ message: "Success" })
 }
 ```
 
 This render function will return a string of the HTML of your email. You can pass in props to the `Email()` function too, for example if you needed to address someone by name, it would look like this `Email({ name })`, and the Email template would just have name as a React prop.
-
 
 ## Tailwind?
 

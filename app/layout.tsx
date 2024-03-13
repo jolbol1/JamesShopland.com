@@ -1,5 +1,6 @@
 import "@/styles/tailwind.css"
 
+import { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import localFont from "next/font/local"
 
@@ -9,7 +10,6 @@ import Analytics from "@/components/analytics"
 import Footer from "@/components/footer"
 import Nav from "@/components/nav"
 import { Providers } from "@/components/providers"
-import { Metadata, Viewport } from "next"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,7 +28,9 @@ export const metadata: Metadata = {
     default: siteMetadata.title,
     template: `%s | ${siteMetadata.title}`,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? siteMetadata.siteUrl),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL ?? siteMetadata.siteUrl
+  ),
   description: siteMetadata.description,
   keywords: [
     "Next.js",
@@ -77,7 +79,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-    themeColor: [
+  themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
@@ -88,8 +90,8 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-      <html lang="en" className={`${inter.variable} ${jetbrains.variable} `}>
-        <body className="min-h-screen bg-white px-[5vw]  dark:bg-black">
+    <html lang="en" className={`${inter.variable} ${jetbrains.variable} `}>
+      <body className="min-h-screen bg-white px-[5vw]  dark:bg-black">
         <Providers>
           <div className="flex min-h-screen flex-col">
             <Nav />
@@ -97,8 +99,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Footer />
             <Analytics />
           </div>
-          </Providers>
-        </body>
-      </html>
+        </Providers>
+      </body>
+    </html>
   )
 }

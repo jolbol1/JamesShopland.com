@@ -12,15 +12,15 @@ Today I'm going to show you how we can utilize svg sprite sheets in NextJs.
 
 https://www.youtube.com/watch?v=_Xrz7FeOtC0
 
-
 <Callout>
-**Credit**<br/>
-The code I will be using is slightly modified from Kent C. Dodds Epic Stack [implementation](https://github.com/epicweb-dev/epic-stack/blob/main/docs/decisions/020-icons.md). His is for Remix.js. I have modified a few parts to make it work on NextJs.
+  **Credit**
+  <br />
+  The code I will be using is slightly modified from Kent C. Dodds Epic Stack
+  [implementation](https://github.com/epicweb-dev/epic-stack/blob/main/docs/decisions/020-icons.md).
+  His is for Remix.js. I have modified a few parts to make it work on NextJs.
 </Callout>
 
-
 ## Getting Started
-
 
 #### 1. Create a folder to hold our icons
 
@@ -33,108 +33,113 @@ Now to add a icon, you can just copy its svg into a `.svg` file, but I'm going t
 [Sly-cli](https://sly-cli.fly.dev/) is a tool that adds code from dependencies, but not the dependencies themselves. This will let us get the icon libraries svg file without all the React layers.
 
 For example, to add the avatar and bell icon for radix icons, we would do this:
+
 ```shell
 npx @sly-cli/sly add @radix-ui/icons camera card-stack --yes --directory ./other/svg/radix
 ```
 
 You can also use:
+
 ```shell
 npx @sly-cli/sly add
 ```
-To use interactive mode to set this up easily from the terminal, as well as see the icons you can use listed, to easily select the ones you want. I will show you my `sly.json` later for a good starter configuration
 
+To use interactive mode to set this up easily from the terminal, as well as see the icons you can use listed, to easily select the ones you want. I will show you my `sly.json` later for a good starter configuration
 
 #### 2. Compiling the icons into a sprite
 
 An SVG sprite utilizes the `<symbol>` for each of our icons, to become an element in one SVG. To generate this, we are going to utilise a script. You will have to run this each time you add a icon. If you used sly, you can set this up to run automatically after you add them. You can see this in my example sly.json I will leave in this blog.
 
 First we need to install some dependencies:
+
 ```shell
 npm install fs-extra glob node-html-parser @types/fs-extra --save-dev
 ```
-Then we need the script. For NextJs, you want to create a file at the root level called `build-icons.mts` *(Note: the .mts file extension is needed for the default NextJs app, unless you are running your app in module mode)*
+
+Then we need the script. For NextJs, you want to create a file at the root level called `build-icons.mts` _(Note: the .mts file extension is needed for the default NextJs app, unless you are running your app in module mode)_
 
 [Link](https://github.com/jolbol1/nextjs-svg-sprites/blob/main/build-icons.mts) to script on GitHub, or copy and paste below
 
 ```ts title="build-icons.mts"
-import * as path from "node:path";
-import fsExtra from "fs-extra";
-import { glob } from "glob";
-import { parse } from "node-html-parser";
+import * as path from "node:path"
 
-const cwd = process.cwd();
-const inputDir = path.join(cwd, "other", "svg");
-const inputDirRelative = path.relative(cwd, inputDir);
-const typeDir = path.join(cwd, "types");
-const outputDir = path.join(cwd, "public", "icons");
-await fsExtra.ensureDir(outputDir);
-await fsExtra.ensureDir(typeDir);
+import fsExtra from "fs-extra"
+import { glob } from "glob"
+import { parse } from "node-html-parser"
+
+const cwd = process.cwd()
+const inputDir = path.join(cwd, "other", "svg")
+const inputDirRelative = path.relative(cwd, inputDir)
+const typeDir = path.join(cwd, "types")
+const outputDir = path.join(cwd, "public", "icons")
+await fsExtra.ensureDir(outputDir)
+await fsExtra.ensureDir(typeDir)
 
 const files = glob
   .sync("**/*.svg", {
     cwd: inputDir,
   })
-  .sort((a, b) => a.localeCompare(b));
+  .sort((a, b) => a.localeCompare(b))
 
-const shouldVerboseLog = process.argv.includes("--log=verbose");
-const logVerbose = shouldVerboseLog ? console.log : () => {};
+const shouldVerboseLog = process.argv.includes("--log=verbose")
+const logVerbose = shouldVerboseLog ? console.log : () => {}
 
 if (files.length === 0) {
-  console.log(`No SVG files found in ${inputDirRelative}`);
+  console.log(`No SVG files found in ${inputDirRelative}`)
 } else {
-  await generateIconFiles();
+  await generateIconFiles()
 }
 
 async function generateIconFiles() {
-  const spriteFilepath = path.join(outputDir, "sprite.svg");
-  const typeOutputFilepath = path.join(typeDir, "name.d.ts");
+  const spriteFilepath = path.join(outputDir, "sprite.svg")
+  const typeOutputFilepath = path.join(typeDir, "name.d.ts")
   const currentSprite = await fsExtra
     .readFile(spriteFilepath, "utf8")
-    .catch(() => "");
+    .catch(() => "")
   const currentTypes = await fsExtra
     .readFile(typeOutputFilepath, "utf8")
-    .catch(() => "");
+    .catch(() => "")
 
-  const iconNames = files.map((file) => iconName(file));
+  const iconNames = files.map((file) => iconName(file))
 
   const spriteUpToDate = iconNames.every((name) =>
     currentSprite.includes(`id=${name}`)
-  );
+  )
   const typesUpToDate = iconNames.every((name) =>
     currentTypes.includes(`"${name}"`)
-  );
+  )
 
   if (spriteUpToDate && typesUpToDate) {
-    logVerbose(`Icons are up to date`);
-    return;
+    logVerbose(`Icons are up to date`)
+    return
   }
 
-  logVerbose(`Generating sprite for ${inputDirRelative}`);
+  logVerbose(`Generating sprite for ${inputDirRelative}`)
 
   const spriteChanged = await generateSvgSprite({
     files,
     inputDir,
     outputPath: spriteFilepath,
-  });
+  })
 
   for (const file of files) {
-    logVerbose("✅", file);
+    logVerbose("✅", file)
   }
-  logVerbose(`Saved to ${path.relative(cwd, spriteFilepath)}`);
+  logVerbose(`Saved to ${path.relative(cwd, spriteFilepath)}`)
 
-  const stringifiedIconNames = iconNames.map((name) => JSON.stringify(name));
+  const stringifiedIconNames = iconNames.map((name) => JSON.stringify(name))
 
   const typeOutputContent = `// This file is generated by npm run build:icons
 
 export type IconName =
 \t| ${stringifiedIconNames.join("\n\t| ")};
-`;
+`
   const typesChanged = await writeIfChanged(
     typeOutputFilepath,
     typeOutputContent
-  );
+  )
 
-  logVerbose(`Manifest saved to ${path.relative(cwd, typeOutputFilepath)}`);
+  logVerbose(`Manifest saved to ${path.relative(cwd, typeOutputFilepath)}`)
 
   const readmeChanged = await writeIfChanged(
     path.join(inputDir, "README.md"),
@@ -144,15 +149,15 @@ This directory contains SVG icons that are used by the app.
 
 Everything in this directory is made into a sprite using \`npm run build:icons\`. This file will show in /public/icons/sprite.svg
 `
-  );
+  )
 
   if (spriteChanged || typesChanged || readmeChanged) {
-    console.log(`Generated ${files.length} icons`);
+    console.log(`Generated ${files.length} icons`)
   }
 }
 
 function iconName(file: string) {
-  return file.replace(/\.svg$/, "").replace(/\\/g, "/");
+  return file.replace(/\.svg$/, "").replace(/\\/g, "/")
 }
 
 /**
@@ -163,30 +168,30 @@ async function generateSvgSprite({
   inputDir,
   outputPath,
 }: {
-  files: string[];
-  inputDir: string;
-  outputPath: string;
+  files: string[]
+  inputDir: string
+  outputPath: string
 }) {
   // Each SVG becomes a symbol and we wrap them all in a single SVG
   const symbols = await Promise.all(
     files.map(async (file) => {
-      const input = await fsExtra.readFile(path.join(inputDir, file), "utf8");
-      const root = parse(input);
+      const input = await fsExtra.readFile(path.join(inputDir, file), "utf8")
+      const root = parse(input)
 
-      const svg = root.querySelector("svg");
-      if (!svg) throw new Error("No SVG element found");
+      const svg = root.querySelector("svg")
+      if (!svg) throw new Error("No SVG element found")
 
-      svg.tagName = "symbol";
-      svg.setAttribute("id", iconName(file));
-      svg.removeAttribute("xmlns");
-      svg.removeAttribute("xmlns:xlink");
-      svg.removeAttribute("version");
-      svg.removeAttribute("width");
-      svg.removeAttribute("height");
+      svg.tagName = "symbol"
+      svg.setAttribute("id", iconName(file))
+      svg.removeAttribute("xmlns")
+      svg.removeAttribute("xmlns:xlink")
+      svg.removeAttribute("version")
+      svg.removeAttribute("width")
+      svg.removeAttribute("height")
 
-      return svg.toString().trim();
+      return svg.toString().trim()
     })
-  );
+  )
 
   const output = [
     `<?xml version="1.0" encoding="UTF-8"?>`,
@@ -197,21 +202,21 @@ async function generateSvgSprite({
     `</defs>`,
     `</svg>`,
     "", // trailing newline
-  ].join("\n");
+  ].join("\n")
 
-  return writeIfChanged(outputPath, output);
+  return writeIfChanged(outputPath, output)
 }
 
 async function writeIfChanged(filepath: string, newContent: string) {
   const currentContent = await fsExtra
     .readFile(filepath, "utf8")
-    .catch(() => "");
-  if (currentContent === newContent) return false;
-  await fsExtra.writeFile(filepath, newContent, "utf8");
-  return true;
+    .catch(() => "")
+  if (currentContent === newContent) return false
+  await fsExtra.writeFile(filepath, newContent, "utf8")
+  return true
 }
-
 ```
+
 Next, we want to add the command to run this script to out `package.json`.
 
 ```json title="package.json"
@@ -220,6 +225,7 @@ Next, we want to add the command to run this script to out `package.json`.
     "build:icons": "npx tsx ./build-icons.mts"
   },
 ```
+
 Now if we run `npm run build:icons`, you should see a `sprite.svg` file appear in `/public/icons`. It will also create a `name.d.ts` file in `types`. This is for TypeScript and helps us ensure we are referencing the correct icon.
 
 #### 3. Using SVG Sprites in NextJs
@@ -227,19 +233,21 @@ Now if we run `npm run build:icons`, you should see a `sprite.svg` file appear i
 We can begin to use our icons within an SVG like below, where `name` is the icon name. If you used subfolder in the icon folder, the name will be `folder/icon` such as `radix/camera`.
 
 ```tsx
-    <svg {...props}>
-      <use href={`/icons/sprite.svg}#${name}`} />
-    </svg>
+<svg {...props}>
+  <use href={`/icons/sprite.svg}#${name}`} />
+</svg>
 ```
 
 To create a reusable, typesafe and extensible Icon component, we can do something like this:
 
 ```tsx title="components/icon.tsx"
-import { type SVGProps } from "react";
-import { cn } from "@/lib/cn";
-import { type IconName } from "@/types/name";
+import { type SVGProps } from "react"
 
-export { IconName };
+import { type IconName } from "@/types/name"
+
+import { cn } from "@/lib/cn"
+
+export { IconName }
 
 export function Icon({
   name,
@@ -248,8 +256,8 @@ export function Icon({
   children,
   ...props
 }: SVGProps<SVGSVGElement> & {
-  name: IconName;
-  childClassName?: string;
+  name: IconName
+  childClassName?: string
 }) {
   if (children) {
     return (
@@ -259,7 +267,7 @@ export function Icon({
         <Icon name={name} className={className} {...props} />
         {children}
       </span>
-    );
+    )
   }
   return (
     <svg
@@ -268,9 +276,8 @@ export function Icon({
     >
       <use href={`./icons/sprite.svg#${name}`} />
     </svg>
-  );
+  )
 }
-
 ```
 
 This component uses the `cn` tailwind helper function. If you do not already have it you can create that in `lib/cn.ts`
@@ -278,24 +285,26 @@ This component uses the `cn` tailwind helper function. If you do not already hav
 ```ts title="cn.ts"
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
- 
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 ```
+
 Now to use our Icon component, we simply do:
 
 ```tsx
 <Icon className="h-4 w-4" name="radix/camera" />
-
 ```
 
 Where name is the icon name. If you want the icon to appear to the left of text and be aligned, the component above can do that for you if you pass the text in as a child:
+
 ```jsx
 <Icon className="h-4 w-4" name="radix/pencil-1" childClassName="text-red-600">
   Auto aligned text, with icon on left
 </Icon>
 ```
+
 Note that you can pass in classNames to the child element using `childClassName`, or just use your own nested element.
 
 #### 4. Preload the sprite
@@ -303,20 +312,21 @@ Note that you can pass in classNames to the child element using `childClassName`
 To repload the sprite so its loaded and ready to use on page load, we need to create a client component for the NextJs App Router, called `preload-resources.tsx`
 
 ```tsx title="preload-resources.tsx"
-"use client";
+"use client"
 
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom"
 
 export function PreloadResources() {
   ReactDOM.preload("/icons/sprite.svg", {
     as: "image",
-  });
+  })
 
-  return null;
+  return null
 }
 ```
 
 Then we want to use this at our top most `layout.tsx`
+
 ```tsx title="layout.tsx"
     <html lang="en">
       <PreloadResources />
@@ -335,21 +345,13 @@ This will run the build script for you after adding icons.
     {
       "name": "@radix-ui/icons",
       "directory": "./other/svg/radix",
-      "postinstall": [
-        "pnpm",
-        "run",
-        "build:icons"
-      ],
+      "postinstall": ["pnpm", "run", "build:icons"],
       "transformers": []
     },
     {
       "name": "lucide-icons",
       "directory": "./other/svg/lucide",
-      "postinstall": [
-        "pnpm",
-        "run",
-        "build:icons"
-      ],
+      "postinstall": ["pnpm", "run", "build:icons"],
       "transformers": []
     }
   ]
@@ -357,6 +359,7 @@ This will run the build script for you after adding icons.
 ```
 
 ## Wrapping Up
+
 Hopefully the above helps you get started with using SVG sprites in NextJs and React. Its a great approach with good performance compared to alternatives. You can view the example repo, as well as the components and scripts [here](https://github.com/jolbol1/nextjs-svg-sprites/tree/main)
 
 One drawback to sprites is you don't typically install a library of icons and then use them like regular components, we have to use the build script. Further, there is no "tree-shaking" for sprites, all the icons you add will be added to it. So make sure you only add the ones you use.
