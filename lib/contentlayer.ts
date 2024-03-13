@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Document, MDX } from "contentlayer/core"
+import type { Document, MDX } from "contentlayer-temp/core"
 import { slug } from "github-slugger"
 
 export type MDXDocument = Document & { body: MDX }

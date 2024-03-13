@@ -4,7 +4,7 @@
   "packageRules": [
     {
       "groupName": "Contentlayer",
-      "matchPackageNames": ["contentlayer", "next-contentlayer"]
+      "matchPackageNames": ["contentlayer-temp", "next-contentlayer-temp"]
     }
   ],
   "prHourlyLimit": 0,

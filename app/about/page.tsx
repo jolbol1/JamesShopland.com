@@ -29,7 +29,7 @@ export default function About() {
     twitter,
     linkedin,
     github,
-    youtube
+    youtube,
   } = author
 
   return (

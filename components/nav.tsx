@@ -29,7 +29,7 @@ const Nav = () => {
               </GlowDiv>
             </div>
             {typeof siteMetadata.headerTitle === "string" ? (
-              <div className="underlined after:bottom[0px]  text-xl font-semibold   [@media(min-width:440px)]:text-2xl">
+              <div className="underlined after:bottom[0px]  hidden text-xl font-semibold [@media(min-width:380px)]:block   [@media(min-width:440px)]:text-2xl">
                 {siteMetadata.headerTitle}
               </div>
             ) : (
@@ -39,7 +39,7 @@ const Nav = () => {
         </Link>
       </div>
       <div className="flex items-center text-base leading-5">
-        <div className="hidden items-center justify-center min-[700px]:flex">
+        <div className="hidden items-center justify-center [@media(min-width:800px)]:flex">
           {headerNavLinks.map((link) => (
             <Link
               key={link.title}

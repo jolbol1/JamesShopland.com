@@ -39,9 +39,9 @@ export function ShowcaseProjects() {
       </div>
       <div className="mx-auto mt-6 flex max-w-3xl justify-center px-4  text-base font-medium leading-6 sm:px-6 xl:max-w-5xl">
         <Link
-          href="/blog"
+          href="/projects"
           className="my-3 w-full rounded-lg bg-primary-600 p-3 text-center text-white"
-          aria-label="All posts"
+          aria-label="All projects"
         >
           View all my projects &rarr;
         </Link>

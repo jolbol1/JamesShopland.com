@@ -29,7 +29,7 @@ export function LatestPosts({ posts }: LatestPostsProps) {
             emerging technologies and industry news
           </p>
         </div>
-        <div className="flex-1 rounded-3xl bg-gradient-to-br from-blue-200 to-blue-600 p-[1px] transition duration-300 hover:shadow-2xl hover:shadow-blue-800">
+        <div className="flex-1 rounded-3xl bg-gradient-to-br from-blue-200 to-blue-600 p-px transition duration-300 hover:shadow-2xl hover:shadow-blue-800">
           <ul className="flex h-full flex-col justify-between divide-y divide-gray-400 rounded-3xl bg-slate-200 px-6 dark:divide-gray-700 dark:bg-slate-950">
             {!posts.length && "No posts found."}
             {posts.slice(0, MAX_DISPLAY).map((post) => {

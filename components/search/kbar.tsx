@@ -81,7 +81,8 @@ export const KBarSearchProvider: FC<{
           name: "YouTube",
           keywords: "youtube channel subscribe",
           section: "Home",
-          perform: () => window.open("https://www.youtube.com/@JollyCoding", "_blank"),
+          perform: () =>
+            window.open("https://www.youtube.com/@JollyCoding", "_blank"),
           priority: Priority.HIGH,
         },
         {

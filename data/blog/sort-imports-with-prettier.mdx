@@ -15,21 +15,27 @@ https://www.youtube.com/watch?v=Lf8VFt-RVeE
 Today I'll show you a plugin you can use on top of Prettier to have your imports automatically sorted, in a completely configurable way. From this:
 
 ```tsx
-import { toast } from '@/components/ui/use-toast'
-import { cn } from '@/lib/utils'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { buttonVariants } from '@/components/ui/button'
-import TextareaAutosize from 'react-textarea-autosize'
-import { Icons } from '@/components/icons'
-import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
-import { postPatchSchema } from '@/lib/validations/post'
-import { Post } from '@prisma/client'
-import Link from 'next/link'
-import * as z from 'zod'
-import '@/styles/editor.css'
-import * as React from 'react'
-import EditorJS from '@editorjs/editorjs'
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Post } from "@prisma/client"
+import { useForm } from "react-hook-form"
+import TextareaAutosize from "react-textarea-autosize"
+import * as z from "zod"
+
+import { cn } from "@/lib/utils"
+import { postPatchSchema } from "@/lib/validations/post"
+
+import { buttonVariants } from "@/components/ui/button"
+import { toast } from "@/components/ui/use-toast"
+import { Icons } from "@/components/icons"
+
+import "@/styles/editor.css"
+
+import * as React from "react"
+
+import EditorJS from "@editorjs/editorjs"
 ```
 
 To something you have configured, like this:
@@ -110,11 +116,13 @@ This will match anything with react, and place it at the top. Next, any import n
 Now when we run prettier, any imports with react in them will be placed at the top, such as:
 
 ```jsx
-import * as React from 'react'
-import { useForm } from 'react-hook-form'
-import TextareaAutosize from 'react-textarea-autosize'
-import { Icons } from '@/components/icons'
-import { buttonVariants } from '@/components/ui/button'
+import * as React from "react"
+
+import { useForm } from "react-hook-form"
+import TextareaAutosize from "react-textarea-autosize"
+
+import { buttonVariants } from "@/components/ui/button"
+import { Icons } from "@/components/icons"
 ```
 
 However, this isnt exactly what I wanted, as you may notice `react-hook-form` has been sorted to the top too. To target specific imports we can utilise some basic regex.

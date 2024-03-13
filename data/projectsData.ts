@@ -10,6 +10,33 @@ export interface ProjectData {
 
 const projectsData: ProjectData[] = [
   {
+    title: "JollyUI",
+    description:
+      "Styled React Aria components that you can copy and paste into your apps. The components are accessible, customizable, and open source. Over 300 GitHub stars! \n The library includes components like date pickers, sliders, progress bars, meters and more...",
+    titleLink: "https://jollyui.dev",
+    links: [
+      {
+        title: "Docs",
+        href: "https://jollyui.dev",
+      },
+      { title: "GitHub", href: "https://github.com/jolbol1/jolly-ui" },
+    ],
+    icons: ["react", "tailwind", "typescript"],
+  },
+  {
+    title: "F1 GPT",
+    description:
+      "A OpenAI powered chat application with access to realtime F1 data. You can ask about events of the race, conditions and even transcribe radio messages. Uses Vercel Generative UI to reply with components for a better user experience.",
+    titleLink: "https://f1-gpt.vercel.app",
+    links: [
+      {
+        title: "Demo",
+        href: "https://f1-gpt.vercel.app",
+      },
+    ],
+    icons: ["next", "react", "typescript"],
+  },
+  {
     title: "Opening Lines",
     description: `Generate Opening Message tool, which utilizes ChatGPTs API to help you craft the perfect opening message for any situation. Whether you're looking to make a professional introduction or start a conversation on a dating app, this tool can help you get started with the right words and vibe.`,
     titleLink: "https://opening-lines.jamesshopland.cloud/",
@@ -19,16 +46,7 @@ const projectsData: ProjectData[] = [
     ],
     icons: ["next", "react", "typescript"],
   },
-  {
-    title: "cz-gitmojis",
-    description: `Commitizen Adaptor for Gitmoji project, tool that simplifies and standardizes the commit process. This project features is easy-to-use adaptor that follows the popular Gitmoji convention, displaying all available emojis and their descriptions to help developers choose the right emoji to convey the content and status of their commits.`,
-    titleLink: "https://www.npmjs.com/package/cz-gitmojis",
-    links: [
-      { title: "GitHub", href: "https://github.com/jolbol1/cz-gitmojis" },
-      { title: "NPM", href: "https://www.npmjs.com/package/cz-gitmojis" },
-    ],
-    icons: ["javascript", "npm"],
-  },
+
   {
     title: "Random Coordinates",
     description: `Advanced random teleporter for Minecraft with over 100,000 downloads, this popular tool could utilize atmospheric noise to generate random coordinates, providing a more accurate and reliable method than traditional pseudo-random number algorithms commonly used in computer programs.`,
@@ -54,6 +72,16 @@ const projectsData: ProjectData[] = [
       },
     ],
     icons: ["typescript", "svelte"],
+  },
+  {
+    title: "cz-gitmojis",
+    description: `Commitizen Adaptor for Gitmoji project, tool that simplifies and standardizes the commit process. This project features is easy-to-use adaptor that follows the popular Gitmoji convention, displaying all available emojis and their descriptions to help developers choose the right emoji to convey the content and status of their commits.`,
+    titleLink: "https://www.npmjs.com/package/cz-gitmojis",
+    links: [
+      { title: "GitHub", href: "https://github.com/jolbol1/cz-gitmojis" },
+      { title: "NPM", href: "https://www.npmjs.com/package/cz-gitmojis" },
+    ],
+    icons: ["javascript", "npm"],
   },
   {
     title: "Plex Bedtime",

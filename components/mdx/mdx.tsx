@@ -3,7 +3,7 @@ import * as React from "react"
 import NextImage, { ImageProps } from "next/image"
 
 import type { MDXComponents } from "mdx/types"
-import { useMDXComponent } from "next-contentlayer/hooks"
+import { useMDXComponent } from "next-contentlayer-temp/hooks"
 
 import { cn } from "@/lib/utils"
 

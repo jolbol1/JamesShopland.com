@@ -13,18 +13,20 @@ Today I'm going to show you how we can generate these dynamically in NextJS 13. 
 https://www.youtube.com/watch?v=QHi4XZ8K72A
 
 ## Example
+
 For my site I have this setup. If I share a link to twitter for one of my posts, it looks like this.
 
-  <Image
-    className="mx-auto mt-3"
-    alt="og image for blog"
-    src="/images/blog/og-image-blog/example.png"
-    width={600}
-    height={100}
-  />
+{" "}
+
+<Image
+  className="mx-auto mt-3"
+  alt="og image for blog"
+  src="/images/blog/og-image-blog/example.png"
+  width={600}
+  height={100}
+/>
 
 ## Generating the Image
-
 
 ### 1. Create the API route
 
@@ -51,23 +53,16 @@ Now that we have our route, how do we make and return an image.
 To do this we simply need to define an async function called GET, and return a simple image for now.
 
 ```tsx title="route.tsx"
-
 export async function GET() {
   try {
-    return new ImageResponse(
-      (
-        <div>
-          Hello World
-        </div>
-      )
-    );
+    return new ImageResponse(<div>Hello World</div>)
   } catch (e: any) {
-    return new Response("Failed to generate OG image", { status: 500 });
+    return new Response("Failed to generate OG image", { status: 500 })
   }
 }
 ```
 
-Now if you navigate to `https://localhost:3000/api/og` you should see a simple image with the text hello in it. 
+Now if you navigate to `https://localhost:3000/api/og` you should see a simple image with the text hello in it.
 
 ### 3. Pull in dynamic data
 
@@ -80,12 +75,12 @@ This example checks for the titles existence, if it isn't provided use a default
 ```tsx title="route.tsx"
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
+    const { searchParams } = new URL(request.url)
 
-    const hasTitle = searchParams.has("title");
+    const hasTitle = searchParams.has("title")
     const title = hasTitle
       ? searchParams.get("title")?.slice(0, 100)
-      : "My website";
+      : "My website"
 
     return new ImageResponse(
       (
@@ -93,17 +88,16 @@ export async function GET(request: Request) {
           {title}
         </div>
       )
-    );
+    )
   } catch (e: any) {
-    return new Response("Failed to generate OG image", { status: 500 });
+    return new Response("Failed to generate OG image", { status: 500 })
   }
 }
 ```
 
 Now if we go to the url `https://localhost:3000/api/og?title=Hello%20World`, we will see the words Hello World in our image. Now lets style this!
 
-
-### 4. Styling 
+### 4. Styling
 
 To style this image, we can use inline styles as you would in react by adding the style prop, or we can use Tailwind.
 
@@ -112,12 +106,12 @@ In order to use tailwind, we don't use `className` as you may be used to. Instea
 ```tsx title="route.tsx"
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
+    const { searchParams } = new URL(request.url)
 
-    const hasTitle = searchParams.has("title");
+    const hasTitle = searchParams.has("title")
     const title = hasTitle
       ? searchParams.get("title")?.slice(0, 100)
-      : "My website";
+      : "My website"
 
     return new ImageResponse(
       (
@@ -144,9 +138,9 @@ export async function GET(request: Request) {
           </div>
         </div>
       )
-    );
+    )
   } catch (e: any) {
-    return new Response("Failed to generate OG image", { status: 500 });
+    return new Response("Failed to generate OG image", { status: 500 })
   }
 }
 ```
@@ -164,16 +158,16 @@ With the array buffer, we will want to add it to the ImageResponse configuration
 ```tsx title="route.tsx"
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
+    const { searchParams } = new URL(request.url)
 
-    const hasTitle = searchParams.has("title");
+    const hasTitle = searchParams.has("title")
     const title = hasTitle
       ? searchParams.get("title")?.slice(0, 100)
-      : "My website";
+      : "My website"
 
     const fontData = await fetch(
       new URL("../../../assets/fonts/Inter-Bold.ttf", import.meta.url)
-    ).then((res) => res.arrayBuffer());
+    ).then((res) => res.arrayBuffer())
 
     return new ImageResponse(
       (
@@ -210,9 +204,9 @@ export async function GET(request: Request) {
           },
         ],
       }
-    );
+    )
   } catch (e: any) {
-    return new Response("Failed to generate OG image", { status: 500 });
+    return new Response("Failed to generate OG image", { status: 500 })
   }
 }
 ```
@@ -245,9 +239,9 @@ To do this we can add a config option `emoji` and set it to an emoji provider. T
 Similar to custom fonts, we have to load these by fetching and then getting an array buffer.
 
 ```ts
-    const imageData = await fetch(
-      new URL("../../../assets/logo-64x64.png", import.meta.url)
-    ).then((res) => res.arrayBuffer());
+const imageData = await fetch(
+  new URL("../../../assets/logo-64x64.png", import.meta.url)
+).then((res) => res.arrayBuffer())
 ```
 
 Then to use it, we can simply use a standard html image tag where we want it
@@ -257,6 +251,7 @@ Then to use it, we can simply use a standard html image tag where we want it
 <img width={64} height={64} src={imageData} />
 // ...
 ```
+
 ## Using the Image
 
 To use the image, you have 2 options. Static metadata, or dynamic metadata. You will most likely want dynamic as this is the main purpose of an OG route.

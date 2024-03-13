@@ -1,4 +1,4 @@
-const { withContentlayer } = require("next-contentlayer")
+const { withContentlayer } = require("next-contentlayer-temp")
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
@@ -62,7 +62,7 @@ module.exports = () => {
   return plugins.reduce((acc, next) => next(acc), {
     reactStrictMode: true,
     images: {
-      formats: ['image/avif', 'image/webp'],    
+      formats: ["image/avif", "image/webp"],
     },
     pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
     eslint: {
