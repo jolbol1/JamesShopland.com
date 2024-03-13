@@ -28,11 +28,13 @@ export function Header() {
             </Link>
             <Link
               href={siteMetadata.youtube}
+              aria-label=""
               target="_blank"
               className="group inline-flex items-center justify-center gap-2 rounded-lg border border-[#FF0000] bg-[#FF0000] px-5 py-3 text-center text-base font-medium text-white hover:bg-[#FF0000]/80  focus:ring-4 focus:ring-gray-100  dark:text-white  dark:focus:ring-gray-800"
             >
-              <Youtube className="size-4 fill-current " />
-              <span className="before:content-['YouTube'] sm:group-hover:before:content-['Subscribe!']"></span>
+              <Youtube aria-hidden className="size-4 fill-current " />
+              <span aria-hidden className="before:content-['YouTube'] sm:group-hover:before:content-['Subscribe!']"></span>
+              <span className="sr-only">YouTube</span>
             </Link>
           </div>
         </div>
