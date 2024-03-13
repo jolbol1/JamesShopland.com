@@ -89,7 +89,6 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
       <html lang="en" className={`${inter.variable} ${jetbrains.variable} `}>
-        <head />
         <body className="min-h-screen bg-white px-[5vw]  dark:bg-black">
         <Providers>
           <div className="flex min-h-screen flex-col">
