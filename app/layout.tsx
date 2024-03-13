@@ -9,7 +9,7 @@ import Analytics from "@/components/analytics"
 import Footer from "@/components/footer"
 import Nav from "@/components/nav"
 import { Providers } from "@/components/providers"
-import { Viewport } from "next"
+import { Metadata, Viewport } from "next"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,7 +23,7 @@ const jetbrains = localFont({
   display: "swap",
 })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: {
     default: siteMetadata.title,
     template: `%s | ${siteMetadata.title}`,
