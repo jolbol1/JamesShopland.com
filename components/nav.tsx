@@ -29,7 +29,7 @@ const Nav = () => {
               </GlowDiv>
             </div>
             {typeof siteMetadata.headerTitle === "string" ? (
-              <div className="underlined after:bottom[0px]  text-xl font-semibold hidden [@media(min-width:380px)]:block   [@media(min-width:440px)]:text-2xl">
+              <div className="underlined after:bottom[0px]  hidden text-xl font-semibold [@media(min-width:380px)]:block   [@media(min-width:440px)]:text-2xl">
                 {siteMetadata.headerTitle}
               </div>
             ) : (

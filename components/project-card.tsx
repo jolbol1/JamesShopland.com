@@ -18,7 +18,7 @@ const ProjectCard = ({
   <div
     className={className ?? "md relative grow p-4 md:w-1/2 md:grow-0 2xl:w-1/3"}
   >
-    <div className=" relative h-full rounded-2xl bg-card-gradient-dark p-[1px] dark:bg-card-gradient">
+    <div className=" relative h-full rounded-2xl bg-card-gradient-dark p-px dark:bg-card-gradient">
       <div className="flex h-full flex-col gap-4 rounded-2xl bg-gradient-to-b from-slate-200 to-slate-100 p-6 dark:from-slate-950 dark:to-gray-950">
         <div className="h-full overflow-hidden rounded-lg ">
           <div className="flex h-full flex-col justify-between ">

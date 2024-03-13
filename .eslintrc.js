@@ -13,6 +13,7 @@ module.exports = {
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jsx-a11y/recommended",
+    "plugin:tailwindcss/recommended",
     "next",
     "next/core-web-vitals",
     "prettier",
@@ -33,5 +34,7 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/ban-ts-comment": "off",
+    "tailwindcss/no-custom-classname": "off",
+    "tailwindcss/classnames-order": "error",
   },
 }

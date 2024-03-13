@@ -9,7 +9,7 @@ import { GlowDiv } from "./glow-div"
 
 const LightIcon = () => (
   <span
-    className="absolute inset-0 top-1 rotate-90 transform  transition duration-1000 motion-reduce:duration-[0s] dark:rotate-0 "
+    className="absolute inset-0 top-1 rotate-90 transition  duration-1000 motion-reduce:duration-0 dark:rotate-0"
     style={{ transformOrigin: "50% 100px" }}
   >
     <svg
@@ -18,7 +18,7 @@ const LightIcon = () => (
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="mx-auto h-6 w-6"
+      className="mx-auto size-6"
     >
       <path
         strokeLinecap="round"
@@ -31,7 +31,7 @@ const LightIcon = () => (
 
 const DarkIcon = () => (
   <span
-    className="absolute inset-0 top-1 rotate-0 transform  transition duration-1000 motion-reduce:duration-[0s] dark:-rotate-90 "
+    className="absolute inset-0 top-1 rotate-0 transition  duration-1000 motion-reduce:duration-0 dark:-rotate-90"
     style={{ transformOrigin: "50% 100px" }}
   >
     <svg
@@ -40,7 +40,7 @@ const DarkIcon = () => (
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="mx-auto h-6 w-6"
+      className="mx-auto size-6"
     >
       <path
         strokeLinecap="round"
@@ -63,7 +63,7 @@ const DarkModeSwitch = ({ variant = "icon" }: DarkModeSwitchProps) => {
 
   return (
     <GlowDiv>
-      <div className="rounded bg-gray-800 p-[1px] leading-[0]  hover:bg-gradient-to-r  hover:from-blue-600 hover:to-cyan-600 dark:bg-gray-200">
+      <div className="rounded bg-gray-800 p-px leading-[0]  hover:bg-gradient-to-r  hover:from-blue-600 hover:to-cyan-600 dark:bg-gray-200">
         <button
           onClick={() =>
             setTheme(
@@ -76,7 +76,7 @@ const DarkModeSwitch = ({ variant = "icon" }: DarkModeSwitchProps) => {
           )}
         >
           {clientLoaded && (
-            <div className="relative h-8 w-8">
+            <div className="relative size-8">
               <LightIcon />
               <DarkIcon />
             </div>

@@ -2,10 +2,10 @@ export function CodingTimeline() {
   return (
     <ol className="relative ml-3 !list-none border-l border-gray-200 dark:border-gray-700">
       <li className="mb-10 ml-8">
-        <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 ring-8  ring-gray-100 dark:bg-blue-600 dark:ring-gray-900">
+        <span className="absolute -left-3 flex size-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100  dark:bg-blue-600 dark:ring-gray-900">
           <svg
             aria-hidden="true"
-            className="h-4 w-4 text-blue-300 dark:text-blue-300"
+            className="size-4 text-blue-300 dark:text-blue-300"
             fill="currentColor"
             viewBox="0 0 16 16"
             xmlns="http://www.w3.org/2000/svg"
@@ -17,9 +17,9 @@ export function CodingTimeline() {
         <h3 className="mb-1 flex flex-col items-start text-lg font-semibold text-gray-900 dark:text-white sm:flex-row sm:items-center">
           Software Engineer - Frontend Focused
           <span className="relative my-2 mr-2 flex min-w-[105px]  items-center rounded bg-blue-600 px-2.5 py-0.5 text-sm font-medium text-white dark:bg-blue-600 dark:text-white sm:my-0 sm:ml-3">
-            <span className="relative mr-2 flex h-3 w-3">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-400 opacity-75"></span>
-              <span className="relative inline-flex h-3 w-3 rounded-full bg-lime-500"></span>
+            <span className="relative mr-2 flex size-3">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-lime-400 opacity-75"></span>
+              <span className="relative inline-flex size-3 rounded-full bg-lime-500"></span>
             </span>
             Current Role
           </span>
@@ -35,10 +35,10 @@ export function CodingTimeline() {
         </p>
       </li>
       <li className="mb-10 ml-8">
-        <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 ring-8  ring-gray-100 dark:bg-blue-600 dark:ring-gray-900">
+        <span className="absolute -left-3 flex size-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100  dark:bg-blue-600 dark:ring-gray-900">
           <svg
             aria-hidden="true"
-            className="h-4 w-4 text-blue-300 dark:text-blue-300"
+            className="size-4 text-blue-300 dark:text-blue-300"
             fill="currentColor"
             viewBox="0 0 16 16"
             xmlns="http://www.w3.org/2000/svg"
@@ -61,10 +61,10 @@ export function CodingTimeline() {
         </p>
       </li>
       <li className="mb-10 ml-8">
-        <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 ring-white dark:bg-blue-600 dark:ring-gray-900">
+        <span className="absolute -left-3 flex size-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 dark:bg-blue-600 dark:ring-gray-900">
           <svg
             aria-hidden="true"
-            className="h-4 w-4 text-blue-300 dark:text-blue-300"
+            className="size-4 text-blue-300 dark:text-blue-300"
             fill="currentColor"
             viewBox="0 0 16 16"
             xmlns="http://www.w3.org/2000/svg"
@@ -86,10 +86,10 @@ export function CodingTimeline() {
         </p>
       </li>
       <li className="mb-10 ml-8">
-        <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 ring-white dark:bg-blue-600 dark:ring-gray-900">
+        <span className="absolute -left-3 flex size-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 dark:bg-blue-600 dark:ring-gray-900">
           <svg
             aria-hidden="true"
-            className="h-4 w-4 text-blue-300 dark:text-blue-300"
+            className="size-4 text-blue-300 dark:text-blue-300"
             fill="currentColor"
             viewBox="0 0 16 16"
             xmlns="http://www.w3.org/2000/svg"
@@ -112,10 +112,10 @@ export function CodingTimeline() {
         </p>
       </li>
       <li className="mb-10 ml-8">
-        <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 ring-white dark:bg-blue-600 dark:ring-gray-900">
+        <span className="absolute -left-3 flex size-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 dark:bg-blue-600 dark:ring-gray-900">
           <svg
             aria-hidden="true"
-            className="h-4 w-4 text-blue-300 dark:text-blue-300"
+            className="size-4 text-blue-300 dark:text-blue-300"
             fill="currentColor"
             viewBox="0 0 16 16"
             xmlns="http://www.w3.org/2000/svg"
@@ -138,10 +138,10 @@ export function CodingTimeline() {
         </p>
       </li>
       <li className="mb-10 ml-8">
-        <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 ring-white dark:bg-blue-600 dark:ring-gray-900">
+        <span className="absolute -left-3 flex size-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 dark:bg-blue-600 dark:ring-gray-900">
           <svg
             aria-hidden="true"
-            className="h-4 w-4 text-blue-300 dark:text-blue-300"
+            className="size-4 text-blue-300 dark:text-blue-300"
             fill="currentColor"
             viewBox="0 0 16 16"
             xmlns="http://www.w3.org/2000/svg"
@@ -164,10 +164,10 @@ export function CodingTimeline() {
         </p>
       </li>
       <li className="mb-10 ml-8">
-        <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 ring-white dark:bg-blue-600 dark:ring-gray-900">
+        <span className="absolute -left-3 flex size-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 dark:bg-blue-600 dark:ring-gray-900">
           <svg
             aria-hidden="true"
-            className="h-4 w-4 text-blue-300 dark:text-blue-300"
+            className="size-4 text-blue-300 dark:text-blue-300"
             fill="currentColor"
             viewBox="0 0 16 16"
             xmlns="http://www.w3.org/2000/svg"
@@ -191,10 +191,10 @@ export function CodingTimeline() {
         </p>
       </li>
       <li className="ml-8">
-        <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 ring-white dark:bg-blue-600 dark:ring-gray-900">
+        <span className="absolute -left-3 flex size-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100 dark:bg-blue-600 dark:ring-gray-900">
           <svg
             aria-hidden="true"
-            className="h-4 w-4 text-blue-300 dark:text-blue-300"
+            className="size-4 text-blue-300 dark:text-blue-300"
             fill="currentColor"
             viewBox="0 0 16 16"
             xmlns="http://www.w3.org/2000/svg"

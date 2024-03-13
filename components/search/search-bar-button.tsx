@@ -13,7 +13,7 @@ export const SearchBarButton = ({
     <button
       onClick={onClick}
       title="Search"
-      className="mx-4 flex h-[34px] w-[34px] cursor-text items-center justify-center rounded-md border border-gray-800 bg-gray-50 px-2 text-sm hover:border-blue-600 hover:bg-gray-100 dark:border-gray-200 dark:bg-gray-900 dark:hover:border-blue-600 dark:hover:bg-gray-800 [@media(min-width:900px)]:w-[unset]"
+      className="mx-4 flex size-[34px] cursor-text items-center justify-center rounded-md border border-gray-800 bg-gray-50 px-2 text-sm hover:border-blue-600 hover:bg-gray-100 dark:border-gray-200 dark:bg-gray-900 dark:hover:border-blue-600 dark:hover:bg-gray-800 [@media(min-width:900px)]:w-[unset]"
     >
       <span className="my-2 block  w-4 [@media(min-width:900px)]:mr-2">
         <svg
@@ -40,7 +40,7 @@ export const SearchBarButton = ({
         {kbd}
       </kbd>
       <kbd
-        className={`ml-1 hidden whitespace-nowrap rounded px-1 pl-1 align-middle font-medium leading-4 tracking-wide [font-size:10px] [@media(min-width:900px)]:inline-block ${"border border-slate-400/70 text-slate-500 dark:border-slate-600 dark:text-slate-400"}`}
+        className={`ml-1 hidden whitespace-nowrap rounded px-1 align-middle font-medium leading-4 tracking-wide [font-size:10px] [@media(min-width:900px)]:inline-block ${"border border-slate-400/70 text-slate-500 dark:border-slate-600 dark:text-slate-400"}`}
       >
         K
       </kbd>

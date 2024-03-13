@@ -29,14 +29,14 @@ export function Header() {
             <Link
               href={siteMetadata.youtube}
               target="_blank"
-              className="inline-flex group items-center gap-2 justify-center bg-[#FF0000] hover:bg-opacity-75 text-white rounded-lg border border-[#FF0000] px-5 py-3 text-center text-base font-medium   focus:ring-4 focus:ring-gray-100  dark:text-white  dark:focus:ring-gray-800"
+              className="group inline-flex items-center justify-center gap-2 rounded-lg border border-[#FF0000] bg-[#FF0000] px-5 py-3 text-center text-base font-medium text-white hover:bg-[#FF0000]/80  focus:ring-4 focus:ring-gray-100  dark:text-white  dark:focus:ring-gray-800"
             >
-              <Youtube className="fill-current h-4 w-4 " />
-              <span className="sm:group-hover:before:content-['Subscribe!'] before:content-['YouTube']"></span>
+              <Youtube className="size-4 fill-current " />
+              <span className="before:content-['YouTube'] sm:group-hover:before:content-['Subscribe!']"></span>
             </Link>
           </div>
         </div>
-        <div className="col-span-full mb-12 flex items-center justify-center lg:col-span-7 lg:col-start-6 lg:-mr-[5vw] lg:-mt-24 lg:mb-0 lg:px-0">
+        <div className="col-span-full mb-12 flex items-center justify-center lg:col-span-7 lg:col-start-6 lg:-mt-24 lg:mb-0 lg:mr-[-5vw] lg:px-0">
           <div className="relative w-full">
             <Image
               src={hero}
@@ -45,7 +45,7 @@ export function Header() {
                 "cartoon image of james shopland with icons of programming languages surrounding him"
               }
               priority
-              className="w-full max-h-[50vh] object-contain lg:max-h-[75vh]"
+              className="max-h-[50vh] w-full object-contain lg:max-h-[75vh]"
               sizes="(max-width: 1024px) 60vw,
               100vw"
             />
