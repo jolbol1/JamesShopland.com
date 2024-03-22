@@ -86,23 +86,23 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Your Name - [@JollyShopland](https://twitter.com/JollyShopland) - github@jamesshopland.com
 
-Project Link: [https://github.com/jolbol1/jolbol1.github.io](https://github.com/jolbol1/jolbol1.github.io)
+Project Link: [https://github.com/jolbol1/JamesShopland.com](https://github.com/jolbol1/JamesShopland.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/jolbol1/jolbol1.github.io.svg?style=for-the-badge
-[contributors-url]: https://github.com/jolbol1/jolbol1.github.io/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/jolbol1/jolbol1.github.io.svg?style=for-the-badge
-[forks-url]: https://github.com/jolbol1/jolbol1.github.io/network/members
-[stars-shield]: https://img.shields.io/github/stars/jolbol1/jolbol1.github.io.svg?style=for-the-badge
-[stars-url]: https://github.com/jolbol1/jolbol1.github.io/stargazers
-[issues-shield]: https://img.shields.io/github/issues/jolbol1/jolbol1.github.io.svg?style=for-the-badge
-[issues-url]: https://github.com/jolbol1/jolbol1.github.io/issues
-[license-shield]: https://img.shields.io/github/license/jolbol1/jolbol1.github.io.svg?style=for-the-badge
-[license-url]: https://github.com/jolbol1/jolbol1.github.io/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/jolbol1/JamesShopland.com.svg?style=for-the-badge
+[contributors-url]: https://github.com/jolbol1/JamesShopland.com/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/jolbol1/JamesShopland.com.svg?style=for-the-badge
+[forks-url]: https://github.com/jolbol1/JamesShopland.com/network/members
+[stars-shield]: https://img.shields.io/github/stars/jolbol1/JamesShopland.com.svg?style=for-the-badge
+[stars-url]: https://github.com/jolbol1/JamesShopland.com/stargazers
+[issues-shield]: https://img.shields.io/github/issues/jolbol1/JamesShopland.com.svg?style=for-the-badge
+[issues-url]: https://github.com/jolbol1/JamesShopland.com/issues
+[license-shield]: https://img.shields.io/github/license/jolbol1/JamesShopland.com.svg?style=for-the-badge
+[license-url]: https://github.com/jolbol1/JamesShopland.com/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/james.shopland
 [product-screenshot]: images/screenshot.png
