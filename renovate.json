@@ -1,0 +1,37 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "commitMessagePrefix": "⬆️",
+  "commitMessageAction": "Upgrade",
+  "major": {
+    "automerge": false
+  },
+  "prHourlyLimit": 0,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true,
+    "automergeType": "branch",
+    "platformAutomerge": true
+  },
+  "automerge": true,
+  "automergeType": "branch",
+  "platformAutomerge": true,
+  "packageRules": [
+      {
+          "updateTypes": [
+              "pin"
+          ],
+          "commitMessagePrefix": "📌",
+          "commitMessageAction": "Pin"
+      },
+      {
+          "updateTypes": [
+              "rollback"
+          ],
+          "commitMessagePrefix": "⬇️",
+          "commitMessageAction": "Downgrade"
+      }
+  ]
+}
