@@ -2,5 +2,26 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "commitMessagePrefix": "⬆️",
+  "commitMessageAction": "Upgrade",
+  "major": {
+    "automerge": false
+  },
+  "packageRules": [
+      {
+          "updateTypes": [
+              "pin"
+          ],
+          "commitMessagePrefix": "📌",
+          "commitMessageAction": "Pin"
+      },
+      {
+          "updateTypes": [
+              "rollback"
+          ],
+          "commitMessagePrefix": "⬇️",
+          "commitMessageAction": "Downgrade"
+      }
   ]
 }
