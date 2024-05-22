@@ -16,7 +16,7 @@
   "dependencies": {
     "@next/bundle-analyzer": "14.2.3",
     "@remark-embedder/core": "^3.0.2",
-    "@remark-embedder/transformer-oembed": "^3.0.0",
+    "@remark-embedder/transformer-oembed": "^5.0.0",
     "@types/mdx": "^2.0.8",
     "@vercel/analytics": "^1.1.0",
     "@vercel/og": "^0.6.0",
