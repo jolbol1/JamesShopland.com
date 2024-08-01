@@ -1,3 +1,5 @@
+import CustomLink from "./link"
+
 export function CodingTimeline() {
   return (
     <ol className="relative ml-3 !list-none border-l border-gray-200 dark:border-gray-700">
@@ -15,7 +17,14 @@ export function CodingTimeline() {
           </svg>
         </span>
         <h3 className="mb-1 flex flex-col items-start text-lg font-semibold text-gray-900 dark:text-white sm:flex-row sm:items-center">
-          Software Engineer - Frontend Focused
+          Developer Advocate at&nbsp;{" "}
+          <a
+            href="https://jollycod.ing/work"
+            target="_blank"
+            className="text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300"
+          >
+            BetterStack
+          </a>
           <span className="relative my-2 mr-2 flex min-w-[105px]  items-center rounded bg-blue-600 px-2.5 py-0.5 text-sm font-medium text-white dark:bg-blue-600 dark:text-white sm:my-0 sm:ml-3">
             <span className="relative mr-2 flex size-3">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-lime-400 opacity-75"></span>
@@ -23,6 +32,33 @@ export function CodingTimeline() {
             </span>
             Current Role
           </span>
+        </h3>
+        <time className="text-md my-2  block font-bold leading-none text-gray-600 dark:text-gray-200">
+          2024
+        </time>
+        <p className="mb-4 text-base font-normal text-gray-700 dark:text-gray-400">
+          Throughout my last few jobs I launched a YouTube channel with the aim
+          to stay on top of the latest tech news and trends. BetterStack reached
+          out and offered me the opportunity to join their Developer Advocacy
+          team, where I am able to create content and guides to help developers
+          learn and grow, while working with the aweomse BetterStack team.
+        </p>
+      </li>
+      <li className="mb-10 ml-8">
+        <span className="absolute -left-3 flex size-6 items-center justify-center rounded-full bg-blue-600 ring-8 ring-gray-100  dark:bg-blue-600 dark:ring-gray-900">
+          <svg
+            aria-hidden="true"
+            className="size-4 text-blue-300 dark:text-blue-300"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M3 3.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Zm1.5 0a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Zm1 .5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z" />
+            <path d="M.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-13a.5.5 0 0 0-.5-.5H.5ZM1 5V2h14v3H1Zm0 1h14v8H1V6Z" />
+          </svg>
+        </span>
+        <h3 className="mb-1 flex flex-col items-start text-lg font-semibold text-gray-900 dark:text-white sm:flex-row sm:items-center">
+          Software Engineer - Frontend Focused
         </h3>
         <time className="text-md my-2  block font-bold leading-none text-gray-600 dark:text-gray-200">
           2023
