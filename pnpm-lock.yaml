@@ -109,7 +109,7 @@ importers:
         version: 2.4.0
       tailwindcss:
         specifier: ^3.3.3
-        version: 3.4.8
+        version: 3.4.9
       zod:
         specifier: ^3.22.4
         version: 3.23.8
@@ -149,7 +149,7 @@ importers:
         version: 5.2.1(eslint-config-prettier@9.1.0(eslint@9.8.0))(eslint@9.8.0)(prettier@3.3.3)
       eslint-plugin-tailwindcss:
         specifier: ^3.15.1
-        version: 3.17.4(tailwindcss@3.4.8)
+        version: 3.17.4(tailwindcss@3.4.9)
       husky:
         specifier: ^9.0.0
         version: 9.1.4
@@ -4636,8 +4636,8 @@ packages:
   tailwind@4.0.0:
     resolution: {integrity: sha512-LlUNoD/5maFG1h5kQ6/hXfFPdcnYw+1Z7z+kUD/W/E71CUMwcnrskxiBM8c3G8wmPsD1VvCuqGYMHviI8+yrmg==}
 
-  tailwindcss@3.4.8:
-    resolution: {integrity: sha512-GkP17r9GQkxgZ9FKHJQEnjJuKBcbFhMFzKu5slmN6NjlCuFnYJMQ8N4AZ6VrUyiRXlDtPKHkesuQ/MS913Nvdg==}
+  tailwindcss@3.4.9:
+    resolution: {integrity: sha512-1SEOvRr6sSdV5IDf9iC+NU4dhwdqzF4zKKq3sAbasUWHEM6lsMhX+eNN5gkPx1BvLFEnZQEUFbXnGj8Qlp83Pg==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -7852,11 +7852,11 @@ snapshots:
       string.prototype.matchall: 4.0.11
       string.prototype.repeat: 1.0.0
 
-  eslint-plugin-tailwindcss@3.17.4(tailwindcss@3.4.8):
+  eslint-plugin-tailwindcss@3.17.4(tailwindcss@3.4.9):
     dependencies:
       fast-glob: 3.3.2
       postcss: 8.4.41
-      tailwindcss: 3.4.8
+      tailwindcss: 3.4.9
 
   eslint-scope@8.0.2:
     dependencies:
@@ -10502,7 +10502,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  tailwindcss@3.4.8:
+  tailwindcss@3.4.9:
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
