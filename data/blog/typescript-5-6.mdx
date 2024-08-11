@@ -1,0 +1,37 @@
+---
+title: "TypeScript 5.6 Beta is Awesome"
+date: "2024-08-11"
+tags: ["typescript", "javascript", "blog"]
+draft: false
+summary: "The new TypeScript update fixes some common dev headaches, and adds emojis?"
+---
+
+Following on from a great update with 5.5, the latest 5.6 release adds even more quality of life improvements.
+
+https://www.youtube.com/watch?v=9SYjgkPCRDY
+
+## What's New in TypeScript 5.6?
+
+TypeScript 5.6 is packed with quality-of-life improvements, heres my favorite new features:
+
+1. **Disallowed Nullish and Truthy Checks**: Help catch the sneaky always-truthy conditions! (while allowing `while(true)` ofcourse) 👋
+2. **Side Effect Import Checks**: No more silent failures on typos in your side effect imports statements.
+3. **Arbitrary Module Identifiers**: Emojis in your imports? 🤔 (The real use is for language interoperability i.e wasm)
+4. **Enhanced Iterator Support**: Iterator helpers updated to match javascript standards.
+5. **Strict Built-in Iterator Checks**: `BuiltinIteratorReturn` can be undefined, so the type is no longer widened to `any`, allowing you to catch undefined and typos before they throw an error in prod.
+6. **Improved Override Checks**: Behaviour change to show you if you've pointlessly overridden a method not on the base class.
+7. **The New --noCheck Option**: Compile with errors as you itterate, combine with --noEmit on another terminal for checking. (Maybe dont do `tsc --noCheck --noEmit` though 🤷‍♂️)
+
+## Why You Should Care
+
+These updates aren't just performance improvements (altough thats in there too!) – they're real problem-solvers. How many times have you spent hours debugging, only to find out it was a simple typo in an import? Or maybe you've wrestled with iterator types, trying to get them to play nice with your code? TypeScript 5.6 addresses these pain points and more.
+
+As someone who's been using TypeScript for years, Its cool to see it still improving. The team at Microsoft, with the help of the open-source community have been addressing common pain points and introducing features that'll make our code more robust and our development process smoother.
+
+## How to use?
+
+If you want to test out some of these features now, install the beta:
+
+```shell
+pnpm install -D typescript@beta
+```
