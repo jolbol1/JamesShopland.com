@@ -85,7 +85,7 @@ importers:
         version: 2.1.1(encoding@0.1.13)
       rehype-pretty-code:
         specifier: ^0.14.0
-        version: 0.14.0(shiki@1.15.2)
+        version: 0.14.0(shiki@1.16.1)
       rehype-slug:
         specifier: ^6.0.0
         version: 6.0.0
@@ -100,7 +100,7 @@ importers:
         version: 1.2.2
       shiki:
         specifier: ^1.0.0
-        version: 1.15.2
+        version: 1.16.1
       tailwind:
         specifier: ^4.0.0
         version: 4.0.0
@@ -1478,8 +1478,11 @@ packages:
   '@rushstack/eslint-patch@1.10.4':
     resolution: {integrity: sha512-WJgX9nzTqknM393q1QJDJmoW28kUfEnybeTfVNcNAPnIx210RXm2DiXiHzfNPJNIUUb1tJnz/l4QGtJ30PgWmA==}
 
-  '@shikijs/core@1.15.2':
-    resolution: {integrity: sha512-hi6XZuwHYn6bU4wtXZxST8ynM55aiU2+rVU9aPIrSxqKmEKl4d65puwGsggwcZWTET+7zGXKe7AUj46iQ8Aq8w==}
+  '@shikijs/core@1.16.1':
+    resolution: {integrity: sha512-aI0hBtw+a6KsJp2jcD4YuQqKpeCbURMZbhHVozDknJpm+KJqeMRkEnfBC8BaKE/5XC+uofPgCLsa/TkTk0Ba0w==}
+
+  '@shikijs/vscode-textmate@9.2.0':
+    resolution: {integrity: sha512-5FinaOp6Vdh/dl4/yaOTh0ZeKch+rYS8DUb38V3GMKYVkdqzxw53lViRKUYkVILRiVQT7dcPC7VvAKOR73zVtQ==}
 
   '@shuding/opentype.js@1.4.0-beta.0':
     resolution: {integrity: sha512-3NgmNyH3l/Hv6EvsWJbsvpcpUba6R8IREQ83nH83cyakCw7uM1arZKNfHwv1Wz6jgqrF/j4x5ELvR6PnK9nTcA==}
@@ -4417,8 +4420,8 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
-  shiki@1.15.2:
-    resolution: {integrity: sha512-M+7QZQZiZw/cZeizrC/yryG3eeG8pTUhu7ZaHxVyzPNFIRIlN46YBciquoNPCiXiwLnx6JB62f3lSuSYQrus1w==}
+  shiki@1.16.1:
+    resolution: {integrity: sha512-tCJIMaxDVB1mEIJ5TvfZU7kCPB5eo9fli5+21Olc/bmyv+w8kye3JOp+LZRmGkAyT71hrkefQhTiY+o9mBikRQ==}
 
   side-channel@1.0.6:
     resolution: {integrity: sha512-fDW/EZ6Q9RiO8eFG8Hj+7u/oW+XrPTIChwCOM2+th2A6OblDtYYIpve9m+KvI9Z4C9qSEXlaGR6bTEYHReuglA==}
@@ -6506,9 +6509,12 @@ snapshots:
 
   '@rushstack/eslint-patch@1.10.4': {}
 
-  '@shikijs/core@1.15.2':
+  '@shikijs/core@1.16.1':
     dependencies:
+      '@shikijs/vscode-textmate': 9.2.0
       '@types/hast': 3.0.4
+
+  '@shikijs/vscode-textmate@9.2.0': {}
 
   '@shuding/opentype.js@1.4.0-beta.0':
     dependencies:
@@ -9983,13 +9989,13 @@ snapshots:
       hast-util-from-html: 2.0.2
       unified: 11.0.5
 
-  rehype-pretty-code@0.14.0(shiki@1.15.2):
+  rehype-pretty-code@0.14.0(shiki@1.16.1):
     dependencies:
       '@types/hast': 3.0.4
       hast-util-to-string: 3.0.0
       parse-numeric-range: 1.3.0
       rehype-parse: 9.0.0
-      shiki: 1.15.2
+      shiki: 1.16.1
       unified: 11.0.5
       unist-util-visit: 5.0.0
 
@@ -10217,9 +10223,10 @@ snapshots:
 
   shebang-regex@3.0.0: {}
 
-  shiki@1.15.2:
+  shiki@1.16.1:
     dependencies:
-      '@shikijs/core': 1.15.2
+      '@shikijs/core': 1.16.1
+      '@shikijs/vscode-textmate': 9.2.0
       '@types/hast': 3.0.4
 
   side-channel@1.0.6:
