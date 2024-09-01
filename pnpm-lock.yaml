@@ -28,7 +28,7 @@ importers:
         version: 0.6.2
       autoprefixer:
         specifier: ^10.4.16
-        version: 10.4.20(postcss@8.4.41)
+        version: 10.4.20(postcss@8.4.42)
       clsx:
         specifier: ^2.0.0
         version: 2.1.1
@@ -67,7 +67,7 @@ importers:
         version: 0.12.7
       postcss:
         specifier: ^8.4.31
-        version: 8.4.41
+        version: 8.4.42
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -4062,8 +4062,8 @@ packages:
     resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
     engines: {node: ^10 || ^12 || >=14}
 
-  postcss@8.4.41:
-    resolution: {integrity: sha512-TesUflQ0WKZqAvg52PWL6kHgLKP6xB6heTOdoYM0Wt2UHyxNa4K25EZZMgKns3BH1RLVbZCREPpLY0rhnNoHVQ==}
+  postcss@8.4.42:
+    resolution: {integrity: sha512-hywKUQB9Ra4dR1mGhldy5Aj1X3MWDSIA1cEi+Uy0CjheLvP6Ual5RlwMCh8i/X121yEDLDIKBsrCQ8ba3FDMfQ==}
     engines: {node: ^10 || ^12 || >=14}
 
   prelude-ls@1.2.1:
@@ -6996,14 +6996,14 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  autoprefixer@10.4.20(postcss@8.4.41):
+  autoprefixer@10.4.20(postcss@8.4.42):
     dependencies:
       browserslist: 4.23.3
       caniuse-lite: 1.0.30001653
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.1
-      postcss: 8.4.41
+      postcss: 8.4.42
       postcss-value-parser: 4.2.0
 
   available-typed-arrays@1.0.7:
@@ -7855,7 +7855,7 @@ snapshots:
   eslint-plugin-tailwindcss@3.17.4(tailwindcss@3.4.10):
     dependencies:
       fast-glob: 3.3.2
-      postcss: 8.4.41
+      postcss: 8.4.42
       tailwindcss: 3.4.10
 
   eslint-scope@8.0.2:
@@ -9745,28 +9745,28 @@ snapshots:
 
   possible-typed-array-names@1.0.0: {}
 
-  postcss-import@15.1.0(postcss@8.4.41):
+  postcss-import@15.1.0(postcss@8.4.42):
     dependencies:
-      postcss: 8.4.41
+      postcss: 8.4.42
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.8
 
-  postcss-js@4.0.1(postcss@8.4.41):
+  postcss-js@4.0.1(postcss@8.4.42):
     dependencies:
       camelcase-css: 2.0.1
-      postcss: 8.4.41
+      postcss: 8.4.42
 
-  postcss-load-config@4.0.2(postcss@8.4.41):
+  postcss-load-config@4.0.2(postcss@8.4.42):
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.5.0
     optionalDependencies:
-      postcss: 8.4.41
+      postcss: 8.4.42
 
-  postcss-nested@6.2.0(postcss@8.4.41):
+  postcss-nested@6.2.0(postcss@8.4.42):
     dependencies:
-      postcss: 8.4.41
+      postcss: 8.4.42
       postcss-selector-parser: 6.1.2
 
   postcss-selector-parser@6.1.2:
@@ -9782,7 +9782,7 @@ snapshots:
       picocolors: 1.0.1
       source-map-js: 1.2.0
 
-  postcss@8.4.41:
+  postcss@8.4.42:
     dependencies:
       nanoid: 3.3.7
       picocolors: 1.0.1
@@ -10515,11 +10515,11 @@ snapshots:
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.0.1
-      postcss: 8.4.41
-      postcss-import: 15.1.0(postcss@8.4.41)
-      postcss-js: 4.0.1(postcss@8.4.41)
-      postcss-load-config: 4.0.2(postcss@8.4.41)
-      postcss-nested: 6.2.0(postcss@8.4.41)
+      postcss: 8.4.42
+      postcss-import: 15.1.0(postcss@8.4.42)
+      postcss-js: 4.0.1(postcss@8.4.42)
+      postcss-load-config: 4.0.2(postcss@8.4.42)
+      postcss-nested: 6.2.0(postcss@8.4.42)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.8
       sucrase: 3.35.0
