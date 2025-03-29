@@ -82,7 +82,7 @@ importers:
         version: 7.1.0
       rehype-citation:
         specifier: ^2.0.0
-        version: 2.2.2
+        version: 2.3.0
       rehype-pretty-code:
         specifier: ^0.14.0
         version: 0.14.1(shiki@1.29.2)
@@ -4164,8 +4164,8 @@ packages:
   rehype-autolink-headings@7.1.0:
     resolution: {integrity: sha512-rItO/pSdvnvsP4QRB1pmPiNHUskikqtPojZKJPPPAVx9Hj8i8TwMBhofrrAYRhYOOBZH9tgmG5lPqDLuIWPWmw==}
 
-  rehype-citation@2.2.2:
-    resolution: {integrity: sha512-a9+njSn4yJ3/bePz+T8AkCLXhSb3fK+HKlG9xEcLJraN3W92jGV91a10XEvSy6gJ5BvRdtDtu3aEd1uqvNDHRQ==}
+  rehype-citation@2.3.0:
+    resolution: {integrity: sha512-ox+b3RHcV34yC1NNFFi/zNwzZCs3Gppol3s5bO7ABF2lh+XKW2fKlbvpnoFYnLO8gCviwhG4MPxmchPGvAaGMA==}
 
   rehype-parse@9.0.1:
     resolution: {integrity: sha512-ksCzCD0Fgfh7trPDxr2rSylbwq9iYDkSn8TCDmEJ49ljEUBxDVCzCHv7QNzZOfODanX4+bWQ4WZqLCRWYLfhag==}
@@ -9649,7 +9649,7 @@ snapshots:
       unified: 11.0.5
       unist-util-visit: 5.0.0
 
-  rehype-citation@2.2.2:
+  rehype-citation@2.3.0:
     dependencies:
       '@citation-js/core': 0.7.18
       '@citation-js/date': 0.5.1
