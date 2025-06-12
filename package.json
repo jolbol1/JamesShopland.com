@@ -14,7 +14,7 @@
     "prettier:fix": "npx prettier --write ."
   },
   "dependencies": {
-    "@next/bundle-analyzer": "14.2.29",
+    "@next/bundle-analyzer": "14.2.30",
     "@remark-embedder/core": "^3.0.2",
     "@remark-embedder/transformer-oembed": "^5.0.0",
     "@types/mdx": "^2.0.8",
@@ -59,7 +59,7 @@
     "@typescript-eslint/parser": "^8.0.0",
     "cross-env": "^7.0.3",
     "eslint": "^9.0.0",
-    "eslint-config-next": "14.2.29",
+    "eslint-config-next": "14.2.30",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-tailwindcss": "^3.15.1",
