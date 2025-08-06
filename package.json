@@ -19,7 +19,7 @@
     "@remark-embedder/transformer-oembed": "^5.0.0",
     "@types/mdx": "^2.0.8",
     "@vercel/analytics": "^1.1.0",
-    "@vercel/og": "^0.6.0",
+    "@vercel/og": "^0.8.0",
     "autoprefixer": "^10.4.16",
     "clsx": "^2.0.0",
     "contentlayer-temp": "^0.4.4",
