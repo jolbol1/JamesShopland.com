@@ -57,7 +57,7 @@
     "@types/rss": "^0.0.32",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
-    "cross-env": "^7.0.3",
+    "cross-env": "^10.0.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "14.2.32",
     "eslint-config-prettier": "^9.0.0",
