@@ -17,6 +17,23 @@ const prettyOptions = {
   },
 }
 
+const YOUTUBE_HOSTS = new Set([
+  "youtube.com",
+  "www.youtube.com",
+  "m.youtube.com",
+  "youtu.be",
+  "www.youtu.be",
+  "youtube-nocookie.com",
+  "www.youtube-nocookie.com",
+])
+
+const CODESANDBOX_HOSTS = new Set([
+  "codesandbox.io",
+  "www.codesandbox.io",
+  "codesandbox.stream",
+  "www.codesandbox.stream",
+])
+
 function handleEmbedderError({ url }) {
   return `<p>Error embedding <a href="${url}">${url}</a></p>.`
 }
@@ -25,10 +42,10 @@ function handleEmbedderHtml(html, info) {
   if (!html) return null
 
   const url = new URL(info.url)
-  if (/youtu\.?be/.test(url.hostname)) {
+  if (YOUTUBE_HOSTS.has(url.hostname)) {
     return makeEmbed(html, "youtube")
   }
-  if (url.hostname.includes("codesandbox.io")) {
+  if (CODESANDBOX_HOSTS.has(url.hostname)) {
     return makeEmbed(html, "codesandbox", "80%")
   }
 
