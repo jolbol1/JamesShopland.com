@@ -5,11 +5,21 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-import { allAuthors, allBlogs } from "contentlayer/generated"
-import type { Blog } from "contentlayer/generated"
-
 import siteMetadata from "@/config/site-metadata"
 
+import type {
+  AuthorMeta,
+  BlogMeta,
+  CompiledBlog,
+  CoreContent,
+} from "@/lib/content"
+import {
+  getAllAuthors,
+  getAllBlogs,
+  getBlogBySlug,
+  sortBlogsDesc,
+  toCoreContent,
+} from "@/lib/content"
 import { formatDate } from "@/lib/utils"
 
 import Comments from "@/components/comments"
@@ -17,8 +27,6 @@ import ScrollTopAndComment from "@/components/floating-buttons"
 import { Mdx } from "@/components/mdx/mdx"
 import PageTitle from "@/components/page-title"
 import Tag from "@/components/tag"
-
-import { coreContent, sortedBlogPost } from "../../../lib/contentlayer"
 
 const editUrl = (path: string) =>
   `${siteMetadata.siteRepo}/blob/main/data/${path}`
@@ -36,34 +44,37 @@ interface BlogPostPageProps {
 }
 
 interface PostPageDetails {
-  post: Blog
-  prev: ReturnType<typeof coreContent> | null
-  next: ReturnType<typeof coreContent> | null
-  authorDetails: (ReturnType<typeof coreContent> | null)[]
+  post: CompiledBlog
+  prev: CoreContent<BlogMeta> | null
+  next: CoreContent<BlogMeta> | null
+  authorDetails: Array<CoreContent<AuthorMeta> | null>
 }
 
 async function getPostFromParams(
   params: BlogPostRouteParams
 ): Promise<PostPageDetails | null> {
   const slug = params.slug.join("/")
-  const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
+  const [post, authors, blogs] = await Promise.all([
+    getBlogBySlug(slug),
+    getAllAuthors(),
+    getAllBlogs(),
+  ])
+
+  if (!post) return null
+
+  const sortedPosts = sortBlogsDesc(blogs).filter((blog) => blog.draft !== true)
   const postIndex = sortedPosts.findIndex((p) => p.slug === slug)
   if (postIndex === -1) return null
-  const post = sortedPosts[postIndex]
   const prevContent = sortedPosts[postIndex + 1] || null
-  const prev =
-    (prevContent && (prevContent?.draft ? null : coreContent(prevContent))) ||
-    null
+  const prev = prevContent ? toCoreContent(prevContent) : null
   const nextContent = sortedPosts[postIndex - 1] || null
-  const next =
-    (nextContent && (nextContent?.draft ? null : coreContent(nextContent))) ||
-    null
+  const next = nextContent ? toCoreContent(nextContent) : null
 
   const authorList = post.authors || ["default"]
   const authorDetails = authorList.map((author) => {
-    const authorResults = allAuthors.find((p) => p.slug === author)
+    const authorResults = authors.find((candidate) => candidate.slug === author)
     if (!authorResults) return null
-    return coreContent(authorResults)
+    return toCoreContent(authorResults)
   })
 
   return {
@@ -122,26 +133,28 @@ export async function generateMetadata({
   }
 }
 
-export async function generateStaticParams(): Promise<
-  BlogPostRouteParams[]
-> {
-  return allBlogs.map((post) => ({
-    slug: post.slugAsParams.split("/"),
-  }))
+export async function generateStaticParams(): Promise<BlogPostRouteParams[]> {
+  return (await getAllBlogs())
+    .filter((post) => post.draft !== true)
+    .map((post) => ({
+      slug: post.slugAsParams.split("/"),
+    }))
 }
+
+export const dynamicParams = false
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const pageDetails = await getPostFromParams(await params)
   if (!pageDetails) return notFound()
   const { post, prev, next, authorDetails } = pageDetails
   const { filePath, path, date, title, tags } = post
-  const jsonLd = post.structuredData
-  jsonLd["author"] = authorDetails.map((author) => {
-    return {
+  const jsonLd = {
+    ...post.structuredData,
+    author: authorDetails.map((author) => ({
       "@type": "Person",
       name: author?.name,
-    }
-  })
+    })),
+  }
 
   if (!post || post.draft) {
     notFound()
@@ -214,7 +227,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </dl>
             <div className="col-span-8 col-start-3 divide-y divide-gray-200 dark:divide-gray-700  xl:row-span-2 xl:pb-0">
               <div className="max-w-none rounded-xl bg-gray-200 px-6 py-6  dark:bg-gray-900">
-                <Mdx code={post.body.code} />
+                <Mdx code={post.code} />
               </div>
               <div className="mt-10 pb-6 pt-6 text-center text-sm text-gray-700 dark:text-gray-300">
                 <Link href={discussUrl(path)} rel="nofollow">
