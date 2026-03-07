@@ -1,27 +1,25 @@
 import Link from "next/link"
 
-import { allBlogs } from "contentlayer/generated"
-import type { Blog } from "contentlayer/generated"
+import {
+  allCoreContent,
+  getAllBlogs,
+  getAllTags,
+  sortedBlogPost,
+} from "@/lib/mdx"
 
 import { formatDate } from "@/lib/utils"
 
 import Tag from "@/components/tag"
 import Tags from "@/components/tags"
 
-import {
-  allCoreContent,
-  getAllTags,
-  sortedBlogPost,
-} from "../../lib/contentlayer"
-
 export const metadata = {
   title: "Blog",
 }
 
 export default async function BlogPage() {
-  const posts = allCoreContent(sortedBlogPost(allBlogs)) as Blog[]
-  const initialDisplayPosts = allCoreContent(posts)
-  const tags = await getAllTags(allBlogs)
+  const posts = allCoreContent(sortedBlogPost(await getAllBlogs()))
+  const initialDisplayPosts = posts
+  const tags = await getAllTags()
   const filteredBlogPosts = posts
 
   // If initialDisplayPosts exist, display it if no searchValue is specified

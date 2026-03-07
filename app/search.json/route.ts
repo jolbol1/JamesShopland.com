@@ -1,8 +1,9 @@
-import { allBlogs } from "contentlayer/generated"
+import { allCoreContent, getAllBlogs } from "@/lib/mdx"
 
-import { allCoreContent } from "@/lib/contentlayer"
+export const dynamic = "force-static"
 
 export async function GET() {
+  const allBlogs = await getAllBlogs()
   const body = JSON.stringify(allCoreContent(allBlogs))
 
   return new Response(body, {

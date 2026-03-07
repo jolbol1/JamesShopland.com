@@ -1,30 +1,35 @@
 import "@/styles/mdx.css"
 
-import { Metadata } from "next"
+import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-import { allAuthors, allBlogs } from "contentlayer/generated"
-import type { Blog } from "contentlayer/generated"
-
 import siteMetadata from "@/config/site-metadata"
-
+import {
+  type AuthorDocument,
+  type BlogDocument,
+  type CoreContent,
+  coreContent,
+  getAllBlogs,
+  getAuthorBySlug,
+  getBlogBySlug,
+  sortedBlogPost,
+} from "@/lib/mdx"
 import { formatDate } from "@/lib/utils"
 
 import Comments from "@/components/comments"
 import ScrollTopAndComment from "@/components/floating-buttons"
-import { Mdx } from "@/components/mdx/mdx"
 import PageTitle from "@/components/page-title"
 import Tag from "@/components/tag"
 
-import { coreContent, sortedBlogPost } from "../../../lib/contentlayer"
+export const dynamicParams = false
 
-const editUrl = (path: string) =>
-  `${siteMetadata.siteRepo}/blob/main/data/${path}`
-const discussUrl = (path: string) =>
+const editUrl = (filePath: string) =>
+  `${siteMetadata.siteRepo}/blob/main/data/${filePath}`
+const discussUrl = (postPath: string) =>
   `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-    `${siteMetadata.siteUrl}/${path}`
+    `${siteMetadata.siteUrl}/${postPath}`
   )}`
 
 interface BlogPostRouteParams {
@@ -36,40 +41,45 @@ interface BlogPostPageProps {
 }
 
 interface PostPageDetails {
-  post: Blog
-  prev: ReturnType<typeof coreContent> | null
-  next: ReturnType<typeof coreContent> | null
-  authorDetails: (ReturnType<typeof coreContent> | null)[]
+  authorDetails: Array<CoreContent<AuthorDocument> | null>
+  next: CoreContent<BlogDocument> | null
+  post: BlogDocument
+  prev: CoreContent<BlogDocument> | null
 }
 
 async function getPostFromParams(
   params: BlogPostRouteParams
 ): Promise<PostPageDetails | null> {
   const slug = params.slug.join("/")
-  const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
-  const postIndex = sortedPosts.findIndex((p) => p.slug === slug)
-  if (postIndex === -1) return null
-  const post = sortedPosts[postIndex]
-  const prevContent = sortedPosts[postIndex + 1] || null
-  const prev =
-    (prevContent && (prevContent?.draft ? null : coreContent(prevContent))) ||
-    null
-  const nextContent = sortedPosts[postIndex - 1] || null
-  const next =
-    (nextContent && (nextContent?.draft ? null : coreContent(nextContent))) ||
-    null
+  const post = await getBlogBySlug(slug)
 
-  const authorList = post.authors || ["default"]
-  const authorDetails = authorList.map((author) => {
-    const authorResults = allAuthors.find((p) => p.slug === author)
-    if (!authorResults) return null
-    return coreContent(authorResults)
-  })
+  if (!post || post.draft) {
+    return null
+  }
+
+  const publishedPosts = sortedBlogPost(
+    (await getAllBlogs()).filter((blog) => blog.draft !== true)
+  )
+  const postIndex = publishedPosts.findIndex((blog) => blog.slug === slug)
+
+  if (postIndex === -1) {
+    return null
+  }
+
+  const prevContent = publishedPosts[postIndex + 1] ?? null
+  const nextContent = publishedPosts[postIndex - 1] ?? null
+  const authorList = post.authors ?? ["default"]
+  const authorDetails = await Promise.all(
+    authorList.map(async (author) => {
+      const authorResult = await getAuthorBySlug(author)
+      return authorResult ? coreContent(authorResult) : null
+    })
+  )
 
   return {
     post,
-    prev,
-    next,
+    prev: prevContent ? coreContent(prevContent) : null,
+    next: nextContent ? coreContent(nextContent) : null,
     authorDetails,
   }
 }
@@ -79,12 +89,11 @@ export async function generateMetadata({
 }: BlogPostPageProps): Promise<Metadata> {
   const details = await getPostFromParams(await params)
 
-  if (!details || !details.post) {
+  if (!details) {
     return {}
   }
 
-  const post = details.post
-
+  const { post } = details
   const ogParams = new URLSearchParams()
   ogParams.set("heading", post.title)
   ogParams.set("type", "Blog Post")
@@ -125,26 +134,28 @@ export async function generateMetadata({
 export async function generateStaticParams(): Promise<
   BlogPostRouteParams[]
 > {
-  return allBlogs.map((post) => ({
+  const posts = (await getAllBlogs()).filter((post) => post.draft !== true)
+
+  return posts.map((post) => ({
     slug: post.slugAsParams.split("/"),
   }))
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const pageDetails = await getPostFromParams(await params)
-  if (!pageDetails) return notFound()
+
+  if (!pageDetails) {
+    return notFound()
+  }
+
   const { post, prev, next, authorDetails } = pageDetails
-  const { filePath, path, date, title, tags } = post
-  const jsonLd = post.structuredData
-  jsonLd["author"] = authorDetails.map((author) => {
-    return {
+  const Post = (await import(`../../../data/blog/${post.slug}.mdx`)).default
+  const jsonLd = {
+    ...post.structuredData,
+    author: authorDetails.map((author) => ({
       "@type": "Person",
       name: author?.name,
-    }
-  })
-
-  if (!post || post.draft) {
-    notFound()
+    })),
   }
 
   return (
@@ -157,12 +168,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div>
                   <dt className="sr-only">Published on</dt>
                   <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                    <time dateTime={date}>{formatDate(date)}</time>
+                    <time dateTime={post.date}>{formatDate(post.date)}</time>
                   </dd>
                 </div>
               </dl>
               <div>
-                <PageTitle>{title}</PageTitle>
+                <PageTitle>{post.title}</PageTitle>
               </div>
             </div>
           </header>
@@ -213,27 +224,29 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </dd>
             </dl>
             <div className="col-span-8 col-start-3 divide-y divide-gray-200 dark:divide-gray-700  xl:row-span-2 xl:pb-0">
-              <div className="max-w-none rounded-xl bg-gray-200 px-6 py-6  dark:bg-gray-900">
-                <Mdx code={post.body.code} />
+              <div className="max-w-none rounded-xl bg-gray-200 px-6 py-6 dark:bg-gray-900">
+                <div className="mdx">
+                  <Post />
+                </div>
               </div>
               <div className="mt-10 pb-6 pt-6 text-center text-sm text-gray-700 dark:text-gray-300">
-                <Link href={discussUrl(path)} rel="nofollow">
+                <Link href={discussUrl(post.path)} rel="nofollow">
                   Discuss on Twitter
                 </Link>
                 {` • `}
-                <Link href={editUrl(filePath)}>View on GitHub</Link>
+                <Link href={editUrl(post.filePath)}>View on GitHub</Link>
               </div>
               <Comments />
             </div>
             <footer className="col-span-2">
               <div className=" text-sm font-medium leading-5  xl:col-start-1 xl:row-start-2 ">
-                {tags && (
+                {post.tags && (
                   <div className="">
                     <h2 className="pb-1 text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                       Tags
                     </h2>
                     <div className="flex flex-wrap gap-2">
-                      {tags.map((tag) => (
+                      {post.tags.map((tag) => (
                         <div
                           key={tag}
                           className="2xl rounded-lg bg-blue-500  px-2 py-1 text-sm text-white hover:scale-110 hover:bg-blue-600 dark:bg-blue-900 "
@@ -272,7 +285,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <div className="flex h-fit pt-4 xl:pt-8">
                 <Link
                   type="button"
-                  href={`/blog`}
+                  href="/blog"
                   className="w-full rounded-lg  bg-primary-600 p-3 text-center font-bold text-gray-200 hover:scale-110"
                   aria-label="Back to the blogs"
                 >

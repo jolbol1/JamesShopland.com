@@ -1,11 +1,13 @@
-import { allBlogs } from "contentlayer/generated"
 import Rss from "rss"
 
 import siteMetadata from "@/config/site-metadata"
 
-import { allCoreContent } from "@/lib/contentlayer"
+import { allCoreContent, getAllBlogs } from "@/lib/mdx"
+
+export const dynamic = "force-static"
 
 export async function GET() {
+  const allBlogs = await getAllBlogs()
   const feed = new Rss({
     title: siteMetadata.title,
     description: siteMetadata.description,

@@ -2,14 +2,20 @@ import { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-import { allBlogs } from "contentlayer/generated"
 import { slug } from "github-slugger"
 
-import { allCoreContent, getAllTags } from "@/lib/contentlayer"
+import {
+  allCoreContent,
+  getAllBlogs,
+  getAllTags,
+  sortedBlogPost,
+} from "@/lib/mdx"
 import { formatDate } from "@/lib/utils"
 
 import Tag from "@/components/tag"
 import Tags from "@/components/tags"
+
+export const dynamicParams = false
 
 interface TagRouteParams {
   slug: string
@@ -21,7 +27,7 @@ interface TagPageProps {
 
 async function getPageFromParams(params: TagRouteParams) {
   const slug = params.slug
-  const tags = await getAllTags(allBlogs)
+  const tags = await getAllTags()
   const page = Object.keys(tags).find((tag) => tag === slug)
 
   if (!page) {
@@ -46,7 +52,7 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams(): Promise<TagRouteParams[]> {
-  const tags = await getAllTags(allBlogs)
+  const tags = await getAllTags()
   return Object.keys(tags).map((doc) => ({
     slug: doc,
   }))
@@ -61,11 +67,14 @@ export default async function PagePage({ params }: TagPageProps) {
 
   const title = page[0].toUpperCase() + page.split(" ").join("-").slice(1)
 
+  const allBlogs = await getAllBlogs()
   const tags = await getAllTags(allBlogs)
   const posts = allCoreContent(
-    allBlogs.filter(
-      (post) =>
-        post.draft !== true && post.tags?.map((t) => slug(t)).includes(page)
+    sortedBlogPost(
+      allBlogs.filter(
+        (post) =>
+          post.draft !== true && post.tags?.map((t) => slug(t)).includes(page)
+      )
     )
   )
 
