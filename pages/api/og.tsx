@@ -112,7 +112,7 @@ export default async function handler(req: NextRequest) {
         ],
       }
     )
-  } catch (error) {
+  } catch {
     return new Response(`Failed to generate image`, {
       status: 500,
     })

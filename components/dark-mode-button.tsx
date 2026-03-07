@@ -1,9 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
-
 import clsx from "clsx"
 import { useTheme } from "next-themes"
+
+import { useMounted } from "@/hooks/use-mounted"
 
 import { GlowDiv } from "./glow-div"
 
@@ -56,10 +56,8 @@ interface DarkModeSwitchProps {
 }
 
 const DarkModeSwitch = ({ variant = "icon" }: DarkModeSwitchProps) => {
-  const [clientLoaded, setClientLoaded] = useState(false)
+  const clientLoaded = useMounted()
   const { theme, setTheme, resolvedTheme } = useTheme()
-
-  useEffect(() => setClientLoaded(true), [])
 
   return (
     <GlowDiv>

@@ -11,19 +11,21 @@ import { formatDate } from "@/lib/utils"
 import Tag from "@/components/tag"
 import Tags from "@/components/tags"
 
-interface TagPageProps {
-  params: {
-    slug: string
-  }
+interface TagRouteParams {
+  slug: string
 }
 
-async function getPageFromParams(params: TagPageProps["params"]) {
+interface TagPageProps {
+  params: Promise<TagRouteParams>
+}
+
+async function getPageFromParams(params: TagRouteParams) {
   const slug = params.slug
   const tags = await getAllTags(allBlogs)
   const page = Object.keys(tags).find((tag) => tag === slug)
 
   if (!page) {
-    null
+    return null
   }
 
   return page
@@ -32,7 +34,7 @@ async function getPageFromParams(params: TagPageProps["params"]) {
 export async function generateMetadata({
   params,
 }: TagPageProps): Promise<Metadata> {
-  const page = await getPageFromParams(params)
+  const page = await getPageFromParams(await params)
 
   if (!page) {
     return {}
@@ -43,9 +45,7 @@ export async function generateMetadata({
   }
 }
 
-export async function generateStaticParams(): Promise<
-  TagPageProps["params"][]
-> {
+export async function generateStaticParams(): Promise<TagRouteParams[]> {
   const tags = await getAllTags(allBlogs)
   return Object.keys(tags).map((doc) => ({
     slug: doc,
@@ -53,7 +53,7 @@ export async function generateStaticParams(): Promise<
 }
 
 export default async function PagePage({ params }: TagPageProps) {
-  const page = await getPageFromParams(params)
+  const page = await getPageFromParams(await params)
 
   if (!page) {
     notFound()

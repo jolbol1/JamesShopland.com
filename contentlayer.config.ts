@@ -153,6 +153,8 @@ export default makeSource({
     remarkPlugins: [remarkGfm, [remarkEmbedder.default, remarkOembedOptions]],
     rehypePlugins: [
       rehypeSlug,
+      // The plugin's published type is narrower than the tuple format it accepts.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       [rehypePrettyCode as any, prettyOptions],
       [
         rehypeAutolinkHeadings,

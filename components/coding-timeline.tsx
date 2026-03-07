@@ -1,5 +1,3 @@
-import CustomLink from "./link"
-
 export function CodingTimeline() {
   return (
     <ol className="relative ml-3 !list-none border-l border-gray-200 dark:border-gray-700">
