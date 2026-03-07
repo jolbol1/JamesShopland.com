@@ -1,4 +1,4 @@
-import type { Blog } from "contentlayer/generated"
+import type { BlogDocument, CoreContent } from "@/lib/content-types"
 
 import { formatDate } from "@/lib/utils"
 
@@ -7,10 +7,8 @@ import Tag from "@/components/tag"
 
 const MAX_DISPLAY = 3
 
-type Posts = Omit<Blog, "body" | "_raw" | "_id">[]
-
 interface LatestPostsProps {
-  posts: Posts
+  posts: CoreContent<BlogDocument>[]
 }
 
 export function LatestPosts({ posts }: LatestPostsProps) {

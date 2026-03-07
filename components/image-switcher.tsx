@@ -1,9 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import Image, { ImageProps, StaticImageData } from "next/image"
 
 import { useTheme } from "next-themes"
+
+import { useMounted } from "@/hooks/use-mounted"
 
 interface Props extends Omit<ImageProps, "src"> {
   light: StaticImageData
@@ -12,33 +13,11 @@ interface Props extends Omit<ImageProps, "src"> {
 
 const ImageSwitcher = ({ light, dark, alt, ...rest }: Props) => {
   const { theme, resolvedTheme } = useTheme()
-  const [clientLoaded, setClientLoaded] = useState(false)
-  const [aiImage, setAiImage] = useState<"light" | "dark" | null>(null)
+  const mounted = useMounted()
+  const activeTheme = theme === "system" ? resolvedTheme : theme
+  const imageSrc = mounted && activeTheme === "light" ? light : dark
 
-  useEffect(() => {
-    setClientLoaded(true)
-  }, [])
-
-  useEffect(() => {
-    if (clientLoaded) {
-      if (theme === "light") {
-        setAiImage("light")
-      }
-      if (theme === "dark") {
-        setAiImage("dark")
-      }
-      if (resolvedTheme === "system") {
-        if (theme === "light") {
-          setAiImage("light")
-        }
-        if (theme === "dark") {
-          setAiImage("dark")
-        }
-      }
-    }
-  }, [clientLoaded, theme, resolvedTheme, aiImage])
-
-  return <Image alt={alt} src={aiImage === "light" ? light : dark} {...rest} />
+  return <Image alt={alt} src={imageSrc} {...rest} />
 }
 
 export default ImageSwitcher

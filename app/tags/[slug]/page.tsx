@@ -2,28 +2,29 @@ import { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-import { allBlogs } from "contentlayer/generated"
 import { slug } from "github-slugger"
 
-import { allCoreContent, getAllTags } from "@/lib/contentlayer"
+import { getAllBlogs } from "@/lib/content"
+import { allCoreContent, getAllTags } from "@/lib/content-types"
 import { formatDate } from "@/lib/utils"
 
 import Tag from "@/components/tag"
 import Tags from "@/components/tags"
 
 interface TagPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 async function getPageFromParams(params: TagPageProps["params"]) {
-  const slug = params.slug
-  const tags = await getAllTags(allBlogs)
+  const allBlogs = await getAllBlogs()
+  const { slug } = await params
+  const tags = getAllTags(allBlogs)
   const page = Object.keys(tags).find((tag) => tag === slug)
 
   if (!page) {
-    null
+    return null
   }
 
   return page
@@ -44,9 +45,9 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams(): Promise<
-  TagPageProps["params"][]
+  Awaited<TagPageProps["params"]>[]
 > {
-  const tags = await getAllTags(allBlogs)
+  const tags = getAllTags(await getAllBlogs())
   return Object.keys(tags).map((doc) => ({
     slug: doc,
   }))
@@ -61,7 +62,8 @@ export default async function PagePage({ params }: TagPageProps) {
 
   const title = page[0].toUpperCase() + page.split(" ").join("-").slice(1)
 
-  const tags = await getAllTags(allBlogs)
+  const allBlogs = await getAllBlogs()
+  const tags = getAllTags(allBlogs)
   const posts = allCoreContent(
     allBlogs.filter(
       (post) =>

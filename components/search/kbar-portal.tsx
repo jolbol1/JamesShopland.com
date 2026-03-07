@@ -14,7 +14,7 @@ import {
 
 import { formatDate } from "@/lib/utils"
 
-import { CoreContent, MDXDocument } from "../../lib/contentlayer"
+import type { BlogDocument, CoreContent } from "@/lib/content-types"
 
 export const Portal = ({
   searchDocumentsPath,
@@ -25,7 +25,7 @@ export const Portal = ({
   const router = useRouter()
 
   useEffect(() => {
-    const mapPosts = (posts: CoreContent<MDXDocument>[]) => {
+    const mapPosts = (posts: CoreContent<BlogDocument>[]) => {
       const actions: Action[] = []
       for (const post of posts) {
         actions.push({

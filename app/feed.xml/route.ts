@@ -1,11 +1,12 @@
-import { allBlogs } from "contentlayer/generated"
 import Rss from "rss"
 
 import siteMetadata from "@/config/site-metadata"
 
-import { allCoreContent } from "@/lib/contentlayer"
+import { getAllBlogs } from "@/lib/content"
+import { allCoreContent } from "@/lib/content-types"
 
 export async function GET() {
+  const allBlogs = await getAllBlogs()
   const feed = new Rss({
     title: siteMetadata.title,
     description: siteMetadata.description,

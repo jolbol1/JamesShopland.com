@@ -1,8 +1,7 @@
 // @ts-check
-const { fontFamily } = require("tailwindcss/defaultTheme")
-const colors = require("tailwindcss/colors")
+const colors = /** @type {any} */ (require("tailwindcss/colors"))
 
-/** @type {import("tailwindcss/types").Config } */
+/** @type {import("tailwindcss").Config } */
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
@@ -38,8 +37,13 @@ module.exports = {
         14: "3.5rem",
       },
       fontFamily: {
-        mono: ["var(--font-code)", ...fontFamily.mono],
-        sans: ["var(--font-inter)", ...fontFamily.sans],
+        mono: [
+          "var(--font-code)",
+          "ui-monospace",
+          "SFMono-Regular",
+          "monospace",
+        ],
+        sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       colors: {
         primary: colors.blue,

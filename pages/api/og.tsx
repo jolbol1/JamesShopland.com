@@ -43,62 +43,60 @@ export default async function handler(req: NextRequest) {
     const image2Data = await image2
 
     return new ImageResponse(
-      (
+      <div
+        tw="flex relative flex-col p-12 w-full h-full items-start"
+        style={{
+          color: paint,
+          background: mode === "dark" ? "black" : "white",
+        }}
+      >
         <div
-          tw="flex relative flex-col p-12 w-full h-full items-start"
+          tw="flex leading-[1.1] font-bold tracking-tighter items-center"
           style={{
-            color: paint,
-            background: mode === "dark" ? "black" : "white",
+            fontFamily: "Inter",
+            fontWeight: "bolder",
+            marginLeft: "-3px",
+            fontSize: "32px",
           }}
         >
+          <img width="64" height="64" src={imageData} />
+          <h1 tw="pl-4">James Shopland</h1>
+        </div>
+
+        <div tw="flex flex-col flex-1 ">
           <div
-            tw="flex leading-[1.1] font-bold tracking-tighter items-center"
+            tw="flex text-xl uppercase font-bold tracking-tight"
+            style={{ fontFamily: "Inter", fontWeight: "normal" }}
+          >
+            {values.type}
+          </div>
+          <div
+            tw="flex leading-[1.1] text-[80px] font-bold tracking-tighter"
             style={{
               fontFamily: "Inter",
               fontWeight: "bolder",
               marginLeft: "-3px",
-              fontSize: "32px",
+              fontSize,
             }}
           >
-            <img width="64" height="64" src={imageData} />
-            <h1 tw="pl-4">James Shopland</h1>
-          </div>
-
-          <div tw="flex flex-col flex-1 ">
-            <div
-              tw="flex text-xl uppercase font-bold tracking-tight"
-              style={{ fontFamily: "Inter", fontWeight: "normal" }}
-            >
-              {values.type}
-            </div>
-            <div
-              tw="flex leading-[1.1] text-[80px] font-bold tracking-tighter"
-              style={{
-                fontFamily: "Inter",
-                fontWeight: "bolder",
-                marginLeft: "-3px",
-                fontSize,
-              }}
-            >
-              {heading}
-            </div>
-          </div>
-          <div tw="flex items-center w-full justify-between">
-            <div
-              tw="flex text-xl"
-              style={{ fontFamily: "Inter", fontWeight: "normal" }}
-            >
-              jamesshopland.com
-            </div>
-            <div
-              tw="flex items-center text-xl"
-              style={{ fontFamily: "Inter", fontWeight: "normal" }}
-            >
-              <img height="86" src={image2Data} />
-            </div>
+            {heading}
           </div>
         </div>
-      ),
+        <div tw="flex items-center w-full justify-between">
+          <div
+            tw="flex text-xl"
+            style={{ fontFamily: "Inter", fontWeight: "normal" }}
+          >
+            jamesshopland.com
+          </div>
+          <div
+            tw="flex items-center text-xl"
+            style={{ fontFamily: "Inter", fontWeight: "normal" }}
+          >
+            <img height="86" src={image2Data} />
+          </div>
+        </div>
+      </div>,
       {
         width: 1200,
         height: 630,
@@ -112,7 +110,7 @@ export default async function handler(req: NextRequest) {
         ],
       }
     )
-  } catch (error) {
+  } catch {
     return new Response(`Failed to generate image`, {
       status: 500,
     })

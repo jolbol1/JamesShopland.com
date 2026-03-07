@@ -5,7 +5,8 @@ import { notFound } from "next/navigation"
 
 import AIDark from "@/public/images/general/ai-dark.webp"
 import AILight from "@/public/images/general/ai-light.webp"
-import { allAuthors } from "contentlayer/generated"
+
+import { getAllAuthors } from "@/lib/content"
 
 import { CodingTimeline } from "@/components/coding-timeline"
 import ImageSwitcher from "@/components/image-switcher"
@@ -17,8 +18,8 @@ export const metadata = {
   title: "About",
 }
 
-export default function About() {
-  const author = allAuthors.find((p) => p.slug === "default")
+export default async function About() {
+  const author = (await getAllAuthors()).find((p) => p.slug === "default")
   if (!author) notFound()
   const {
     name,
@@ -73,7 +74,7 @@ export default function About() {
           </div>
         </div>
         <div className="max-w-none pb-8 pt-8 text-gray-700 dark:text-gray-300 xl:col-span-2">
-          <Mdx code={author.body.code} />
+          <Mdx source={author.body.raw} />
 
           <div className="relative col-span-2 col-start-2 ">
             <h3 className="my-12 text-center text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100  sm:text-4xl sm:leading-10 md:my-6 md:text-left  md:leading-14">

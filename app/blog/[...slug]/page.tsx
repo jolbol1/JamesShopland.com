@@ -5,11 +5,15 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-import { allAuthors, allBlogs } from "contentlayer/generated"
-import type { Blog } from "contentlayer/generated"
-
 import siteMetadata from "@/config/site-metadata"
 
+import { getAllAuthors, getAllBlogs } from "@/lib/content"
+import type {
+  AuthorDocument,
+  BlogDocument,
+  CoreContent,
+} from "@/lib/content-types"
+import { coreContent, sortedBlogPost } from "@/lib/content-types"
 import { formatDate } from "@/lib/utils"
 
 import Comments from "@/components/comments"
@@ -17,8 +21,6 @@ import ScrollTopAndComment from "@/components/floating-buttons"
 import { Mdx } from "@/components/mdx/mdx"
 import PageTitle from "@/components/page-title"
 import Tag from "@/components/tag"
-
-import { coreContent, sortedBlogPost } from "../../../lib/contentlayer"
 
 const editUrl = (path: string) =>
   `${siteMetadata.siteRepo}/blob/main/data/${path}`
@@ -28,24 +30,29 @@ const discussUrl = (path: string) =>
   )}`
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string[]
-  }
+  }>
 }
 
 interface PostPageDetails {
-  post: Blog
-  prev: ReturnType<typeof coreContent> | null
-  next: ReturnType<typeof coreContent> | null
-  authorDetails: (ReturnType<typeof coreContent> | null)[]
+  post: BlogDocument
+  prev: CoreContent<BlogDocument> | null
+  next: CoreContent<BlogDocument> | null
+  authorDetails: (CoreContent<AuthorDocument> | null)[]
 }
 
 async function getPostFromParams(
   params: BlogPostPageProps["params"]
 ): Promise<PostPageDetails | null> {
-  const slug = params.slug.join("/")
-  const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
-  const postIndex = sortedPosts.findIndex((p) => p.slug === slug)
+  const [allBlogs, allAuthors] = await Promise.all([
+    getAllBlogs(),
+    getAllAuthors(),
+  ])
+  const { slug } = await params
+  const joinedSlug = slug.join("/")
+  const sortedPosts = sortedBlogPost(allBlogs)
+  const postIndex = sortedPosts.findIndex((p) => p.slug === joinedSlug)
   if (postIndex === -1) return null
   const post = sortedPosts[postIndex]
   const prevContent = sortedPosts[postIndex + 1] || null
@@ -121,8 +128,9 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams(): Promise<
-  BlogPostPageProps["params"][]
+  Awaited<BlogPostPageProps["params"]>[]
 > {
+  const allBlogs = await getAllBlogs()
   return allBlogs.map((post) => ({
     slug: post.slugAsParams.split("/"),
   }))
@@ -212,7 +220,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </dl>
             <div className="col-span-8 col-start-3 divide-y divide-gray-200 dark:divide-gray-700  xl:row-span-2 xl:pb-0">
               <div className="max-w-none rounded-xl bg-gray-200 px-6 py-6  dark:bg-gray-900">
-                <Mdx code={post.body.code} />
+                <Mdx source={post.body.raw} />
               </div>
               <div className="mt-10 pb-6 pt-6 text-center text-sm text-gray-700 dark:text-gray-300">
                 <Link href={discussUrl(path)} rel="nofollow">

@@ -1,9 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
-
 import clsx from "clsx"
 import { useTheme } from "next-themes"
+
+import { useMounted } from "@/hooks/use-mounted"
 
 import { GlowDiv } from "./glow-div"
 
@@ -56,10 +56,9 @@ interface DarkModeSwitchProps {
 }
 
 const DarkModeSwitch = ({ variant = "icon" }: DarkModeSwitchProps) => {
-  const [clientLoaded, setClientLoaded] = useState(false)
+  const mounted = useMounted()
   const { theme, setTheme, resolvedTheme } = useTheme()
-
-  useEffect(() => setClientLoaded(true), [])
+  const activeTheme = theme ?? resolvedTheme
 
   return (
     <GlowDiv>
@@ -75,7 +74,7 @@ const DarkModeSwitch = ({ variant = "icon" }: DarkModeSwitchProps) => {
             { "w-8": variant === "icon" }
           )}
         >
-          {clientLoaded && (
+          {mounted && (
             <div className="relative size-8">
               <LightIcon />
               <DarkIcon />
@@ -86,9 +85,7 @@ const DarkModeSwitch = ({ variant = "icon" }: DarkModeSwitchProps) => {
               "sr-only": variant === "icon",
             })}
           >
-            <p>
-              Toggle {clientLoaded && theme === "dark" ? "light" : "dark"} mode
-            </p>
+            Toggle {mounted && activeTheme === "dark" ? "light" : "dark"} mode
           </span>
         </button>
       </div>
