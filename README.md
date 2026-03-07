@@ -36,6 +36,8 @@ My personal portfolio site. Made as a hub to show of my projects and skills.
 I use this site as a place to learn new frameworks and more, from time to time it may completely change as I try out new things. Currently using NextJs, React and TypeScript.
 Previously written in Svelte, Gatsby React and pure HTML.
 
+Blog and author content is loaded from the local `data/` directory using a custom filesystem-backed MDX registry built on Next.js MDX conventions plus `mdx-bundler`.
+
 The site is deployed via Vercel.
 
 <p align="right">(<a href="#top">back to top</a>)</p>

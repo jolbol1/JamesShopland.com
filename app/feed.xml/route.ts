@@ -1,9 +1,8 @@
-import { allBlogs } from "contentlayer/generated"
 import Rss from "rss"
 
 import siteMetadata from "@/config/site-metadata"
 
-import { allCoreContent } from "@/lib/contentlayer"
+import { getAllBlogs, toAllCoreContent } from "@/lib/content"
 
 export async function GET() {
   const feed = new Rss({
@@ -16,7 +15,7 @@ export async function GET() {
     language: "en-US",
   })
 
-  allCoreContent(allBlogs).forEach((article) => {
+  toAllCoreContent(await getAllBlogs()).forEach((article) => {
     const author = article.authors ? article.authors[0] : siteMetadata.author
     feed.item({
       title: article.title,

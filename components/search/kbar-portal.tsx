@@ -12,9 +12,8 @@ import {
   useRegisterActions,
 } from "kbar"
 
+import type { BlogMeta, CoreContent } from "@/lib/content"
 import { formatDate } from "@/lib/utils"
-
-import { CoreContent, MDXDocument } from "../../lib/contentlayer"
 
 export const Portal = ({
   searchDocumentsPath,
@@ -25,7 +24,7 @@ export const Portal = ({
   const router = useRouter()
 
   useEffect(() => {
-    const mapPosts = (posts: CoreContent<MDXDocument>[]) => {
+    const mapPosts = (posts: CoreContent<BlogMeta>[]) => {
       const actions: Action[] = []
       for (const post of posts) {
         actions.push({
