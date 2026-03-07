@@ -27,10 +27,12 @@ const discussUrl = (path: string) =>
     `${siteMetadata.siteUrl}/${path}`
   )}`
 
+interface BlogPostRouteParams {
+  slug: string[]
+}
+
 interface BlogPostPageProps {
-  params: {
-    slug: string[]
-  }
+  params: Promise<BlogPostRouteParams>
 }
 
 interface PostPageDetails {
@@ -41,7 +43,7 @@ interface PostPageDetails {
 }
 
 async function getPostFromParams(
-  params: BlogPostPageProps["params"]
+  params: BlogPostRouteParams
 ): Promise<PostPageDetails | null> {
   const slug = params.slug.join("/")
   const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
@@ -75,7 +77,7 @@ async function getPostFromParams(
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
-  const details = await getPostFromParams(params)
+  const details = await getPostFromParams(await params)
 
   if (!details || !details.post) {
     return {}
@@ -121,7 +123,7 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams(): Promise<
-  BlogPostPageProps["params"][]
+  BlogPostRouteParams[]
 > {
   return allBlogs.map((post) => ({
     slug: post.slugAsParams.split("/"),
@@ -129,7 +131,7 @@ export async function generateStaticParams(): Promise<
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const pageDetails = await getPostFromParams(params)
+  const pageDetails = await getPostFromParams(await params)
   if (!pageDetails) return notFound()
   const { post, prev, next, authorDetails } = pageDetails
   const { filePath, path, date, title, tags } = post

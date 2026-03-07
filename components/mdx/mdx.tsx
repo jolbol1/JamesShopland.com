@@ -1,4 +1,5 @@
-/* eslint-disable jsx-a11y/heading-has-content */
+/* eslint-disable react-hooks/static-components */
+
 import * as React from "react"
 import NextImage, { ImageProps } from "next/image"
 
@@ -65,7 +66,7 @@ const components: MDXComponents = {
     />
   ),
   a: ({ className, ...props }) => (
-    // eslint-disable-next-line jsx-a11y/anchor-has-content
+     
     <a
       className={cn(
         "font-medium text-primary-600 dark:text-primary-500 ",

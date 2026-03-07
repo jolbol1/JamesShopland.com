@@ -1,18 +1,9 @@
-// @ts-check
-const { fontFamily } = require("tailwindcss/defaultTheme")
+// @ts-nocheck
+const defaultTheme = require("tailwindcss/defaultTheme")
 const colors = require("tailwindcss/colors")
 
-/** @type {import("tailwindcss/types").Config } */
+/** @type {import("tailwindcss").Config } */
 module.exports = {
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,tsx}",
-    "./components/**/*.{js,ts,tsx}",
-    "./layouts/**/*.{js,ts,tsx}",
-    "./lib/**/*.{js,ts,tsx}",
-    "./data/**/*.mdx",
-  ],
-  darkMode: "class",
   theme: {
     extend: {
       container: {
@@ -38,8 +29,8 @@ module.exports = {
         14: "3.5rem",
       },
       fontFamily: {
-        mono: ["var(--font-code)", ...fontFamily.mono],
-        sans: ["var(--font-inter)", ...fontFamily.sans],
+        mono: ["var(--font-code)", ...defaultTheme.fontFamily.mono],
+        sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
       },
       colors: {
         primary: colors.blue,

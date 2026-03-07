@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import dynamic from "next/dynamic"
 
 import useIntersectionObserver from "hooks/use-observer"
@@ -29,9 +29,7 @@ const Comments = () => {
   const isVisible = !!entry?.isIntersecting
   const commentsConfig = siteMetadata.giscusConfig
 
-  useEffect(() => {
-    isVisible && setLoadComments(true)
-  }, [isVisible])
+  const shouldLoadComments = loadComments || isVisible
 
   return (
     <div
@@ -39,10 +37,10 @@ const Comments = () => {
       id="comment"
       ref={ref}
     >
-      {!loadComments && (
+      {!shouldLoadComments && (
         <button onClick={() => setLoadComments(true)}>Load Comments</button>
       )}
-      {loadComments && <GiscusComponent {...commentsConfig} />}
+      {shouldLoadComments && <GiscusComponent {...commentsConfig} />}
     </div>
   )
 }

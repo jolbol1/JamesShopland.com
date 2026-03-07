@@ -65,9 +65,6 @@ module.exports = () => {
       formats: ["image/avif", "image/webp"],
     },
     pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-    eslint: {
-      dirs: ["pages", "components", "lib", "layouts", "scripts"],
-    },
     async headers() {
       return [
         {
@@ -76,7 +73,7 @@ module.exports = () => {
         },
       ]
     },
-    webpack: (config, options) => {
+    webpack: (config) => {
       config.module.rules.push({
         test: /\.svg$/,
         use: ["@svgr/webpack"],
