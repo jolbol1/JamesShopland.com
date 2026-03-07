@@ -5,6 +5,8 @@ import NextImage, { type ImageProps } from "next/image"
 import { cn } from "@/lib/utils"
 
 import { Callout } from "@/components/mdx/callout"
+import JustGiving from "@/components/running-blog/justGiving"
+import JustGivingUpdates from "@/components/running-blog/justGivingUpdates"
 
 export const mdxComponents: MDXComponents = {
   h1: ({ className, ...props }) => (
@@ -167,6 +169,8 @@ export const mdxComponents: MDXComponents = {
   ),
   Callout,
   Image: (props: ImageProps) => <NextImage {...props} />,
+  JustGiving,
+  JustGivingUpdates,
 }
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
