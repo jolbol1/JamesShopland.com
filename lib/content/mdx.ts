@@ -45,6 +45,10 @@ function makeEmbed(html: string, type: string, heightRatio = "56.25%") {
 `
 }
 
+function matchesHostname(hostname: string, allowedHost: string) {
+  return hostname === allowedHost || hostname.endsWith(`.${allowedHost}`)
+}
+
 function handleEmbedderHtml(html: string | null, info: TransformerInfo) {
   if (!html) return null
 
@@ -54,7 +58,7 @@ function handleEmbedderHtml(html: string | null, info: TransformerInfo) {
     return makeEmbed(html, "youtube")
   }
 
-  if (url.hostname.includes("codesandbox.io")) {
+  if (matchesHostname(url.hostname, "codesandbox.io")) {
     return makeEmbed(html, "codesandbox", "80%")
   }
 
