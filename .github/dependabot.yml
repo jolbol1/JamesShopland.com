@@ -5,6 +5,41 @@ updates:
     schedule:
       interval: daily
     open-pull-requests-limit: 20
-    commit-message:
-      prefix: "⬆️"
-      include: scope
+    groups:
+      app-framework:
+        patterns:
+          - next
+          - '@next/*'
+          - react
+          - react-dom
+          - '@mdx-js/*'
+          - mdx-bundler
+      ui:
+        patterns:
+          - tailwindcss
+          - '@tailwindcss/*'
+          - tailwind-*
+          - next-themes
+          - kbar
+          - clsx
+          - '@svgr/*'
+          - rehype-pretty-code
+          - shiki
+      tooling:
+        patterns:
+          - typescript
+          - '@types/*'
+          - eslint
+          - eslint-*
+          - '@typescript-eslint/*'
+          - prettier
+          - prettier-*
+          - '@ianvs/prettier-plugin-sort-imports'
+          - husky
+          - lint-staged
+          - cross-env
+          - js-yaml
+          - esbuild
+      other:
+        patterns:
+          - '*'
