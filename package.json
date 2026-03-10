@@ -23,7 +23,7 @@
     "@remark-embedder/core": "^3.0.3",
     "@remark-embedder/transformer-oembed": "^5.0.1",
     "@types/mdx": "^2.0.13",
-    "@vercel/analytics": "^1.6.1",
+    "@vercel/analytics": "^2.0.0",
     "@vercel/og": "^0.11.1",
     "autoprefixer": "^10.4.27",
     "clsx": "^2.1.1",
